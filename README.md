@@ -3,6 +3,9 @@
   <span style="vertical-align: middle;">&nbsp;AI Safety Daily</span>
 </h1>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png" width="100%" height="180" alt="AI Safety Daily Banner" style="object-fit: cover; border-radius: 8px;">
+</p>
 
 > Daily bilingual (Chinese/English) digest of AI safety, alignment, security, privacy, and governance.
 

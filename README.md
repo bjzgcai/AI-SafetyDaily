@@ -28,7 +28,14 @@
 
 ### 目录结构
 
-
+```
+.
+├── README.md
+└── 2026/
+    └── 04/
+        ├── safety_ai_digest_1d_2026-04-22_zh.md   # 中文版
+        └── safety_ai_digest_1d_2026-04-22_en.md   # 英文版
+```
 
 ### 更新频率
 
@@ -66,7 +73,14 @@ Each daily report includes:
 
 ### Directory Structure
 
-
+```
+.
+├── README.md
+└── 2026/
+    └── 04/
+        ├── safety_ai_digest_1d_2026-04-22_zh.md   # Chinese
+        └── safety_ai_digest_1d_2026-04-22_en.md   # English
+```
 
 ### Update Frequency
 

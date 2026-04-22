@@ -1,10 +1,11 @@
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/logo.png" height="40" alt="AI Safety Daily Logo" style="vertical-align: middle;">
+  <span style="vertical-align: middle;">&nbsp;AI Safety Daily</span>
+</h1>
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/logo.png" width="120" alt="AI Safety Daily Logo">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png" width="100%" height="180" alt="AI Safety Daily Banner" style="object-fit: cover; border-radius: 8px;">
 </p>
-
-<h1 align="center">AI Safety Daily</h1>
-
-
 
 > Daily bilingual (Chinese/English) digest of AI safety, alignment, security, privacy, and governance.
 

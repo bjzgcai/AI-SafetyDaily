@@ -1,4 +1,12 @@
-# AI Safety Daily
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/logo.png" width="120" alt="AI Safety Daily Logo">
+</p>
+
+<h1 align="center">AI Safety Daily</h1>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png" width="100%" alt="AI Safety Daily Banner">
+</p>
 
 > Daily bilingual (Chinese/English) digest of AI safety, alignment, security, privacy, and governance.
 
@@ -28,14 +36,7 @@
 
 ### 目录结构
 
-```
-.
-├── README.md
-└── 2026/
-    └── 04/
-        ├── safety_ai_digest_1d_2026-04-22_zh.md   # 中文版
-        └── safety_ai_digest_1d_2026-04-22_en.md   # 英文版
-```
+
 
 ### 更新频率
 
@@ -73,14 +74,7 @@ Each daily report includes:
 
 ### Directory Structure
 
-```
-.
-├── README.md
-└── 2026/
-    └── 04/
-        ├── safety_ai_digest_1d_2026-04-22_zh.md   # Chinese
-        └── safety_ai_digest_1d_2026-04-22_en.md   # English
-```
+
 
 ### Update Frequency
 

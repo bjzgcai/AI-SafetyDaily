@@ -3,16 +3,15 @@
   <span style="vertical-align: middle;">&nbsp;AI Safety Daily</span>
 </h1>
 
-<p align="center">
-  <div style="
-    width: 100%;
-    height: calc(100% / 3); 
-    background-image: url('https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png');
-    background-size: cover; 
-    background-position: center; 
-    border-radius: 10px; 
-  "></div>
+<p align="center" style="overflow: hidden; line-height: 0;">
+  <img src="https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png" 
+       style="width: 100%; 
+              height: 150px; /* 这里手动指定你想显示的高度 */
+              object-fit: cover; 
+              object-position: 50% 50%; /* 确保中心对齐 */
+              border-radius: 10px;">
 </p>
+
 > Daily bilingual (Chinese/English) digest of AI safety, alignment, security, privacy, and governance.
 
 <p align="center">

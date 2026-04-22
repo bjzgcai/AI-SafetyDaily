@@ -36,7 +36,17 @@
 
 ### 目录结构
 
-
+```
+.
+├── README.md
+├── assets/
+│   ├── logo.png
+│   └── banner.png
+└── 2026/
+    └── 04/
+        ├── safety_ai_digest_1d_2026-04-22_zh.md   # 中文版
+        └── safety_ai_digest_1d_2026-04-22_en.md   # 英文版
+```
 
 ### 更新频率
 
@@ -48,9 +58,9 @@
 |------|------|
 | 学术论文 | arXiv (cs.AI, cs.CL, cs.LG, cs.CR) |
 | 公司博客 | OpenAI, DeepMind, Google AI |
-| 国际科技媒体 | TechCrunch, The Verge, MIT Technology Review |
-| 中文科技媒体 | 36氪, 量子位 |
-| 开源社区 | HuggingFace, GitHub |
+| 国际科技媒体 | TechCrunch、The Verge、MIT Technology Review |
+| 中文科技媒体 | 36氪、量子位 |
+| 开源社区 | HuggingFace、GitHub |
 
 ---
 
@@ -74,7 +84,17 @@ Each daily report includes:
 
 ### Directory Structure
 
-
+```
+.
+├── README.md
+├── assets/
+│   ├── logo.png
+│   └── banner.png
+└── 2026/
+    └── 04/
+        ├── safety_ai_digest_1d_2026-04-22_zh.md   # Chinese
+        └── safety_ai_digest_1d_2026-04-22_en.md   # English
+```
 
 ### Update Frequency
 

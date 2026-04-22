@@ -6,11 +6,11 @@
 <p align="center">
   <div style="
     width: 100%;
-    height: calc(100% / 3); /* 设置容器高度为原本的1/3 */
+    height: calc(100% / 3); 
     background-image: url('https://raw.githubusercontent.com/bjzgcai/AI-SafetyDaily/main/assets/banner.png');
-    background-size: cover; /* 保持图片比例，使其完全覆盖容器 */
-    background-position: center; /* 将图片从中间开始显示，从而只显示中间1/3部分 */
-    border-radius: 10px; /* 保持圆角效果 */
+    background-size: cover; 
+    background-position: center; 
+    border-radius: 10px; 
   "></div>
 </p>
 > Daily bilingual (Chinese/English) digest of AI safety, alignment, security, privacy, and governance.

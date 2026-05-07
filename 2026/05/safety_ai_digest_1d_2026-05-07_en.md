@@ -1,48 +1,144 @@
 # AI Daily Digest [AI 安全] - 2026-05-07
 
 
-# Daily Thematic Digest: AI Safety, Alignment, Security, and Governance
-**Date:** 2026-05-07
-**Author:** Senior AI Safety Researcher
+# Daily Thematic Digest: AI Safety, Alignment, and Governance
+**Date:** 2026-05-07  
+**Theme:** AI Safety, Alignment, Security, Privacy, and Governance
 
 ## Highlights
 
-Three developments stand out today as critical inflection points for the field. First, the academic community is aggressively moving to democratize agentic search capabilities through **OpenSearch-VL** and **OpenSeeker-v2**, challenging the closed, resource-intensive pipelines previously dominated by industrial giants. This shift is vital for safety auditing, as reproducible training recipes allow for independent verification of agent behaviors. Second, **SymptomAI** provides one of the largest empirical deployments of conversational AI for medical assessment, involving nearly 14,000 participants. This study offers rare, real-world data on how LLMs perform in unstructured, everyday patient interactions, moving beyond curated vignettes to actual safety-critical deployment. Third, testimony from OpenAI’s former CTO, Mira Murati, during the ongoing *Musk v. Altman* trial suggests a disconnect between public safety assurances and internal legal assessments. This underscores the growing tension between corporate governance narratives and the technical realities of model safety standards.
+Three academic developments stand out today for their implications on systemic risk and model integrity. First, the paper **Laundering AI Authority with Adversarial Examples** introduces a novel attack vector where Vision-Language Models (VLMs) are manipulated to produce confident, authoritative responses about incorrect visual inputs, fundamentally challenging the trust placed in AI as fact-checkers. Second, **MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents** exposes a critical gap in safety evaluation, demonstrating that coding agents can ship exploitable code through sequences of innocuous requests that individually pass safety review. Third, **Undetectable Backdoors in Model Parameters** presents a supply-chain attack method that plants sparse, provably undetectable backdoors in pre-trained image classifiers, highlighting the vulnerability of distributed model weights to subtle perturbations.
 
-## Agentic Reasoning and Reproducible Benchmarks
+## Adversarial Attacks & Robustness
 
-The landscape of agentic evaluation is shifting from isolated task performance to complex, multi-step reasoning environments. Historically, frontier search agents relied on proprietary data and reinforcement learning pipelines that were opaque to the broader community. **OpenSearch-VL** directly addresses this by providing a fully open-source recipe for training multimodal deep search agents using agentic reinforcement learning. By curating dedicated high-quality training data and transparent trajectory synthesis pipelines, this work enables the community to audit the reasoning chains of search agents rather than treating them as black boxes. This aligns with findings from **OpenSeeker-v2**, which demonstrates that simple Supervised Fine-Tuning (SFT) on informative, high-difficulty trajectories can rival more complex RL pipelines. The authors report that when fueled with high-quality data, SFT approaches are surprisingly powerful, suggesting that data curation may be a more significant bottleneck than algorithmic complexity for safety-critical reasoning.
+The landscape of adversarial security is shifting from input-level perturbations to structural exploitation of model architectures. While **SoK: Robustness in Large Language Models against Jailbreak Attacks** provides a necessary baseline by critiquing existing evaluation metrics for failing to capture the multidimensional nature of LLM security, recent work suggests that standard jailbreak defenses are insufficient against more sophisticated threats. The authors of **Laundering AI Authority with Adversarial Examples** demonstrate that VLMs, often deployed as trusted authorities, can be coerced into validating false premises through subtle image perturbations. Unlike traditional jailbreaks that compromise alignment, this attack operates at the perception level, enabling "AI authority laundering" where the model's confidence is weaponized against user trust.
 
-However, the scope of evaluation must expand beyond search. **Workspace-Bench 1.0** introduces a necessary benchmark for AI agents operating within complex file dependencies, a scenario often overlooked in standard benchmarks. Unlike previous evaluations that rely on pre-specified files, this framework tests agents on identifying and updating explicit and implicit dependencies among heterogeneous files. This is a critical safety consideration, as agents manipulating real-world workspaces pose risks of data corruption or unintended side effects. Complementing this, **BRIGHT-P** rethinks reasoning-intensive retrieval, arguing that existing benchmarks like BRIGHT evaluate retrievers in isolation rather than as part of an evidence portfolio construction process. The authors propose that retrievers in agentic systems must provide complementary evidence across iterative search and synthesis, a requirement that current static benchmarks fail to capture. Together, these works highlight a consensus that future safety evaluations must account for the iterative, interactive, and dependency-heavy nature of real-world agent deployment.
+This trend extends to model architecture itself. **Misrouter: Exploiting Routing Mechanisms for Input-Only Attacks on Mixture-of-Experts LLMs** identifies the routing mechanism in MoE models as a new attack surface, allowing attackers to bypass safety alignment remotely without model modification. Complementing this, **Undetectable Backdoors in Model Parameters** reveals that supply-chain attacks can inject sparse perturbations into model weights that remain invisible to standard anomaly detection. The authors report that these backdoors can be activated by specific triggers while maintaining clean performance on standard benchmarks. In the audio domain, **Sparse Tokens Suffice: Jailbreaking Audio Language Models via Token-Aware Gradient Optimization** challenges the assumption that dense waveform optimization is necessary, showing that gradient energy is highly non-uniform and that sparse optimization can achieve similar jailbreak success rates.
 
-## Multimodal Fidelity, Efficiency, and Physical Grounding
+These findings collectively suggest that robustness cannot be achieved through input filtering alone. The **Gray-Box Poisoning of Continuous Malware Ingestion Pipelines** further reinforces this by showing that functionality-preserving manipulations of binaries can poison detection models during continuous training, indicating that defense mechanisms must account for the entire data lifecycle rather than just inference-time inputs.
 
-In the realm of generative models, the focus is increasingly on balancing efficiency with fidelity, particularly regarding unintended changes and physical consistency. **StableI2I** proposes a unified evaluation framework that explicitly measures content fidelity and pre-post consistency in image-to-image transitions. The authors note that existing evaluations largely fail to assess whether output images preserve the semantic correspondence and spatial structure of the input, a gap that poses significant risks for applications like image restoration or editing where fidelity is paramount. This concern for unintended changes is echoed in **D-OPSD**, which addresses the challenge of continuously tuning step-distilled diffusion models. The authors find that applying standard fine-tuning techniques compromises the inherent few-step inference capability, necessitating an on-policy self-distillation paradigm to maintain performance without degrading the model's efficiency.
+## Model Alignment & Interpretability
 
-Beyond 2D generation, the integration of physics into 3D asset generation is becoming a prerequisite for embodied AI. **PhysForge** introduces a decoupled two-stage framework supported by **PhysDB**, a large-scale dataset of 150,000 assets with four-tier physical annotations. The authors argue that interactive asset generation must be rooted in functional logic and hierarchical physics, moving beyond static geometry. This is further supported by **iWorld-Bench**, a comprehensive benchmark for training and testing world models on interaction-related abilities such as distance perception and memory. The construction of a diverse dataset with 330k video clips aims to address the lack of large-scale datasets for evaluating physical interaction capabilities. Meanwhile, **Stream-R1** and **Stream-T1** tackle the computational bottlenecks of video generation. **Stream-R1** introduces reliability-perplexity aware reward distillation, arguing that indiscriminate supervision caps distilled quality. **Stream-T1** proposes shifting focus to streaming video generation for test-time scaling, identifying that chunk-level synthesis is intrinsically suited for reducing computational overhead while enabling fine-grained temporal control. These efficiency gains are not merely performance optimizations; they reduce the energy footprint and latency, which are critical factors in the safety and accessibility of deployment.
+Alignment research is increasingly focusing on the granularity of credit assignment and the fidelity of preference signals. **EP-GRPO: Entropy-Progress Aligned Group Relative Policy Optimization with Implicit Process Guidance** quantifies credit assignment failures in Group Relative Policy Optimization (GRPO), revealing that uniform token-level granularity ignores heterogeneous informational value. The authors propose implicit process guidance to address polarity misalignment and zero-variance collapse, arguing that outcome-level supervision is insufficient for complex reasoning tasks. This aligns with findings in **Every Step Counts: Step-Level Credit Assignment for Tool-Integrated Text-to-SQL**, which notes that coarse-grained outcome supervision encourages models to explore suboptimal reasoning spaces.
 
-## Governance, Real-World Safety, and Industry Incidents
+In the realm of Direct Preference Optimization (DPO), **RLearner-LLM: Balancing Logical Grounding and Fluency in Large Language Models via Hybrid Direct Preference Optimization** identifies a systematic verbosity bias where standard preference signals reward fluency over logical correctness. The authors propose a hybrid pipeline fusing NLI signals with verifier LLM scores to bridge this "logical alignment gap." Similarly, **Preference-Based Self-Distillation: Beyond KL Matching via Reward Regularization** critiques existing self-distillation methods for reducing learning to KL matching, which can degrade reasoning performance over time.
 
-The intersection of technical capability and governance is currently under intense scrutiny. The **SymptomAI** study represents a significant step in empirical safety validation. By deploying conversational AI agents for end-to-end patient interviewing and differential diagnosis via the Fitbit app, the researchers randomized participants (N=13,917) to interact with five AI agents. This corpus captures real-world symptom reporting, allowing for a more accurate assessment of diagnostic performance compared to curated case studies. The authors report that while models excel on complex scenarios with rich context, their performance in everyday life remains a critical area for investigation. This empirical approach contrasts with the theoretical safety claims often made by industry leaders.
+Interpretability efforts are also yielding new insights into model mechanics. **Superposition Is Not Necessary: A Mechanistic Interpretability Analysis of Transformer Representations for Time Series Forecasting** applies sparse autoencoders to PatchTST, establishing that single-layer, narrow-dimensional transformers can achieve competitive results without complex superposition mechanisms. Meanwhile, **Text Corpora as Concept Fields: Black-Box Hallucination and Novelty Measurement** introduces a local drift field to score sentence transitions, offering a black-box method to measure hallucination without accessing model internals. However, **Misaligned by Reward: Socially Undesirable Preferences in LLMs** warns that broad instruction-following benchmarks fail to capture socially desirable preferences, necessitating a framework that converts social evaluation datasets into pairwise preference data for bias, safety, morality, and ethical reasoning.
 
-This tension was highlighted during the *Musk v. Altman* trial, where Mira Murati testified under oath that CEO Sam Altman falsely stated that OpenAI's legal department determined a new model did not violate safety standards. While the trial proceedings are ongoing, this testimony suggests that internal safety determinations may not always align with public assurances. In parallel, industry shifts indicate a recalibration of risk. Google has pulled the plug on Project Mariner, an experimental feature designed to perform tasks across the web, citing a need to reassess the technology. Similarly, Apple agreed to pay $250 million to settle a class action lawsuit for overpromising the arrival of Siri’s AI features. These legal and product developments signal that the market is beginning to penalize companies that prioritize feature velocity over verified safety and reliability.
+## Privacy Protection & Federated Learning
 
-Open-source security tools are emerging to fill the gap left by corporate transparency. The **Agent_Memory_Techniques** repository provides 30 runnable Jupyter notebooks covering conversation buffers, vector stores, and knowledge graphs, offering a standardized way to audit memory mechanisms. Similarly, **agent-safety-eval-lab** offers a framework for agent trace and tool-use safety evaluation, allowing researchers to monitor how agents interact with external tools. These tools are essential for the community to independently verify the safety claims made by proprietary systems.
+Privacy-preserving computation remains a critical bottleneck for deploying AI in sensitive domains. **Data anonymization in the presence of outliers via invariant coordinate selection** proposes ICSA, a robust alternative to spectral anonymization that replaces PCA with invariant coordinate selection to regulate robustness against contamination. This is particularly relevant for medical applications, where **Vol-Mark: A Watermark for 3D Medical Volume Data Via Cubic Difference Expansion and Contrastive Learning** offers a reversible-zero watermarking approach to protect ownership and authenticity in telemedicine.
 
-Regarding hardware and infrastructure, reports indicate that Samsung has announced the cessation of sales for all home appliances in the Chinese market to respond to changing market conditions, while Apple has increased production targets for the MacBook Neo to 10 million units. While these are business decisions, they reflect the intense demand for AI-capable hardware. In the robotics sector, reports of executive departures from Boston Dynamics and funding for specialized robotic hand startups like the one backed by Tencent and Baidu suggest a consolidation of effort towards dexterous manipulation. However, these industry movements must be viewed with caution; as noted in reports regarding the "Terafab" chip factory proposal by SpaceX, the capital intensity of AI infrastructure is rising, potentially creating barriers to entry that limit independent safety auditing.
+The position paper **Position: Embodied AI Requires a Privacy-Utility Trade-off** argues that optimizing perception, planning, and interaction components independently creates a systemic privacy crisis when deployed in sensitive environments. This necessitates a unified approach to privacy in embodied systems. In the context of blockchain and IoT, **Revocation-Ready CP-ABE Key Management for Blockchain-Based IoT Data Sharing** presents a hybrid architecture to enforce dynamic authorization without reintroducing trusted online policy enforcement points. Furthermore, **HELO Cryptography: A Lightweight Cryptographic System for Enhancing IoT Security in P2P Data Transmission** addresses the computational constraints of IoT devices by proposing a lightweight system for secure data transmission.
+
+## Agent Security & Governance
+
+As AI agents move from isolated tasks to complex workflows, security evaluation must evolve from static benchmarks to dynamic runtime monitoring. **Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours** introduces an AI red teaming agent built on the Dreadnode SDK, automating the construction of attack workflows to reduce the time spent on manual workflow assembly. This automation is critical given the findings in **MOSAIC-Bench**, which shows that coding agents can pass per-prompt safety review yet ship exploitable code through sequenced compliance with innocuous requests.
+
+Runtime safety is addressed by **AgentTrust: Runtime Safety Evaluation and Interception for AI Agent Tool Use**, a layer that intercepts agent tool calls to prevent irreversible harm such as credential exposure or data exfiltration. This complements **Workspace-Bench 1.0: Benchmarking AI Agents on Workspace Tasks with Large-Scale File Dependencies**, which evaluates agents on their ability to reason over heterogeneous file dependencies, a key capability for real-world deployment. **Uno-Orchestra: Parsimonious Agent Routing via Selective Delegation** further optimizes multi-agent systems by jointly learning task decomposition and worker choice, reducing the risk of rigid orchestration failures.
+
+## Open Source Security Tools
+
+Several open-source projects released today emphasize security tooling and agent harnesses. **0xbl33p/goblintown** provides a multi-agent orchestration protocol with drift monitoring and budget capping, featuring roles like Gremlins that attack outputs and Trolls that arbitrate. **AgentTrust** (referenced in the academic section) is also available as a runtime safety layer. **Agent_Memory_Techniques** offers a collection of runnable notebooks covering conversation buffers, vector stores, and knowledge graphs, essential for managing agent state securely. **agent-safety-eval-lab** provides a dedicated environment for evaluating agent trace and tool-use safety. Additionally, **pyflue** offers a Python port of the Flue agent harness framework, enabling standardized testing of agent behaviors.
+
+## Industry Context & Governance
+
+While academic research drives theoretical safety, industry developments highlight the scaling of deployment risks. Reports from **TechCrunch** and **36kr** indicate significant infrastructure expansion, such as SpaceX's proposed $119B semiconductor factory and Samsung's valuation crossing $1 trillion driven by AI chip demand. These developments increase the attack surface for supply-chain vulnerabilities, as noted in **Firmware Distribution as Attack Surface: A Security Study of ASIC Cryptocurrency Miners**, which reconstructs and analyzes publicly distributed firmware artifacts.
+
+Caution is warranted regarding industry announcements. Sources such as **36kr** and **Qbitai** frequently repackage PR material with sensational headlines, such as claims about "AI PPT" agents or specific funding rounds for robotics startups. While these indicate market momentum, they lack the technical rigor of peer-reviewed validation. For instance, claims regarding the capabilities of new robotics models or AI trading bots should be treated as unverified until independently benchmarked. The **DeepSeek** valuation reports and **SpaceX** chip factory proposals underscore the economic incentives driving rapid deployment, which often outpaces safety validation.
 
 ## Looking Forward
 
-Several theoretical and practical questions remain unresolved as the field moves toward more capable agents. First, the "trust" gap identified in the Murati testimony raises a fundamental question: How can external auditors verify safety claims when internal legal and safety departments operate under different incentives? The community needs standardized, third-party certification protocols that are independent of corporate legal departments. Second, the gap between simulated physics and real-world interaction remains significant. While **PhysForge** and **iWorld-Bench** make strides, the question of how to verify that a world model's internal physics simulation accurately predicts real-world consequences without costly physical testing remains open. Finally, as agents become more autonomous in workspace and medical settings, the definition of "harm" must evolve. Current benchmarks measure task success, but they do not adequately measure the long-term impact of agent decisions on human well-being or data integrity. Future research must prioritize longitudinal studies that track agent behavior over extended periods, moving beyond single-turn evaluations to understand the cumulative safety profile of agentic systems.
+Several theoretical questions remain unresolved. First, the relationship between sparse representations and safety alignment requires further investigation; while **Superposition Is Not Necessary** suggests simpler mechanisms may suffice for time series, it is unclear if this holds for complex reasoning tasks where superposition might encode safety constraints. Second, the compositional safety of agents remains a critical gap; **MOSAIC-Bench** demonstrates that structural vulnerabilities emerge from sequences of compliant actions, yet no unified framework exists to verify long-horizon agent trajectories. Finally, the privacy-utility trade-off in embodied AI, as highlighted in **Position: Embodied AI Requires a Privacy-Utility Trade-off**, lacks a formalized mathematical bound. Future research must determine if privacy-preserving mechanisms can be integrated into the training loop without degrading the model's ability to generalize across sensitive environments.
 
 ---
 
 
 ## References
 
+- **Laundering AI Authority with Adversarial Examples** — [arxiv_cr](https://arxiv.org/abs/2605.04261v1)
+- **SoK: Robustness in Large Language Models against Jailbreak Attacks** — [arxiv_ai](https://arxiv.org/abs/2605.05058v1)
+- **Superposition Is Not Necessary: A Mechanistic Interpretability Analysis of Transformer Representations for Time Series Forecasting** — [arxiv_ai](https://arxiv.org/abs/2605.05151v1)
+- **On the Hardness of Junking LLMs** — [arxiv_lg](https://arxiv.org/abs/2605.05116v1)
+- **Uncertainty-Aware Exploratory Direct Preference Optimization for Multimodal Large Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.04874v1)
+- **Misrouter: Exploiting Routing Mechanisms for Input-Only Attacks on Mixture-of-Experts LLMs** — [arxiv_cr](https://arxiv.org/abs/2605.04446v1)
+- **Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours** — [arxiv_cr](https://arxiv.org/abs/2605.04019v1)
+- **Probabilistic Atomic Swaps for Bitcoin and Friends** — [arxiv_cr](https://arxiv.org/abs/2605.04975v1)
+- **Data anonymization in the presence of outliers via invariant coordinate selection** — [arxiv_cr](https://arxiv.org/abs/2605.04833v1)
+- **AgentTrust: Runtime Safety Evaluation and Interception for AI Agent Tool Use** — [arxiv_cr](https://arxiv.org/abs/2605.04785v1)
+- **Text Corpora as Concept Fields: Black-Box Hallucination and Novelty Measurement** — [arxiv_ai](https://arxiv.org/abs/2605.05103v1)
+- **Misaligned by Reward: Socially Undesirable Preferences in LLMs** — [arxiv_ai](https://arxiv.org/abs/2605.05003v1)
+- **Federated Learning for Early Prediction of EV Charging Demand** — [arxiv_ai](https://arxiv.org/abs/2605.04993v1)
+- **EP-GRPO: Entropy-Progress Aligned Group Relative Policy Optimization with Implicit Process Guidance** — [arxiv_ai](https://arxiv.org/abs/2605.04960v1)
+- **Gated Multimodal Learning for Interpretable Property Energy Performance Prediction and Retrofit Scenario Analysis** — [arxiv_lg](https://arxiv.org/abs/2605.05088v1)
+- **Order Matters: Improving Domain Adaptation by Reordering Data** — [arxiv_lg](https://arxiv.org/abs/2605.05084v1)
+- **Graph-SND: Sparse Aggregation for Behavioral Diversity in Multi-Agent Reinforcement Learning** — [arxiv_lg](https://arxiv.org/abs/2605.05020v1)
+- **Beyond Semantics: An Evidential Reasoning-Aware Multi-View Learning Framework for Trustworthy Mental Health Prediction** — [arxiv_cl](https://arxiv.org/abs/2605.05121v1)
+- **Sparse Tokens Suffice: Jailbreaking Audio Language Models via Token-Aware Gradient Optimization** — [arxiv_cl](https://arxiv.org/abs/2605.04700v1)
+- **Graph-Augmented LLMs for Swiss MP Ideology Prediction** — [arxiv_cl](https://arxiv.org/abs/2605.04643v1)
+- **RLearner-LLM: Balancing Logical Grounding and Fluency in Large Language Models via Hybrid Direct Preference Optimization** — [arxiv_cl](https://arxiv.org/abs/2605.04539v1)
+- **MOSAIC-Bench: Measuring Compositional Vulnerability Induction in Coding Agents** — [arxiv_cr](https://arxiv.org/abs/2605.03952v1)
+- **Membership Inference Attacks for Retrieval Based In-Context Learning for Document Question Answering** — [arxiv_cr](https://arxiv.org/abs/2605.04116v1)
+- **Toward a Risk Assessment Framework for Institutional DeFi: A Nine-Dimension Approach** — [arxiv_cr](https://arxiv.org/abs/2605.05145v1)
+- **You Snooze, You Lose: Automatic Safety Alignment Restoration through Neural Weight Translation** — [arxiv_cr](https://arxiv.org/abs/2605.04992v1)
+- **Vol-Mark: A Watermark for 3D Medical Volume Data Via Cubic Difference Expansion and Contrastive Learning** — [arxiv_cr](https://arxiv.org/abs/2605.04705v1)
+- **Gray-Box Poisoning of Continuous Malware Ingestion Pipelines** — [arxiv_cr](https://arxiv.org/abs/2605.04698v1)
+- **When Life Gives You BC, Make Q-functions: Extracting Q-values from Behavior Cloning for On-Robot Reinforcement Learning** — [arxiv_ai](https://arxiv.org/abs/2605.05172v1)
+- **Executable World Models for ARC-AGI-3 in the Era of Coding Agents** — [arxiv_ai](https://arxiv.org/abs/2605.05138v1)
+- **Joint Treatment Effect Estimation from Incomplete Healthcare Data: Temporal Causal Normalizing Flows with LLM-driven Evolutionary MNAR Imputation** — [arxiv_ai](https://arxiv.org/abs/2605.05125v1)
+- **Adaptive Policy Selection and Fine-Tuning under Interaction Budgets for Offline-to-Online Reinforcement Learning** — [arxiv_ai](https://arxiv.org/abs/2605.05123v1)
+- **LineRides: Line-Guided Reinforcement Learning for Bicycle Robot Stunts** — [arxiv_ai](https://arxiv.org/abs/2605.05110v1)
+- **Building informative materials datasets beyond targeted objectives** — [arxiv_ai](https://arxiv.org/abs/2605.05104v1)
+- **Driver-WM: A Driver-Centric Traffic-Conditioned Latent World Model for In-Cabin Dynamics Rollout** — [arxiv_ai](https://arxiv.org/abs/2605.05092v1)
+- **Look Once, Beam Twice: Camera-Primed Real-Time Double-Directional mmWave Beam Management for Vehicular Connectivity** — [arxiv_ai](https://arxiv.org/abs/2605.05071v1)
+- **Adaptive Learning Strategies for AoA-Based Outdoor Localization: A Comprehensive Framework** — [arxiv_ai](https://arxiv.org/abs/2605.05055v1)
+- **Direct Product Flow Matching: Decoupling Radial and Angular Dynamics for Few-Shot Adaptation** — [arxiv_ai](https://arxiv.org/abs/2605.05054v1)
+- **Preference-Based Self-Distillation: Beyond KL Matching via Reward Regularization** — [arxiv_ai](https://arxiv.org/abs/2605.05040v1)
+- **Position: Embodied AI Requires a Privacy-Utility Trade-off** — [arxiv_ai](https://arxiv.org/abs/2605.05017v1)
+- **Uno-Orchestra: Parsimonious Agent Routing via Selective Delegation** — [arxiv_ai](https://arxiv.org/abs/2605.05007v1)
+- **On-line Learning in Tree MDPs by Treating Policies as Bandit Arms** — [arxiv_ai](https://arxiv.org/abs/2605.04979v1)
+- **Rollout Pass-Rate Control: Steering Binary-Reward RL Toward Its Most Informative Regime** — [arxiv_lg](https://arxiv.org/abs/2605.05112v1)
+- **Provable imitation learning for control of instability in partially-observed Vlasov--Poisson equations** — [arxiv_lg](https://arxiv.org/abs/2605.05081v1)
+- **Scalable inference of spatial regions and temporal signatures from time series** — [arxiv_lg](https://arxiv.org/abs/2605.05008v1)
+- **DualTCN: A Physics-Constrained Temporal Convolutional Network for 2 Time-Domain Marine CSEM Inversion** — [arxiv_lg](https://arxiv.org/abs/2605.04997v1)
+- **When Relations Break: Analyzing Relation Hallucination in Vision-Language Model Under Rotation and Noise** — [arxiv_cl](https://arxiv.org/abs/2605.05045v1)
+- **Why Expert Alignment Is Hard: Evidence from Subjective Evaluation** — [arxiv_cl](https://arxiv.org/abs/2605.04972v1)
+- **Reinforcement Learning for Compositional Generalization with Outcome-Level Optimization** — [arxiv_cl](https://arxiv.org/abs/2605.04920v1)
+- **BenCSSmark: Making the Social Sciences Count in LLM Research** — [arxiv_cl](https://arxiv.org/abs/2605.04886v1)
+- **Anticipating Innovation Using Large Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.04875v1)
+- **Measuring Psychological States Through Semantic Projection: A Theory-Driven Approach to Language-Based Assessment** — [arxiv_cl](https://arxiv.org/abs/2605.04873v1)
+- **Assessing Cognitive Effort in L2 Idiomatic Processing: An Eye-Tracking Dataset** — [arxiv_cl](https://arxiv.org/abs/2605.04857v1)
+- **Elicitation Matters: How Prompts and Query Protocols Shape LLM Surrogates under Sparse Observations** — [arxiv_cl](https://arxiv.org/abs/2605.04764v1)
+- **Every Step Counts: Step-Level Credit Assignment for Tool-Integrated Text-to-SQL** — [arxiv_cl](https://arxiv.org/abs/2605.04719v1)
+- **Paraphrase-Induced Output-Mode Collapse: When LLMs Break Character Under Semantically Equivalent Inputs** — [arxiv_cl](https://arxiv.org/abs/2605.04665v1)
+- **CHE-TKG: Collaborative Historical Evidence and Evolutionary Dynamics Learning for Temporal Knowledge Graph Reasoning** — [arxiv_cl](https://arxiv.org/abs/2605.04652v1)
+- **An Evaluation of Chat Safety Moderations in Roblox** — [arxiv_cr](https://arxiv.org/abs/2605.04491v1)
+- **The Adversarial Discount - AI, Signal Correlation, and the Cybersecurity Arms Race** — [arxiv_cr](https://arxiv.org/abs/2605.04336v1)
+- **SWAN: Semantic Watermarking with Abstract Meaning Representation** — [arxiv_cr](https://arxiv.org/abs/2605.04305v1)
+- **Open-Source Image Editing Models Are Zero-Shot Vision Learners** — [arxiv_cl](https://arxiv.org/abs/2605.04566v1)
+- **UniVer: A Unified Perspective for Multi-step and Multi-draft Speculative Decoding** — [arxiv_cl](https://arxiv.org/abs/2605.04543v1)
+- **Revocation-Ready CP-ABE Key Management for Blockchain-Based IoT Data Sharing** — [arxiv_cr](https://arxiv.org/abs/2605.04280v1)
+- **Lightweight Vulnerability Detection from Code Metrics and Token Features** — [arxiv_cr](https://arxiv.org/abs/2605.04260v1)
+- **Undetectable Backdoors in Model Parameters: Hiding Sparse Secrets in High Dimensions** — [arxiv_cr](https://arxiv.org/abs/2605.04209v1)
+- **HELO Cryptography: A Lightweight Cryptographic System for Enhancing IoT Security in P2P Data Transmission** — [arxiv_cr](https://arxiv.org/abs/2605.03948v1)
+- **Firmware Distribution as Attack Surface: A Security Study of ASIC Cryptocurrency Miners** — [arxiv_cr](https://arxiv.org/abs/2605.03770v2)
 - **D-OPSD: On-Policy Self-Distillation for Continuously Tuning Step-Distilled Diffusion Models** — [huggingface_papers](https://arxiv.org/abs/2605.05204)
 - **Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation** — [huggingface_papers](https://arxiv.org/abs/2605.03849)
 - **RLDX-1 Technical Report** — [huggingface_papers](https://arxiv.org/abs/2605.03269)
+- **Sharp Capacity Thresholds in Linear Associative Memory: From Winner-Take-All to Listwise Retrieval** — [arxiv_lg](https://arxiv.org/abs/2605.05189v1)
+- **Estimating the expected output of wide random MLPs more efficiently than sampling** — [arxiv_lg](https://arxiv.org/abs/2605.05179v1)
+- **Understanding In-Context Learning for Nonlinear Regression with Transformers: Attention as Featurizer** — [arxiv_lg](https://arxiv.org/abs/2605.05176v1)
+- **Human-AI Co-Mentorship in Project-Based Learning: A Case Study in Financial Forecasting** — [arxiv_lg](https://arxiv.org/abs/2605.05144v1)
+- **Low-Cost Black-Box Detection of LLM Hallucinations via Dynamical System Prediction** — [arxiv_lg](https://arxiv.org/abs/2605.05134v1)
+- **Transformed Latent Variable Multi-Output Gaussian Processes** — [arxiv_lg](https://arxiv.org/abs/2605.05133v1)
+- **Conditional outlier detection for clinical alerting** — [arxiv_lg](https://arxiv.org/abs/2605.05124v1)
+- **Physiologically Grounded Driver Behavior Classification: SHAP-Driven Elite Feature Selection and Hybrid Gradient Boosting for Multimodal Physiological Signals** — [arxiv_lg](https://arxiv.org/abs/2605.05120v1)
+- **Manifold Steering Reveals the Shared Geometry of Neural Network Representation and Behavior** — [arxiv_lg](https://arxiv.org/abs/2605.05115v1)
+- **How Long Does Infinite Width Last? Signal Propagation in Long-Range Linear Recurrences** — [arxiv_lg](https://arxiv.org/abs/2605.05113v1)
+- **Unified Framework of Distributional Regret in Multi-Armed Bandits and Reinforcement Learning** — [arxiv_lg](https://arxiv.org/abs/2605.05102v1)
+- **A Bayesian Approach for Task-Specific Next-Best-View Selection with Uncertain Geometry** — [arxiv_lg](https://arxiv.org/abs/2605.05095v1)
+- **Implicit Representations of Grammaticality in Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.05197v1)
+- **MRI-Eval: A Tiered Benchmark for Evaluating LLM Performance on MRI Physics and GE Scanner Operations Knowledge** — [arxiv_cl](https://arxiv.org/abs/2605.05175v1)
 - **OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents** — [huggingface_papers](https://arxiv.org/abs/2605.05185)
 - **Stream-T1: Test-Time Scaling for Streaming Video Generation** — [huggingface_papers](https://arxiv.org/abs/2605.04461)
 - **Lightning Unified Video Editing via In-Context Sparse Attention** — [huggingface_papers](https://arxiv.org/abs/2605.04569)
@@ -59,22 +155,14 @@ Several theoretical and practical questions remain unresolved as the field moves
 - **SymptomAI: Towards a Conversational AI Agent for Everyday Symptom Assessment** — [huggingface_papers](https://arxiv.org/abs/2605.04012)
 - **Is xAI a neocloud now?** — [techcrunch_ai](https://techcrunch.com/2026/05/06/is-xai-a-neocloud-now/)
 - **Five architects of the AI economy explain where the wheels are coming off** — [techcrunch_ai](https://techcrunch.com/2026/05/06/five-architects-of-the-ai-economy-explain-where-the-wheels-are-coming-off/)
-- **Musk’s biggest loyalist became his biggest liability** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/925665/musk-altman-trial-shivon-zilis-testimony)
-- **Google shuts down Project Mariner** — [theverge_ai](https://www.theverge.com/tech/925559/google-project-mariner-shut-down)
-- **How David Sacks crashed and burned in the White House** — [theverge_ai](https://www.theverge.com/column/925487/david-sacks-trump-administration-ai-model-review)
-- **Mira Murati tells the court that she couldn’t trust Sam Altman’s words** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/925338/openai-musk-v-altman-mira-murati)
 - **SpaceX may spend up to $119B on ‘Terafab’ chip factory in Texas** — [techcrunch_ai](https://techcrunch.com/2026/05/06/spacex-may-spend-up-to-119-billion-on-terafab-chip-factory-in-texas/)
 - **DeepSeek could hit $45B valuation from its first investment round** — [techcrunch_ai](https://techcrunch.com/2026/05/06/deepseek-could-hit-45b-valuation-from-its-first-investment-round/)
 - **Khosla-backed robotics startup Genesis AI has gone full stack, demo shows** — [techcrunch_ai](https://techcrunch.com/2026/05/06/khosla-backed-robotics-startup-genesis-ai-has-gone-full-stack-demo-shows/)
-- **Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI** — [theverge_ai](https://www.theverge.com/tech/917225/sam-altman-elon-musk-openai-lawsuit)
 - **5 gardening tips you can try right in Search** — [google_ai](https://blog.google/products-and-platforms/products/search/gardening-tips/)
 - **At TechCrunch Disrupt 2026, all your M&A questions will be answered** — [techcrunch_ai](https://techcrunch.com/2026/05/06/at-techcrunch-disrupt-2026-all-your-ma-questions-will-be-answered/)
 - **3 days left to lock in 50% off a second ticket to TechCrunch Disrupt 2026** — [techcrunch_ai](https://techcrunch.com/2026/05/06/3-days-left-to-lock-in-50-off-a-second-ticket-to-techcrunch-disrupt-2026/)
 - **AI boom pushes Samsung to $1T** — [techcrunch_ai](https://techcrunch.com/2026/05/06/ai-boom-pushes-samsung-to-1t/)
-- **Google&#8217;s AI search summaries will now quote Reddit** — [theverge_ai](https://www.theverge.com/tech/924993/google-ai-search-mode-overviews-update-reddit-links)
-- **Microsoft’s Office and LinkedIn chief now runs Teams in latest reshuffle** — [theverge_ai](https://www.theverge.com/tech/924931/microsoft-office-copilot-windows-reorg-shuffle)
 - **The Download: seafloor science and military chatbots** — [mit_tech_review](https://www.technologyreview.com/2026/05/06/1136917/the-download-seafloor-science-military-ai-chatbots/)
-- **Chrome’s AI features may be hogging 4GB of your computer storage** — [theverge_ai](https://www.theverge.com/tech/924933/google-chrome-4gb-gemini-nano-ai-features)
 - **Barry Diller trusts Sam Altman. But ‘trust is irrelevant’ as AGI nears, he says.** — [techcrunch_ai](https://techcrunch.com/2026/05/06/barry-diller-trusts-sam-altman-but-trust-is-irrelevant-as-agi-nears-he-says/)
 - **Snap says its $400M deal with Perplexity ‘amicably ended’** — [techcrunch_ai](https://techcrunch.com/2026/05/06/snap-says-its-400m-deal-with-perplexity-amicably-ended/)
 - **How Elon Musk left OpenAI, according to Greg Brockman** — [techcrunch_ai](https://techcrunch.com/2026/05/06/how-elon-musk-left-openai-according-to-greg-brockman/)
@@ -82,7 +170,6 @@ Several theoretical and practical questions remain unresolved as the field moves
 - **Tinder owner Match Group is slowing hiring to pay for its increased use of AI tools** — [techcrunch_ai](https://techcrunch.com/2026/05/06/tinder-owner-match-group-is-slowing-hiring-to-pay-for-its-increased-use-of-ai-tools/)
 - **Apple to pay $250M to settle lawsuit over Siri’s delayed AI features** — [techcrunch_ai](https://techcrunch.com/2026/05/06/apple-to-pay-250m-to-settle-lawsuit-over-siris-delayed-ai-features/)
 - **Ethos raises $22.75M from a16z for its expert network with voice onboarding** — [techcrunch_ai](https://techcrunch.com/2026/05/06/ethos-raises-22-75m-from-a16z-for-its-expert-network-with-voice-onboarding/)
-- **voidborne-d/master-skill** — [github](https://github.com/voidborne-d/master-skill)
 - **0xbl33p/goblintown** — [github](https://github.com/0xbl33p/goblintown)
 - **awizemann/harness** — [github](https://github.com/awizemann/harness)
 - **NirDiamant/Agent_Memory_Techniques** — [github](https://github.com/NirDiamant/Agent_Memory_Techniques)
@@ -102,6 +189,7 @@ Several theoretical and practical questions remain unresolved as the field moves
 - **prime-radiant-inc/books-for-bots** — [github](https://github.com/prime-radiant-inc/books-for-bots)
 - **kostyay/pi-k-excalidraw** — [github](https://github.com/kostyay/pi-k-excalidraw)
 - **Naroh091/hermes-war-room** — [github](https://github.com/Naroh091/hermes-war-room)
+- **SuperagenticAI/pyflue** — [github](https://github.com/SuperagenticAI/pyflue)
 - **00后下场整顿Agent：啥都不学就能用好AI，这才是正确打开方式** — [qbitai](https://www.qbitai.com/2026/05/413612.html)
 - **一年磨一剑，今年最炸机器人Demo来了！** — [qbitai](https://www.qbitai.com/2026/05/413830.html)
 - **云知声山海知医慧保大模型重磅发布：以高密智能深耕高价值场景，重构医疗保险数智新生态** — [qbitai](https://www.qbitai.com/2026/05/413782.html)
@@ -111,8 +199,8 @@ Several theoretical and practical questions remain unresolved as the field moves
 - **马斯克22万张GPU全卖给Claude用：5小时限额翻倍，双方合作建太空算力** — [qbitai](https://www.qbitai.com/2026/05/413569.html)
 - **AI PPT，这次是真不用返工了** — [qbitai](https://www.qbitai.com/2026/05/413296.html)
 - **香蕉和GPT Image之外的第3条路：华人15人团队造出AI生图黑马** — [qbitai](https://www.qbitai.com/2026/05/413264.html)
+- **友邦人寿等在天津成立股权投资基金，出资额61亿** — [36kr](https://36kr.com/newsflashes/3798988033416192?f=rss)
 - **腾讯等入股机器人灵巧手研发商临界点** — [36kr](https://36kr.com/newsflashes/3798889072663809?f=rss)
-- **苹果高价买“芯”：MacBook Neo生产目标提高至1000万台** — [36kr](https://36kr.com/newsflashes/3798867347135491?f=rss)
 - **对话孙来春：年入25亿的林清轩不想做中国欧莱雅 ｜厚雪专访** — [36kr](https://36kr.com/p/3797662460419337?f=rss)
 - **斯坦福博士后创立的柔性触觉传感器公司获超亿元融资，低成本触觉手套将量产落地｜硬氪首发** — [36kr](https://36kr.com/p/3797155747748867?f=rss)
 - **像素绽放PixelBloom完成C轮融资，全面发力AI办公解决方案Agent：从“一分钟生成PPT”到“交付商用级结果”** — [36kr](https://36kr.com/p/3797787228151048?f=rss)

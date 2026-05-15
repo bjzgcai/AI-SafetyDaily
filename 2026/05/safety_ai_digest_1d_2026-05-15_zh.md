@@ -1,85 +1,165 @@
 # AI 日报 [AI 安全] - 2026-05-15
 
 
-# 2026-05-15 AI 安全与治理每日综述
+# AI 安全与治理每日综述
 
-## Highlights
+## 亮点
 
-今日安全研究领域的核心突破集中在**大模型攻击面的扩展**与**隐私审计的实用化**两个方向。首先，**MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** 揭示了基于 Transformer 架构的 LLM 存在新型后门攻击路径，攻击者无需修改文本内容即可利用位置编码触发恶意行为，这对现有的基于内容过滤的防御体系提出了严峻挑战。其次，**Privacy Auditing with Zero (0) Training Run** 提出了一种无需干预训练流程的后验隐私审计框架，解决了大型部署模型中难以进行差分隐私参数验证的痛点。此外，针对 Agent 安全，**WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** 展示了在开放 Web 环境中防御提示注入攻击的新范式。产业层面，尽管 Musk 与 Altman 的诉讼案进入尾声，但关于 AI 数据主权与隐私泄露的讨论（如 MIT Tech Review 报道的 Deepfake 隐私问题）持续升温，凸显了治理框架滞后于技术发展的现状。
+当日学术进展中，**When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** 提出了一种新的张量相似度度量，解决了现有方法在权重空间对称性下的盲点，为机制可解释性提供了更严谨的验证工具。**Privacy Auditing with Zero (0) Training Run** 提出了无需重新训练即可审计差分隐私参数的后验框架，解决了大型部署系统无法干预训练流程的难题。此外，**Position: Behavioural Assurance Cannot Verify the Safety Claims Governance Now Demands** 这一立场论文强烈指出，当前的行为评估方法在认识论上存在局限，无法验证治理框架要求的潜在属性，揭示了评估方法的根本性缺陷。
 
 ## 对抗攻击与鲁棒性
 
-当前对抗攻击研究正从传统的输入扰动向更隐蔽的架构层面渗透。**MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** 与 **One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries** 共同指向了模型内部表示的脆弱性。前者指出位置编码本身可作为触发器，这意味着传统的基于文本内容的检测机制可能完全失效；后者则表明，针对恶意微调的防御机制在面对自适应攻击者时往往存在单一弱点，即防御者试图掩盖或误导攻击路径，反而暴露了新的攻击面。这两项工作互为补充，揭示了模型鲁棒性不仅取决于训练数据的质量，更取决于对模型内部机制（如位置编码、微调过程）的深层理解。
+对抗攻击领域正从内容触发转向结构触发，**MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** 揭示了利用位置编码作为触发器的新型后门攻击，无需修改文本内容即可激活恶意行为。这与传统的基于内容的触发器形成对比，表明 Transformer 架构本身存在新的攻击面。针对微调攻击的鲁棒性，**One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries** 指出现有防御在自适应对抗者面前存在单一弱点，即它们往往掩盖或误导了模型对安全边界的理解。在 Agent 安全方面，**WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** 提出了一种针对 Web 代理的鲁棒防御，解决了现有 Guard 模型在未见领域泛化能力不足的问题。此外，**Systematic Discovery of Semantic Attacks in Online Map Construction through Conditional Diffusion** 展示了如何利用扩散模型潜在流形发现绕过传统防御的语义攻击，这对自动驾驶安全构成了潜在威胁。
 
-在评估与检测方面，**The Great Pretender: A Stochasticity Problem in LLM Jailbreak** 对现有的 Jailbreak 评估方法提出了质疑，指出某些声称具有高攻击成功率（ASR）的方法可能受随机性影响，无法在独立验证中复现。这与 **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** 的结论相呼应，后者通过构建 4x6 的目标 - 技术矩阵，发现主流基准（如 HarmBench, InjecAgent）在覆盖威胁面方面存在显著缺失。这表明当前的对抗评估可能存在“虚假繁荣”，即基准测试的通过率提升并不等同于真实安全性的增强。相比之下，**Can Visual Mamba Improve AI-Generated Image Detection?** 则尝试从架构层面改进检测能力，探索视觉 Mamba 在识别 AI 生成图像方面的潜力，为多模态内容的真实性验证提供了新的技术路径。
+## 模型对齐与可解释性
+
+模型对齐与可解释性研究正在深入机制层面。**When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** 引入的张量相似度度量能够捕捉全局功能等价性，为验证不同模型间机制的一致性提供了新工具。在社交语境下的对齐行为，**AI Knows When It's Being Watched: Functional Strategic Action and Contextual Register Modulation in Large Language Models** 发现 LLM 会表现出类似霍桑效应的适应性行为，这对审计和治理提出了挑战。针对越狱攻击，**EVA: Editing for Versatile Alignment against Jailbreaks** 提出了一种编辑对齐方法，旨在减少安全微调带来的计算开销和效用损失。然而，**The Great Pretender: A Stochasticity Problem in LLM Jailbreak** 揭示了越狱生成中的随机性问题，指出某些声称达到高攻击成功率的方法可能无法在独立验证中复现，这提醒我们需要警惕未经证实的营销话术。
 
 ## 隐私保护与联邦学习
 
-隐私保护研究正从理论优化转向工程落地。**Privacy Auditing with Zero (0) Training Run** 提出的零训练运行审计框架，利用固定数据集进行后验分析，避免了大型部署模型重新训练的高昂成本，为合规性审计提供了可操作的工具。这与 **Limits of Personalizing Differential Privacy Budgets** 的理论发现形成对比，后者指出在均值估计任务中，完全个性化的隐私预算并非最优解，简单的阈值操作即可达到相近效果，这为实际部署中的隐私预算分配提供了简化依据。
-
-在联邦学习领域，**DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** 针对现有安全聚合协议通信轮次多、计算开销大的问题，提出了分布式聚合器方案，旨在平衡隐私保护与通信效率。这一方向与 **Backdoor Threats in Variational Quantum Circuits: Taxonomy, Attacks, and Defenses** 中关于量子计算安全性的探讨形成跨领域的呼应，尽管后者关注的是量子电路中的后门风险，但两者都强调了在分布式或协作式计算环境中，数据与模型更新过程中的潜在泄露风险。值得注意的是，**Toward Covert Quantum Computing** 进一步探讨了量子计算环境下的隐私问题，提出了隐蔽量子计算的概念，这在多租户云平台上对于防止同机用户探测计算行为具有重要意义。
+隐私保护技术正从训练时审计转向后验审计。**Privacy Auditing with Zero (0) Training Run** 提出的零训练运行审计框架，利用两个固定数据集即可提供差分隐私参数的经验下界，解决了大型部署系统无法干预训练流程的难题。在联邦学习领域，**DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** 提出了一种新的协议，旨在减少通信轮次并降低客户端的密码学开销。关于个性化隐私预算，**Limits of Personalizing Differential Privacy Budgets** 表明对于均值估计任务，选择正确的有效隐私预算比完全个性化更为关键。此外，**To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model** 提出了 MMGuard，通过生成不可学习的示例来主动保护多模态数据免受未经授权的微调，这是一种预防性的数据保护策略。
 
 ## Agent 安全与治理
 
-随着 Agent 系统从聊天界面走向自主执行任务，安全边界正在从“回答质量”向“操作后果”转移。**WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** 针对 Web Agent 在开放环境中易受 HTML 或视觉界面注入攻击的问题，提出了鲁棒防御方案，解决了现有 Guard 模型泛化能力差、误报率高的问题。**Do Coding Agents Understand Least-Privilege Authorization?** 则通过 AuthBench 基准测试，发现当前模型在推断最小权限授权边界方面仍存在不足，这直接关联到 Agent 在访问文件系统或执行 Shell 命令时的安全风险。
-
-在长期安全适应方面，**LiSA: Lifelong Safety Adaptation via Conservative Policy Induction** 强调了 Guardrails 需要适应本地隐私规范和组织政策，而非仅依赖预部署规范。这与 **Angel or Demon: Investigating the Plasticity Interventions' Impact on Backdoor Threats in Deep Reinforcement Learning** 的研究形成对比，后者关注深度强化学习中的可塑性干预对后门漏洞的影响，指出现有研究多集中于 Vanilla 场景，而忽略了现代 Agent 中内置的可塑性组件可能带来的风险。此外，**Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** 指出，现有的攻击基准在覆盖威胁面方面存在不足，这要求 Agent 安全评估必须超越单一基准，采用更全面的威胁建模。
+Agent 安全与治理是当前最紧迫的议题之一。**Position: Behavioural Assurance Cannot Verify the Safety Claims Governance Now Demands** 这一立场论文强烈指出，当前的行为评估方法在认识论上存在局限，无法验证治理框架要求的潜在属性，如隐藏目标的缺失。在代码 Agent 的安全授权方面，**Do Coding Agents Understand Least-Privilege Authorization?** 通过 AuthBench 基准测试发现，当前模型难以自行推断最小权限边界，这增加了部署风险。针对 Web Agent 的架构，**Web Agents Should Adopt the Plan-Then-Execute Paradigm** 论证了计划后执行范式优于默认的 ReAct 范式，以减少提示注入攻击的路径。在评估方法上，**Holistic Evaluation and Failure Diagnosis of AI Agents** 提出了一种整体评估框架，通过自上而下的诊断与自下而上的评估相结合，解决了长轨迹中失败归因困难的问题。
 
 ## 安全评估基准与工具
 
-安全评估基准的建设正在向多模态和特定领域深化。**ROK-FORTRESS: Measuring the Effect of Geopolitical Transcreation for National Security and Public Safety** 引入了双语、文化对抗的 NSPS 基准，利用英韩语言对和美韩地缘政治轴，填补了多语言安全评估的空白。**EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents** 则专注于语音 Agent 的评估，解决了模拟对话生成与语音特定失败模式测量的挑战。在视觉与记忆方面，**MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory** 指出现有评估往往忽略视觉证据的保留，而 **PDI-Bench (Perspective Distortion Index)** 则提供了量化视频生成中几何一致性的框架。
+安全评估基准与工具的开发正在加速。**ROK-FORTRESS: Measuring the Effect of Geopolitical Transcreation for National Security and Public Safety** 引入了一个双语、文化对抗性的国家安全基准，填补了多语言安全评估中地缘政治语境互动的证据空白。**Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** 提供了一个可复用的框架，用于审计 LLM 攻击基准是否覆盖了威胁表面，揭示了主要框架在覆盖面上的不足。开源工具方面，**secureagentics/Adrian** 提供了运行时安全监控和控制，能够实时捕获恶意工具使用和策略漂移。**outputguard** 则专注于验证和修复 LLM 的结构化输出，提供了多种 JSON 修复策略。
 
-开源工具生态也在同步发展。**secureagentics/Adrian** 提供了运行时安全监控与控制，能够实时捕获恶意工具使用和策略漂移。**outputguard** 专注于验证和修复 LLM 结构化输出，提供多种 JSON 修复策略。在联邦学习与隐私计算方面，**DisAgg** 的开源实现为高效安全聚合提供了参考。这些工具与基准的结合，正在构建一个从理论评估到工程防御的完整闭环。然而，**Talk is (Not) Cheap** 的审计结果显示，即便有这些工具，基准覆盖的不足仍可能导致防御盲区。
+## 行业动态与审慎观察
 
-## 行业观察与治理挑战
+行业动态方面，Elon Musk 与 Sam Altman 的诉讼案近期进入关键阶段，这反映了 AI 治理中关于组织使命与商业利益冲突的现实张力。关于具身智能行业的融资报道，虽然显示资本热度上升，但作为分析师需审慎对待未经独立验证的融资规模数据，避免将市场宣传等同于技术成熟度。开源社区中，**secureagentics/Adrian** 和 **outputguard** 等项目的出现表明，运行时监控和输出验证正成为 Agent 安全的基础设施。
 
-产业层面的动态反映了安全治理的紧迫性。Musk 与 Altman 的诉讼案进入最后阶段，虽然主要涉及公司治理与使命偏离，但其背后折射出 AI 公司权力结构与公众利益之间的张力。MIT Tech Review 报道的 Deepfake 隐私泄露事件（如面部识别导致旧色情视频被关联）
+## 展望未来
+
+展望未来，理论层面仍需解决行为保证与潜在属性验证之间的鸿沟。**Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution** 揭示了量化可能逆转机器遗忘的系统性双重失败，这提示我们在实际部署中需重新评估未学习技术的可靠性。此外，如何建立能够验证长程 Agent 行为的评估体系，而非仅依赖行为输出，仍是未解之谜。对于差分隐私的审计，零训练运行方法虽然提供了便利，但其对复杂训练动态的覆盖范围仍需进一步独立验证。
 
 ---
 
 
 ## 参考来源
 
+- **When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** — [arxiv_lg](https://arxiv.org/abs/2605.15183v1)
 - **Privacy Auditing with Zero (0) Training Run** — [arxiv_cr](https://arxiv.org/abs/2605.14591v1)
 - **XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles** — [arxiv_cr](https://arxiv.org/abs/2605.13922v1)
-- **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** — [arxiv_cr](https://arxiv.org/abs/2605.15172v1)
 - **Analyzing Codes of Conduct for Online Safety in Video Games at Scale** — [arxiv_cr](https://arxiv.org/abs/2605.15047v1)
-- **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** — [arxiv_cr](https://arxiv.org/abs/2605.15030v1)
+- **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** — [arxiv_cl](https://arxiv.org/abs/2605.15172v1)
+- **LATERN: Test-Time Context-Aware Explainable Video Anomaly Detection** — [arxiv_cv](https://arxiv.org/abs/2605.15054v1)
+- **AI Knows When It's Being Watched: Functional Strategic Action and Contextual Register Modulation in Large Language Models** — [arxiv_ai](https://arxiv.org/abs/2605.15034v1)
+- **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** — [arxiv_ai](https://arxiv.org/abs/2605.15030v1)
+- **Small, Private Language Models as Teammates for Educational Assessment Design** — [arxiv_ai](https://arxiv.org/abs/2605.15015v1)
+- **Learning Developmental Scaffoldings to Guide Self-Organisation** — [arxiv_ai](https://arxiv.org/abs/2605.14998v1)
 - **Do Coding Agents Understand Least-Privilege Authorization?** — [arxiv_cr](https://arxiv.org/abs/2605.14859v1)
 - **Can Visual Mamba Improve AI-Generated Image Detection? An In-Depth Investigation** — [arxiv_cr](https://arxiv.org/abs/2605.14799v1)
 - **EVA: Editing for Versatile Alignment against Jailbreaks** — [arxiv_cr](https://arxiv.org/abs/2605.14750v1)
 - **LiSA: Lifelong Safety Adaptation via Conservative Policy Induction** — [arxiv_cr](https://arxiv.org/abs/2605.14454v1)
 - **The Great Pretender: A Stochasticity Problem in LLM Jailbreak** — [arxiv_cr](https://arxiv.org/abs/2605.14418v1)
 - **Toward Covert Quantum Computing** — [arxiv_cr](https://arxiv.org/abs/2605.14325v1)
+- **Mechanical Enforcement for LLM Governance:Evidence of Governance-Task Decoupling in Financial Decision Systems** — [arxiv_cl](https://arxiv.org/abs/2605.14744v1)
 - **Day-to-Day Traffic Network Modeling under Route-Guidance Misinformation: Endogenous Trust and Resilience in CAV Environments** — [arxiv_cr](https://arxiv.org/abs/2605.14204v1)
 - **ROK-FORTRESS: Measuring the Effect of Geopolitical Transcreation for National Security and Public Safety** — [arxiv_cr](https://arxiv.org/abs/2605.14152v1)
 - **Backdoor Threats in Variational Quantum Circuits: Taxonomy, Attacks, and Defenses** — [arxiv_cr](https://arxiv.org/abs/2605.13796v1)
 - **DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** — [arxiv_cr](https://arxiv.org/abs/2605.13708v1)
 - **Ideology Prediction of German Political Texts** — [huggingface_papers](https://arxiv.org/abs/2605.14352)
 - **Limits of Personalizing Differential Privacy Budgets** — [arxiv_cr](https://arxiv.org/abs/2605.13503v1)
-- **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.15118v1)
+- **Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction** — [arxiv_lg](https://arxiv.org/abs/2605.15157v1)
+- **RoSHAP: A Distributional Framework and Robust Metric for Stable Feature Attribution** — [arxiv_lg](https://arxiv.org/abs/2605.15154v1)
+- **Training ML Models with Predictable Failures** — [arxiv_lg](https://arxiv.org/abs/2605.15134v1)
+- **Learning from Language Feedback via Variational Policy Distillation** — [arxiv_lg](https://arxiv.org/abs/2605.15113v1)
+- **DiffusionOPD: A Unified Perspective of On-Policy Distillation in Diffusion Models** — [arxiv_lg](https://arxiv.org/abs/2605.15055v1)
+- **Distance-Matrix Wasserstein Statistics for Scalable Gromov--Wasserstein Learning** — [arxiv_lg](https://arxiv.org/abs/2605.14981v1)
+- **InfoSFT: Learn More and Forget Less with Information-Aware Token Weighting** — [arxiv_lg](https://arxiv.org/abs/2605.14967v1)
+- **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** — [arxiv_cl](https://arxiv.org/abs/2605.15118v1)
+- **From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents** — [arxiv_cl](https://arxiv.org/abs/2605.15104v1)
+- **From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG** — [arxiv_cl](https://arxiv.org/abs/2605.15019v1)
+- **Performance-Driven Policy Optimization for Speculative Decoding with Adaptive Windowing** — [arxiv_cl](https://arxiv.org/abs/2605.14978v1)
+- **VGGT-$Ω$** — [arxiv_cv](https://arxiv.org/abs/2605.15195v1)
+- **Aligning Latent Geometry for Spherical Flow Matching in Image Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15193v1)
+- **RAVEN: Real-time Autoregressive Video Extrapolation with Consistency-model GRPO** — [arxiv_cv](https://arxiv.org/abs/2605.15190v1)
+- **Warp-as-History: Generalizable Camera-Controlled Video Generation from One Training Video** — [arxiv_cv](https://arxiv.org/abs/2605.15182v1)
+- **Computational Imaging Priors for Wireless Capsule Endoscopy: Monte Carlo-Guided Hemoglobin Mapping for Rare-Anomaly Detection** — [arxiv_cv](https://arxiv.org/abs/2605.15062v1)
+- **Characterizing the visual representation of objects from the child's view** — [arxiv_cv](https://arxiv.org/abs/2605.14990v1)
+- **EntityBench: Towards Entity-Consistent Long-Range Multi-Shot Video Generation** — [arxiv_ai](https://arxiv.org/abs/2605.15199v1)
+- **ATLAS: Agentic or Latent Visual Reasoning? One Word is Enough for Both** — [arxiv_ai](https://arxiv.org/abs/2605.15198v1)
+- **Quantitative Video World Model Evaluation for Geometric-Consistency** — [arxiv_ai](https://arxiv.org/abs/2605.15185v1)
+- **OpenDeepThink: Parallel Reasoning via Bradley--Terry Aggregation** — [arxiv_ai](https://arxiv.org/abs/2605.15177v1)
+- **Evidential Reasoning Advances Interpretable Real-World Disease Screening** — [arxiv_ai](https://arxiv.org/abs/2605.15171v1)
+- **Text Knows What, Tables Know When: Clinical Timeline Reconstruction via Retrieval-Augmented Multimodal Alignment** — [arxiv_ai](https://arxiv.org/abs/2605.15168v1)
+- **Position: Behavioural Assurance Cannot Verify the Safety Claims Governance Now Demands** — [arxiv_ai](https://arxiv.org/abs/2605.15164v1)
+- **Self-Distilled Agentic Reinforcement Learning** — [arxiv_ai](https://arxiv.org/abs/2605.15155v1)
+- **Logging Policy Design for Off-Policy Evaluation** — [arxiv_ai](https://arxiv.org/abs/2605.15108v1)
+- **SpeakerLLM: A Speaker-Specialized Audio-LLM for Speaker Understanding and Verification Reasoning** — [arxiv_ai](https://arxiv.org/abs/2605.15044v1)
+- **SemaTune: Semantic-Aware Online OS Tuning with Large Language Models** — [arxiv_ai](https://arxiv.org/abs/2605.15026v1)
+- **COTCAgent: Preventive Consultation via Probabilistic Chain-of-Thought Completion** — [arxiv_ai](https://arxiv.org/abs/2605.15016v1)
+- **Boosting Reinforcement Learning with Verifiable Rewards via Randomly Selected Few-Shot Guidance** — [arxiv_ai](https://arxiv.org/abs/2605.15012v1)
+- **Quantifying and Mitigating Premature Closure in Frontier LLMs** — [arxiv_ai](https://arxiv.org/abs/2605.15000v1)
+- **Explainable Detection of Depression Status Shifts from User Digital Traces** — [arxiv_ai](https://arxiv.org/abs/2605.14995v1)
+- **Second-Order Actor-Critic Methods for Discounted MDPs via Policy Hessian Decomposition** — [arxiv_ai](https://arxiv.org/abs/2605.14982v1)
+- **Efficient Online Conformal Selection with Limited Feedback** — [arxiv_lg](https://arxiv.org/abs/2605.14953v1)
+- **Real-time virtual circuits for plasma shape control via neural network emulators** — [arxiv_lg](https://arxiv.org/abs/2605.14939v1)
+- **Octopus: History-Free Gradient Orthogonalization for Continual Learning in Multimodal Large Language Models** — [arxiv_lg](https://arxiv.org/abs/2605.14938v1)
+- **Slot-MPC: Goal-Conditioned Model Predictive Control with Object-Centric Representations** — [arxiv_lg](https://arxiv.org/abs/2605.14937v1)
+- **Road Maps as Free Geometric Priors: Weather-Invariant Drone Geo-Localization with GeoFuse** — [arxiv_lg](https://arxiv.org/abs/2605.14925v1)
+- **TILBench: A Systematic Benchmark for Tabular Imbalanced Learning Across Data Regimes** — [arxiv_lg](https://arxiv.org/abs/2605.14915v1)
 - **One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries** — [arxiv_cr](https://arxiv.org/abs/2605.14605v1)
 - **Angel or Demon: Investigating the Plasticity Interventions' Impact on Backdoor Threats in Deep Reinforcement Learning** — [arxiv_cr](https://arxiv.org/abs/2605.14587v1)
 - **Systematic Discovery of Semantic Attacks in Online Map Construction through Conditional Diffusion** — [arxiv_cr](https://arxiv.org/abs/2605.14396v1)
-- **Warp-as-History: Generalizable Camera-Controlled Video Generation from One Training Video** — [huggingface_papers](https://arxiv.org/abs/2605.15182)
+- **Model Forensics in AI-Native Wireless Networks: Taxonomy, Applications, and Case Study** — [arxiv_cr](https://arxiv.org/abs/2605.14387v1)
+- **Chain-of-Procedure: Hierarchical Visual-Language Reasoning for Procedural QA** — [arxiv_cl](https://arxiv.org/abs/2605.14928v1)
+- **Streaming Speech-to-Text Translation with a SpeechLLM** — [arxiv_cl](https://arxiv.org/abs/2605.14766v1)
+- **Persian MusicGen: A Large-Scale Dataset and Culturally-Aware Generative Model for Persian Music** — [arxiv_cl](https://arxiv.org/abs/2605.14765v1)
+- **Agentifying Patient Dynamics within LLMs through Interacting with Clinical World Model** — [arxiv_cl](https://arxiv.org/abs/2605.14723v1)
+- **Resolving Action Bottleneck: Agentic Reinforcement Learning Informed by Token-Level Energy** — [arxiv_cl](https://arxiv.org/abs/2605.14558v1)
+- **Learning from Failures: Correction-Oriented Policy Optimization with Verifiable Rewards** — [arxiv_cl](https://arxiv.org/abs/2605.14539v1)
+- **Evo-Depth: A Lightweight Depth-Enhanced Vision-Language-Action Model** — [arxiv_cv](https://arxiv.org/abs/2605.14950v1)
+- **ACE-LoRA: Adaptive Orthogonal Decoupling for Continual Image Editing** — [arxiv_cv](https://arxiv.org/abs/2605.14948v1)
+- **Multi-scale Coarse-to-fine Modeling for Test-time Human Motion Control** — [arxiv_cv](https://arxiv.org/abs/2605.14935v1)
+- **SteerSeg: Attention Steering for Reasoning Video Segmentation** — [arxiv_cv](https://arxiv.org/abs/2605.14908v1)
+- **Hierarchical Image Tokenization for Multi-Scale Image Super Resolution** — [arxiv_cv](https://arxiv.org/abs/2605.14891v1)
+- **To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model** — [arxiv_cr](https://arxiv.org/abs/2605.14291v1)
+- **Web Agents Should Adopt the Plan-Then-Execute Paradigm** — [arxiv_cr](https://arxiv.org/abs/2605.14290v1)
 - **Learning to Build the Environment: Self-Evolving Reasoning RL via Verifiable Environment Synthesis** — [huggingface_papers](https://arxiv.org/abs/2605.14392)
-- **Self-Distilled Agentic Reinforcement Learning** — [huggingface_papers](https://arxiv.org/abs/2605.15155)
-- **Quantitative Video World Model Evaluation for Geometric-Consistency** — [huggingface_papers](https://arxiv.org/abs/2605.15185)
-- **ATLAS: Agentic or Latent Visual Reasoning? One Word is Enough for Both** — [huggingface_papers](https://arxiv.org/abs/2605.15198)
-- **RAVEN: Real-time Autoregressive Video Extrapolation with Consistency-model GRPO** — [huggingface_papers](https://arxiv.org/abs/2605.15190)
 - **Topology-Preserving Neural Operator Learning via Hodge Decomposition** — [huggingface_papers](https://arxiv.org/abs/2605.13834)
 - **EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13841)
 - **RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation** — [huggingface_papers](https://arxiv.org/abs/2605.13542)
 - **FrameSkip: Learning from Fewer but More Informative Frames in VLA Training** — [huggingface_papers](https://arxiv.org/abs/2605.13757)
-- **Vividh-ASR: A Complexity-Tiered Benchmark and Optimization Dynamics for Robust Indic Speech Recognition** — [huggingface_papers](https://arxiv.org/abs/2605.13087)
-- **F-GRPO: Factorized Group-Relative Policy Optimization for Unified Candidate Generation and Ranking** — [huggingface_papers](https://arxiv.org/abs/2605.12995)
-- **VGGT-Edit: Feed-forward Native 3D Scene Editing with Residual Field Prediction** — [huggingface_papers](https://arxiv.org/abs/2605.15186)
+- **RefDecoder: Enhancing Visual Generation with Conditional Video Decoding** — [arxiv_lg](https://arxiv.org/abs/2605.15196v1)
+- **Causal Foundation Models with Continuous Treatments** — [arxiv_lg](https://arxiv.org/abs/2605.15133v1)
+- **Natural Synthesis: Outperforming Reactive Synthesis Tools with Large Reasoning Models** — [arxiv_lg](https://arxiv.org/abs/2605.15131v1)
+- **CoCo-InEKF: State Estimation with Learned Contact Covariances in Dynamic, Contact-Rich Scenarios** — [arxiv_lg](https://arxiv.org/abs/2605.15122v1)
+- **From Data to Action: Accelerating Refinery Optimization with AI** — [arxiv_lg](https://arxiv.org/abs/2605.15085v1)
+- **Average Gradient Outer Product in kernel regression provably recovers the central subspace for multi-index models** — [arxiv_lg](https://arxiv.org/abs/2605.15082v1)
+- **Is Grep All You Need? How Agent Harnesses Reshape Agentic Search** — [arxiv_cl](https://arxiv.org/abs/2605.15184v1)
+- **Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution** — [arxiv_cl](https://arxiv.org/abs/2605.15138v1)
+- **MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory** — [arxiv_cl](https://arxiv.org/abs/2605.15128v1)
+- **Proposal and study of statistical features for string similarity computation and classification** — [arxiv_cl](https://arxiv.org/abs/2605.15110v1)
+- **The Scientific Contribution Graph: Automated Literature-based Technological Roadmapping at Scale** — [arxiv_cl](https://arxiv.org/abs/2605.15011v1)
+- **Articraft: An Agentic System for Scalable Articulated 3D Asset Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15187v1)
+- **From Plans to Pixels: Learning to Plan and Orchestrate for Open-Ended Image Editing** — [arxiv_cv](https://arxiv.org/abs/2605.15181v1)
+- **SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer** — [arxiv_cv](https://arxiv.org/abs/2605.15178v1)
+- **Does Synthetic Layered Design Data Benefit Layered Design Decomposition?** — [arxiv_cv](https://arxiv.org/abs/2605.15167v1)
+- **Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15141v1)
+- **DriveCtrl: Conditioned Sim-to-Real Driving Video Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15116v1)
+- **CoralLite: μCT Reconstruction of Coral Colonies from Individual Corallites** — [arxiv_cv](https://arxiv.org/abs/2605.15093v1)
+- **SAGE3D: Soft-guided attention and graph excitation for 3D point cloud corner detection** — [arxiv_cv](https://arxiv.org/abs/2605.15088v1)
+- **Tokenizer Fertility and Zero-Shot Performance of Foundation Models on Ukrainian Legal Text: A Comparative Study** — [arxiv_cl](https://arxiv.org/abs/2605.14890v1)
+- **Holistic Evaluation and Failure Diagnosis of AI Agents** — [arxiv_cl](https://arxiv.org/abs/2605.14865v1)
+- **Conversion of Lexicon-Grammar tables to LMF. Application to French** — [arxiv_cl](https://arxiv.org/abs/2605.14816v1)
 - **Darwin Family: MRI-Trust-Weighted Evolutionary Merging for Training-Free Scaling of Language-Model Reasoning** — [huggingface_papers](https://arxiv.org/abs/2605.14386)
-- **MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory** — [huggingface_papers](https://arxiv.org/abs/2605.15128)
-- **Orchard: An Open-Source Agentic Modeling Framework** — [huggingface_papers](https://arxiv.org/abs/2605.15040)
 - **Nexus : An Agentic Framework for Time Series Forecasting** — [huggingface_papers](https://arxiv.org/abs/2605.14389)
 - **LLM-based Detection of Manipulative Political Narratives** — [huggingface_papers](https://arxiv.org/abs/2605.14354)
 - **Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems** — [huggingface_papers](https://arxiv.org/abs/2605.14892)
+- **PhyMotion: Structured 3D Motion Reward for Physics-Grounded Human Video Generation** — [huggingface_papers](https://arxiv.org/abs/2605.14269)
+- **Towards Self-Evolving Agentic Literature Retrieval** — [huggingface_papers](https://arxiv.org/abs/2605.14306)
+- **EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13941)
+- **Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling** — [huggingface_papers](https://arxiv.org/abs/2605.13301)
+- **SPIN: Structural LLM Planning via Iterative Navigation for Industrial Tasks** — [huggingface_papers](https://arxiv.org/abs/2605.14051)
+- **BOOKMARKS: Efficient Active Storyline Memory for Role-playing** — [huggingface_papers](https://arxiv.org/abs/2605.14169)
+- **FlowCompile: An Optimizing Compiler for Structured LLM Workflows** — [huggingface_papers](https://arxiv.org/abs/2605.13647)
+- **IndicMedDialog: A Parallel Multi-Turn Medical Dialogue Dataset for Accessible Healthcare in Indic Languages** — [huggingface_papers](https://arxiv.org/abs/2605.13292)
+- **FeatCal: Feature Calibration for Post-Merging Models** — [huggingface_papers](https://arxiv.org/abs/2605.13030)
+- **PersonalAI 2.0: Enhancing knowledge graph traversal/retrieval with planning mechanism for Personalized LLM Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13481)
 - **Elon Musk’s SpaceXAI has been bleeding staff since its merger** — [techcrunch_ai](https://techcrunch.com/2026/05/14/elon-musks-spacexai-has-been-bleeding-staff-since-its-merger/)
 - **Establishing AI and data sovereignty in the age of autonomous systems** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137168/establishing-ai-and-data-sovereignty-in-the-age-of-autonomous-systems/)
 - **Closing time** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/931006/musk-v-altman-closing-arguments-analysis)
@@ -90,8 +170,8 @@
 - **Microsoft starts canceling Claude Code licenses** — [theverge_ai](https://www.theverge.com/tech/930447/microsoft-claude-code-discontinued-notepad)
 - **Use this map to find the data centers in your backyard** — [theverge_ai](https://www.theverge.com/policy/930629/data-center-policy-map-interactive)
 - **Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI** — [theverge_ai](https://www.theverge.com/tech/917225/sam-altman-elon-musk-openai-lawsuit)
-- **Americans do not want AI data centers in their backyards** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/930477/ai-data-centers-gallup-survey-70-percent-opposition)
 - **Data readiness for agentic AI in financial services** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137034/data-readiness-for-agentic-ai-in-financial-services/)
+- **Americans do not want AI data centers in their backyards** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/930477/ai-data-centers-gallup-survey-70-percent-opposition)
 - **The Download: deepfake porn’s stolen bodies and AI sharing private numbers** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137257/the-download-deepfake-porn-bodies-ai-exposing-phone-numbers/)
 - **The Tesla Semi could be a big deal for electric trucking** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137197/tesla-semi-electric-trucking/)
 - **You can make an app for that** — [theverge_ai](https://www.theverge.com/tech/928905/vibe-code-personal-software-revolution)
@@ -127,6 +207,7 @@
 - **yetone/native-feel-skill** — [github](https://github.com/yetone/native-feel-skill)
 - **nexu-io/html-anything** — [github](https://github.com/nexu-io/html-anything)
 - **zghhui/OmniNFT** — [github](https://github.com/zghhui/OmniNFT)
+- **数亿元融资落地！国内最早布局“人类学习”路线的具身公司，用人类视角重做具身智能** — [qbitai](https://www.qbitai.com/2026/05/417935.html)
 - **人手一个数据库，Kimi背后这套AI基建到底有多能扛？** — [qbitai](https://www.qbitai.com/2026/05/417731.html)
 - **重生之我在AI时代当老板：让一群Agent互相PUA** — [qbitai](https://www.qbitai.com/2026/05/417816.html)
 - **淘天金码奖落幕：20 名超级工程师诞生，推动 AI Native 实践** — [qbitai](https://www.qbitai.com/2026/05/417927.html)
@@ -136,13 +217,27 @@
 - **阿里 AI 应用新进展：悟空开始逐步规模化放量** — [qbitai](https://www.qbitai.com/2026/05/417748.html)
 - **田渊栋AI创业估值315亿，老黄苏妈都投了，姚班施天麟也是合伙人** — [qbitai](https://www.qbitai.com/2026/05/417468.html)
 - **亚历山大王回应一切：LeCun、Manus，“我的父母都是中国人”** — [qbitai](https://www.qbitai.com/2026/05/417488.html)
+- **Static and Dynamic Strategies for Influencing Opinions in Social Networks** — [arxiv_cy](https://arxiv.org/abs/2605.14918v1)
+- **From Sycophantic Consensus to Pluralistic Repair: Why AI Alignment Must Surface Disagreement** — [arxiv_cy](https://arxiv.org/abs/2605.14912v1)
+- **GGBound: A Genome-Grounded Agent for Microbial Life-Boundary Prediction** — [arxiv_cy](https://arxiv.org/abs/2605.14442v1)
+- **Due Process on Hold: A Queueing Framework for Improving Access in SNAP** — [arxiv_cy](https://arxiv.org/abs/2605.15165v1)
+- **Tradeoffs are Domain Dependent: Improving Accuracy and Fairness in Property Tax Assessments** — [arxiv_cy](https://arxiv.org/abs/2605.15020v1)
+- **K-Models: a Flexible and Interpretable Method for Ordinal Clustering with Application to Antigen-Antibody Interaction Profiles** — [arxiv_ml](https://arxiv.org/abs/2605.14828v1)
+- **The Racial Character of Computer Graphics Research** — [arxiv_cy](https://arxiv.org/abs/2605.14835v1)
+- **ViMU: Benchmarking Video Metaphorical Understanding** — [arxiv_cy](https://arxiv.org/abs/2605.14607v1)
+- **Computational Thinking Development in AI Agent Creation_A Mixed-Methods Study** — [arxiv_cy](https://arxiv.org/abs/2605.14330v1)
+- **In-Context Learning for Data-Driven Censored Inventory Control** — [arxiv_ml](https://arxiv.org/abs/2605.14840v1)
+- **Optimal Asymptotic Rates for (Stochastic) Gradient Descent under the Local PL-Condition: A Geometric Approach** — [arxiv_ml](https://arxiv.org/abs/2605.14663v1)
+- **Fast Rates for Inverse Reinforcement Learning** — [arxiv_ml](https://arxiv.org/abs/2605.14599v1)
+- **Scaling Laws from Sequential Feature Recovery: A Solvable Hierarchical Model** — [arxiv_ml](https://arxiv.org/abs/2605.14567v1)
+- **Large Dimensional Kernel Ridge Regression: Extending to Product Kernels** — [arxiv_ml](https://arxiv.org/abs/2605.14524v1)
+- **Nearest-Neighbor Radii under Dependent Sampling** — [arxiv_ml](https://arxiv.org/abs/2605.14343v1)
 - **36氪首发｜航天发动机核心部件厂商获投，国内唯一具备核心部件一站式制造能力的民营企业** — [36kr](https://36kr.com/p/3809936183860740?f=rss)
 - **麦记牛奶谢永亮：2025年是唯一窗口期，糖水赛道胜负已定｜厚雪专访** — [36kr](https://36kr.com/p/3809931035844359?f=rss)
 - **36氪首发 | 前大疆核心成员做消费级CNC，获美团、昆仑资本、奇绩创坛投资近亿元** — [36kr](https://36kr.com/p/3809919654403587?f=rss)
 - **2026年上半年最火赛道：具身智能行业前4月融资超200笔，总规模超550亿元** — [36kr](https://36kr.com/p/3809911566704388?f=rss)
 - **抢跑618，iPhone 17 Pro系列首次官方降价** — [36kr](https://36kr.com/newsflashes/3809908500225540?f=rss)
 - **阿里巴巴等来收获期，外卖大战已无大波澜** — [36kr](https://36kr.com/p/3807527591058948?f=rss)
-- **丰田提交申请，拟在美国得克萨斯州斥资20亿美元建厂** — [36kr](https://36kr.com/newsflashes/3809866940030720?f=rss)
 - **独家对谈｜广告人小马宋的烟火与锋芒：非精英们的精英生存指南** — [36kr](https://36kr.com/p/3807543008698118?f=rss)
 - **8点1氪丨周大福回应金饰又涨价；韩国一季度未成年人股票账户暴涨近十倍；张雪机车820RR暂停生产交付** — [36kr](https://36kr.com/p/3809785128869641?f=rss)
 - **氪星晚报｜千里智驾CEO辟谣离职传闻；三星在计划罢工前夕启动减产** — [36kr](https://36kr.com/p/3809007831375621?f=rss)

@@ -1,99 +1,169 @@
 # AI Daily Digest [AI 安全] - 2026-05-15
 
 
-# AI Safety Thematic Digest: 2026-05-15
+# Daily Thematic Digest: AI Safety, Alignment, Security, Privacy, and Governance
+**Date:** 2026-05-15
+**Author:** Senior AI Safety Research Analyst
 
 ## Highlights
 
-Three academic developments stand out today for their potential to reshape safety evaluation and defense mechanisms. First, the introduction of **Privacy Auditing with Zero (0) Training Run** offers a critical post-hoc framework for auditing differential privacy parameters in deployed systems without requiring interventional access or retraining, addressing a major bottleneck in privacy compliance for foundation models. Second, **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** reveals a novel vulnerability where structural token position, rather than textual content, serves as a trigger, challenging existing content-based filtering assumptions. Third, **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** provides a rigorous external validation of current safety benchmarks, revealing significant gaps in collective threat coverage that undermine confidence in current alignment metrics.
+Three significant academic developments dominate today's safety literature, marking a shift from theoretical alignment to structural enforcement and post-hoc auditing. First, **When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** introduces a weight-based metric invariant to weight-space symmetries, addressing a critical gap in verifying functional equivalence across model instances. Second, **Privacy Auditing with Zero (0) Training Run** proposes a post-hoc framework for auditing differential privacy parameters without interventional access, a necessary evolution for auditing large deployed foundation models. Third, **Mechanical Enforcement for LLM Governance: Evidence of Governance-Task Decoupling in Financial Decision Systems** provides empirical evidence that natural-language policies are insufficient for regulated workflows, advocating for mechanical enforcement to prevent principal-agent failures.
 
 ## Adversarial Attacks & Robustness
 
-The landscape of adversarial security is shifting from content-based manipulation to structural and environmental exploitation. A significant concern raised by **MetaBackdoor** is the exploitation of positional encoding in Transformer-based LLMs. Unlike traditional backdoors that rely on explicit textual triggers, this attack surface leverages the inherent positional information required by the architecture, rendering standard content filters ineffective. This finding necessitates a re-evaluation of how model inputs are sanitized, as it suggests that safety mechanisms must now account for structural metadata rather than just semantic content.
+The landscape of adversarial threats is evolving from content-based perturbations to structural and positional exploits, challenging existing robustness assumptions. **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** demonstrates that backdoor attacks do not require explicit modification of input text; instead, they can exploit the inherent positional information encoded in Transformer architectures. This finding suggests that security assumptions relying on content filtering are fundamentally flawed. This vulnerability is compounded by the fragility of current defenses against adaptive adversaries. **One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries** surveys 15 recent defenses and identifies a shared weakness: they obscure or misdirect the model's behavior rather than robustly preventing malicious fine-tuning when the adversary knows the defense mechanism.
 
-In parallel, defenses against prompt injections in autonomous systems are evolving. **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** addresses the vulnerability of web agents to HTML or visual interface injections. While existing guard models struggle with generalization and latency, WARD proposes a robust defense architecture. However, the efficacy of such defenses is questioned by **One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries**, which demonstrates that current robustness claims often rely on fixed attacks that do not account for adaptive adversaries. The authors survey 15 recent defenses and identify a shared weakness where mechanisms obscure or misdirect the model rather than fundamentally securing it. This contradiction highlights a critical gap: robustness against static threats does not guarantee resilience against adaptive fine-tuning attacks.
+These digital vulnerabilities extend into physical-digital hybrid systems. **Systematic Discovery of Semantic Attacks in Online Map Construction through Conditional Diffusion** presents MIRAGE, a framework that bypasses standard adversarial defenses by exploiting the latent manifold of real-world data to degrade mapping predictions in autonomous vehicles. The authors show that pixel perturbation attacks can be neutralized, but semantic attacks leveraging environmental variations (e.g., shadows, wet roads) remain a significant risk. This contrasts with **XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset**, which applies tree-ensembles and hybrid stacking models to UAV intrusion detection. While the latter focuses on improving detection accuracy through ensemble methods, the former highlights the limitations of such detection when the attack surface shifts to semantic or structural properties rather than raw input noise.
 
-Furthermore, the scope of adversarial threats extends beyond text. **Systematic Discovery of Semantic Attacks in Online Map Construction through Conditional Diffusion** presents MIRAGE, a framework for discovering semantic attacks on autonomous vehicle mapping that bypass standard adversarial defenses by exploiting latent manifolds of real-world data. Similarly, **Backdoor Threats in Variational Quantum Circuits** surveys vulnerabilities in NISQ computing, showing that backdoor attacks can embed hidden malicious behaviors in quantum circuits. These works collectively suggest that as AI systems integrate into physical and quantum infrastructures, the attack surface expands to include environmental and hardware-level manipulations.
+## Alignment, Benchmarks, and Safety Evaluation
 
-## Model Alignment & Safety Benchmarks
+Evaluating safety and alignment remains a critical bottleneck, with recent works highlighting the stochasticity and coverage gaps in current benchmarks. **The Great Pretender: A Stochasticity Problem in LLM Jailbreak** critiques the reliability of jailbreak generation methods, noting that top ASR scores against industry-grade LLMs do not guarantee the generation of effective prompts against open models. This suggests that reported safety metrics may be inflated due to evaluation instability. Complementing this, **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** introduces a reusable framework to audit whether benchmarks collectively cover the threat surface. Applying this to six public benchmarks reveals that primary frameworks like HarmBench and InjecAgent lack comprehensive coverage, leaving significant portions of the inference-time attack surface untested.
 
-Alignment research is moving towards more dynamic and context-aware safety mechanisms. **EVA: Editing for Versatile Alignment against Jailbreaks** proposes editing models to reduce jailbreak vulnerabilities without the computational overhead of full safety fine-tuning. This contrasts with **LiSA: Lifelong Safety Adaptation via Conservative Policy Induction**, which focuses on guardrails that adapt to local privacy norms and organizational policies in real-time. While EVA targets static model weights, LiSA addresses the contextual nature of safety failures in deployed agents.
+To address alignment robustness, **EVA: Editing for Versatile Alignment against Jailbreaks** proposes editing models to reduce jailbreak susceptibility without the computational overhead of safety fine-tuning. However, the authors acknowledge the persistent safety-utility trade-off. In the realm of cross-cultural safety, **ROK-FORTRESS: Measuring the Effect of Geopolitical Transcreation for National Security and Public Safety** introduces a bilingual, culturally adversarial benchmark using the English-Korean language pair. This work challenges the assumption that translation-only benchmarks preserve safety scenarios, arguing that geopolitical context significantly alters risk profiles. Meanwhile, **From Sycophantic Consensus to Pluralistic Repair: Why AI Alignment Must Surface Disagreement** argues that current RLHF-trained assistants tend toward sycophantic consensus, failing to represent genuine value pluralism. This theoretical critique aligns with the practical need for **Mechanical Enforcement for LLM Governance**, which suggests that behavioral assurance alone cannot verify safety claims required by governance frameworks.
 
-The reliability of these alignment efforts is scrutinized by **Talk is (Not) Cheap**, which audits six public benchmarks against a 507-leaf taxonomy of inference-time attacks. The study reveals that primary frameworks like HarmBench and InjecAgent suffer from incomplete coverage, meaning a model passing these benchmarks may still be vulnerable to untested attack vectors. This finding is corroborated by **The Great Pretender: A Stochasticity Problem in LLM Jailbreak**, which notes that methods claiming high attack success rates (ASR) often fail to deliver consistent results across different model instances due to stochasticity issues.
+## Privacy, Federated Learning, and Data Protection
 
-Geopolitical and cultural context further complicates alignment. **ROK-FORTRESS** introduces a bilingual, culturally adversarial National Security and Public Safety benchmark using the English-Korean language pair and U.S.-ROK geopolitical axis. This moves beyond simple translation-only benchmarks to test how language and geopolitical context interact, addressing the limitation of current multilingual safety assessments. Additionally, **RealICU** challenges existing medical benchmarks by introducing hindsight-annotated data, arguing that treating historical clinician actions as ground truth is insufficient for assessing true reasoning capabilities in high-stakes environments.
+Privacy-preserving machine learning is seeing a shift toward post-hoc auditing and efficient aggregation protocols. **Privacy Auditing with Zero (0) Training Run** addresses the infeasibility of retraining large deployed systems for privacy auditing. By using two fixed datasets (members and non-members), the authors establish a post-hoc framework that operates in an observational regime, providing empirical lower bounds on differential privacy parameters without interventional access. This complements **Limits of Personalizing Differential Privacy Budgets**, which shows that for mean estimation, the dominant factor is not full personalization but choosing the right effective privacy budget via a thresholding operator.
 
-## Privacy Protection & Federated Learning
+In the domain of federated learning, **DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** proposes a new protocol to reduce communication rounds and cryptographic overhead compared to existing One-Shot Private Aggregation methods. This is crucial for scaling secure collaboration. Furthermore, **To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model** introduces MMGuard, a proactive defense that generates unlearnable examples to protect multimodal data against unauthorized scraping and training. This moves beyond post-hoc unlearning, offering a pre-deployment protection mechanism. These developments contrast with **Small, Private Language Models as Teammates for Educational Assessment Design**, which highlights the utility of SLMs for local privacy and resource constraints in educational settings, suggesting that smaller, localized models may be a viable alternative to centralized LLMs for privacy-sensitive tasks.
 
-Privacy-preserving machine learning continues to face challenges in balancing utility with rigorous auditing. **Privacy Auditing with Zero (0) Training Run** is a significant methodological advance, allowing for empirical lower bounds on differential privacy parameters using fixed datasets in an observational regime. This is particularly relevant for large deployed systems where retraining is infeasible. Complementing this, **DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** proposes a new protocol to reduce communication rounds and cryptographic overhead in federated settings, addressing the scalability issues of existing secure-aggregation schemes.
+## Governance, Agent Security, and Runtime Tooling
 
-However, the limits of personalization in privacy are being tested. **Limits of Personalizing Differential Privacy Budgets** demonstrates that for mean estimation, full personalization offers limited gains compared to a simple thresholding operator for choosing the effective privacy budget. This suggests that complex personalization strategies may not always yield the expected privacy-utility trade-off improvements, urging a re-evaluation of budget allocation strategies in federated systems.
+The governance of AI agents is moving from behavioral evaluation to mechanical enforcement and runtime monitoring. **Mechanical Enforcement for LLM Governance** provides evidence that natural-language policies are decoupled from decision rationale in financial systems, leading to principal-agent failures. The authors propose mechanical enforcement metrics to quantify policy compliance at the rationale level. This is supported by **Position: Behavioural Assurance Cannot Verify the Safety Claims Governance Now Demands**, which argues that current assurance methodologies are epistemically limited to observable outputs and cannot verify latent representations or long-horizon agentic behaviors.
 
-## Agent Security & Governance
-
-As agents gain autonomy, authorization and governance mechanisms are becoming critical. **Do Coding Agents Understand Least-Privilege Authorization?** introduces AuthBench, a benchmark of 120 realistic terminal tasks, to study whether models can infer permission boundaries. The results indicate a need for explicit authorization frameworks, as agents often lack the inherent understanding of least-privilege principles. This is supported by the emergence of open-source tools like **secureagentics/Adrian**, which provides runtime security monitoring to catch malicious tool use and policy drift in real time.
-
-The infrastructure for agentic modeling is also maturing. **Orchard** is an open-source framework for scalable agentic modeling, focusing on environment interaction and training rather than just orchestration. Similarly, **Nexus** offers a multi-agent framework for time series forecasting that integrates unstructured contextual data. These tools reflect a shift towards building robust agent ecosystems, yet they raise governance questions highlighted by **Beyond Individual Intelligence**, which surveys the risks of error propagation and failure attribution in multi-agent systems. The recent adoption of Model Context Protocol (MCP) servers, such as **JazzCashMCP** and **okx-agent-trade-kit**, further standardizes agent interactions but introduces new security surfaces that require auditing.
-
-Industry news regarding the Musk vs. Altman trial and data center opposition underscores the growing tension between AI capability and governance. While legal proceedings focus on corporate control, public sentiment, as reflected in surveys regarding data center construction, indicates a strong preference for local oversight and data sovereignty. This aligns with policy discussions on establishing AI and data sovereignty in the age of autonomous systems, where enterprises must balance capability with control over proprietary data.
-
-## Multimodal & Generative Safety
-
-Generative models are facing increased scrutiny regarding their physical and visual fidelity. **Can Visual Mamba Improve AI-Generated Image Detection?** investigates whether newer architectures can better detect deepfakes, a critical concern given recent reports on deepfake pornography and identity theft. **Quantitative Video World Model Evaluation for Geometric-Consistency** introduces PDI-Bench to audit geometric coherence in generated videos, addressing the subjectivity of human judgment in evaluation.
-
-In the realm of video generation, **Warp-as-History** and **RAVEN** propose methods for camera-controlled and real-time autoregressive video generation. While these improve generative capabilities, they also necessitate robust detection frameworks. **MemEye** evaluates multimodal agent memory from a visual-centric perspective, ensuring agents preserve visual evidence for later reasoning, which is crucial for accountability in long-term interactions.
+Agent architecture also requires security hardening. **Web Agents Should Adopt the Plan-Then-Execute Paradigm** argues that the default ReAct architecture is vulnerable to prompt injections in web environments. Instead, committing to a task-specific program before observing runtime content reduces the attack surface. This structural change is supported by emerging open-source tools. **secureagentics/Adrian** provides runtime security monitoring and control for AI agents, catching malicious tool use and policy drift in real time. Similarly, **ndcorder/outputguard** offers validation and repair strategies for LLM structured outputs, addressing common JSON malformations. These tools address the limitations of **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections**, which proposes a robust defense but notes that existing guard models suffer from limited generalization and high false positive rates. The integration of these runtime tools suggests a future where agent security is not just a pre-deployment check but a continuous operational requirement.
 
 ## Looking Forward
 
-Several theoretical questions remain unresolved. The efficacy of defenses against adaptive adversaries, as highlighted in **One Step to the Side**, suggests that current robustness claims are incomplete; future research must validate defenses against adversaries that evolve alongside the defense mechanisms. The intersection of quantum computing and security, explored in **Toward Covert Quantum Computing** and **Backdoor Threats in Variational Quantum Circuits**, requires a richer framework for covertness and security that accounts for multi-tenant quantum environments.
+Several unresolved theoretical questions and hypotheses await validation as the field matures. The efficacy of mechanical enforcement remains to be tested at scale; while **Mechanical Enforcement for LLM Governance** shows promise in synthetic banking domains, it is unclear if these metrics can generalize to complex, real-world regulatory environments without stifling innovation. Additionally, the relationship between interpretability and security is critical: **When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** offers a path to verifying functional equivalence, but it is unknown if this metric can be leveraged to detect backdoors like those proposed in **MetaBackdoor**.
 
-Furthermore, the validity of safety benchmarks remains a critical hypothesis awaiting validation. The gaps identified in **Talk is (Not) Cheap** and **The Great Pretender** suggest that current benchmarks may provide a false sense of security. Future work must focus on developing dynamic, coverage-agnostic evaluation methods that can adapt to novel attack vectors like the positional encoding backdoor. Finally, the integration of agents into critical infrastructure, from traffic networks to healthcare, requires rigorous testing of trust evolution and failure attribution, as seen in **Day-to-Day Traffic Network Modeling** and **Beyond Individual Intelligence**. The community must move beyond static alignment towards lifelong safety adaptation that accounts for contextual and geopolitical nuances.
+Finally, the intersection of quantum computing and AI safety presents a nascent frontier. **Toward Covert Quantum Computing** and **Backdoor Threats in Variational Quantum Circuits** highlight new security dimensions where classical adversarial techniques may not apply. As quantum processors become available through multi-tenant cloud platforms, ensuring privacy against adversaries sharing the same quantum processing unit becomes critical. The field must determine whether classical safety frameworks like differential privacy and robustness can be extended to quantum regimes or if entirely new paradigms are required. Until these questions are resolved, the reliance on behavioral assurance and static benchmarks will remain a significant vulnerability in the deployment of advanced AI systems.
 
 ---
 
 
 ## References
 
+- **When Are Two Networks the Same? Tensor Similarity for Mechanistic Interpretability** — [arxiv_lg](https://arxiv.org/abs/2605.15183v1)
 - **Privacy Auditing with Zero (0) Training Run** — [arxiv_cr](https://arxiv.org/abs/2605.14591v1)
 - **XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles** — [arxiv_cr](https://arxiv.org/abs/2605.13922v1)
-- **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** — [arxiv_cr](https://arxiv.org/abs/2605.15172v1)
 - **Analyzing Codes of Conduct for Online Safety in Video Games at Scale** — [arxiv_cr](https://arxiv.org/abs/2605.15047v1)
-- **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** — [arxiv_cr](https://arxiv.org/abs/2605.15030v1)
+- **MetaBackdoor: Exploiting Positional Encoding as a Backdoor Attack Surface in LLMs** — [arxiv_cl](https://arxiv.org/abs/2605.15172v1)
+- **LATERN: Test-Time Context-Aware Explainable Video Anomaly Detection** — [arxiv_cv](https://arxiv.org/abs/2605.15054v1)
+- **AI Knows When It's Being Watched: Functional Strategic Action and Contextual Register Modulation in Large Language Models** — [arxiv_ai](https://arxiv.org/abs/2605.15034v1)
+- **WARD: Adversarially Robust Defense of Web Agents Against Prompt Injections** — [arxiv_ai](https://arxiv.org/abs/2605.15030v1)
+- **Small, Private Language Models as Teammates for Educational Assessment Design** — [arxiv_ai](https://arxiv.org/abs/2605.15015v1)
+- **Learning Developmental Scaffoldings to Guide Self-Organisation** — [arxiv_ai](https://arxiv.org/abs/2605.14998v1)
 - **Do Coding Agents Understand Least-Privilege Authorization?** — [arxiv_cr](https://arxiv.org/abs/2605.14859v1)
 - **Can Visual Mamba Improve AI-Generated Image Detection? An In-Depth Investigation** — [arxiv_cr](https://arxiv.org/abs/2605.14799v1)
 - **EVA: Editing for Versatile Alignment against Jailbreaks** — [arxiv_cr](https://arxiv.org/abs/2605.14750v1)
 - **LiSA: Lifelong Safety Adaptation via Conservative Policy Induction** — [arxiv_cr](https://arxiv.org/abs/2605.14454v1)
 - **The Great Pretender: A Stochasticity Problem in LLM Jailbreak** — [arxiv_cr](https://arxiv.org/abs/2605.14418v1)
 - **Toward Covert Quantum Computing** — [arxiv_cr](https://arxiv.org/abs/2605.14325v1)
+- **Mechanical Enforcement for LLM Governance:Evidence of Governance-Task Decoupling in Financial Decision Systems** — [arxiv_cl](https://arxiv.org/abs/2605.14744v1)
 - **Day-to-Day Traffic Network Modeling under Route-Guidance Misinformation: Endogenous Trust and Resilience in CAV Environments** — [arxiv_cr](https://arxiv.org/abs/2605.14204v1)
 - **ROK-FORTRESS: Measuring the Effect of Geopolitical Transcreation for National Security and Public Safety** — [arxiv_cr](https://arxiv.org/abs/2605.14152v1)
 - **Backdoor Threats in Variational Quantum Circuits: Taxonomy, Attacks, and Defenses** — [arxiv_cr](https://arxiv.org/abs/2605.13796v1)
 - **DisAgg: Distributed Aggregators for Efficient Secure Aggregation in Federated Learning** — [arxiv_cr](https://arxiv.org/abs/2605.13708v1)
 - **Ideology Prediction of German Political Texts** — [huggingface_papers](https://arxiv.org/abs/2605.14352)
 - **Limits of Personalizing Differential Privacy Budgets** — [arxiv_cr](https://arxiv.org/abs/2605.13503v1)
-- **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.15118v1)
+- **Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction** — [arxiv_lg](https://arxiv.org/abs/2605.15157v1)
+- **RoSHAP: A Distributional Framework and Robust Metric for Stable Feature Attribution** — [arxiv_lg](https://arxiv.org/abs/2605.15154v1)
+- **Training ML Models with Predictable Failures** — [arxiv_lg](https://arxiv.org/abs/2605.15134v1)
+- **Learning from Language Feedback via Variational Policy Distillation** — [arxiv_lg](https://arxiv.org/abs/2605.15113v1)
+- **DiffusionOPD: A Unified Perspective of On-Policy Distillation in Diffusion Models** — [arxiv_lg](https://arxiv.org/abs/2605.15055v1)
+- **Distance-Matrix Wasserstein Statistics for Scalable Gromov--Wasserstein Learning** — [arxiv_lg](https://arxiv.org/abs/2605.14981v1)
+- **InfoSFT: Learn More and Forget Less with Information-Aware Token Weighting** — [arxiv_lg](https://arxiv.org/abs/2605.14967v1)
+- **Talk is (Not) Cheap: A Taxonomy and Benchmark Coverage Audit for LLM Attacks** — [arxiv_cl](https://arxiv.org/abs/2605.15118v1)
+- **From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents** — [arxiv_cl](https://arxiv.org/abs/2605.15104v1)
+- **From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG** — [arxiv_cl](https://arxiv.org/abs/2605.15019v1)
+- **Performance-Driven Policy Optimization for Speculative Decoding with Adaptive Windowing** — [arxiv_cl](https://arxiv.org/abs/2605.14978v1)
+- **VGGT-$Ω$** — [arxiv_cv](https://arxiv.org/abs/2605.15195v1)
+- **Aligning Latent Geometry for Spherical Flow Matching in Image Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15193v1)
+- **RAVEN: Real-time Autoregressive Video Extrapolation with Consistency-model GRPO** — [arxiv_cv](https://arxiv.org/abs/2605.15190v1)
+- **Warp-as-History: Generalizable Camera-Controlled Video Generation from One Training Video** — [arxiv_cv](https://arxiv.org/abs/2605.15182v1)
+- **Computational Imaging Priors for Wireless Capsule Endoscopy: Monte Carlo-Guided Hemoglobin Mapping for Rare-Anomaly Detection** — [arxiv_cv](https://arxiv.org/abs/2605.15062v1)
+- **Characterizing the visual representation of objects from the child's view** — [arxiv_cv](https://arxiv.org/abs/2605.14990v1)
+- **EntityBench: Towards Entity-Consistent Long-Range Multi-Shot Video Generation** — [arxiv_ai](https://arxiv.org/abs/2605.15199v1)
+- **ATLAS: Agentic or Latent Visual Reasoning? One Word is Enough for Both** — [arxiv_ai](https://arxiv.org/abs/2605.15198v1)
+- **Quantitative Video World Model Evaluation for Geometric-Consistency** — [arxiv_ai](https://arxiv.org/abs/2605.15185v1)
+- **OpenDeepThink: Parallel Reasoning via Bradley--Terry Aggregation** — [arxiv_ai](https://arxiv.org/abs/2605.15177v1)
+- **Evidential Reasoning Advances Interpretable Real-World Disease Screening** — [arxiv_ai](https://arxiv.org/abs/2605.15171v1)
+- **Text Knows What, Tables Know When: Clinical Timeline Reconstruction via Retrieval-Augmented Multimodal Alignment** — [arxiv_ai](https://arxiv.org/abs/2605.15168v1)
+- **Position: Behavioural Assurance Cannot Verify the Safety Claims Governance Now Demands** — [arxiv_ai](https://arxiv.org/abs/2605.15164v1)
+- **Self-Distilled Agentic Reinforcement Learning** — [arxiv_ai](https://arxiv.org/abs/2605.15155v1)
+- **Logging Policy Design for Off-Policy Evaluation** — [arxiv_ai](https://arxiv.org/abs/2605.15108v1)
+- **SpeakerLLM: A Speaker-Specialized Audio-LLM for Speaker Understanding and Verification Reasoning** — [arxiv_ai](https://arxiv.org/abs/2605.15044v1)
+- **SemaTune: Semantic-Aware Online OS Tuning with Large Language Models** — [arxiv_ai](https://arxiv.org/abs/2605.15026v1)
+- **COTCAgent: Preventive Consultation via Probabilistic Chain-of-Thought Completion** — [arxiv_ai](https://arxiv.org/abs/2605.15016v1)
+- **Boosting Reinforcement Learning with Verifiable Rewards via Randomly Selected Few-Shot Guidance** — [arxiv_ai](https://arxiv.org/abs/2605.15012v1)
+- **Quantifying and Mitigating Premature Closure in Frontier LLMs** — [arxiv_ai](https://arxiv.org/abs/2605.15000v1)
+- **Explainable Detection of Depression Status Shifts from User Digital Traces** — [arxiv_ai](https://arxiv.org/abs/2605.14995v1)
+- **Second-Order Actor-Critic Methods for Discounted MDPs via Policy Hessian Decomposition** — [arxiv_ai](https://arxiv.org/abs/2605.14982v1)
+- **Efficient Online Conformal Selection with Limited Feedback** — [arxiv_lg](https://arxiv.org/abs/2605.14953v1)
+- **Real-time virtual circuits for plasma shape control via neural network emulators** — [arxiv_lg](https://arxiv.org/abs/2605.14939v1)
+- **Octopus: History-Free Gradient Orthogonalization for Continual Learning in Multimodal Large Language Models** — [arxiv_lg](https://arxiv.org/abs/2605.14938v1)
+- **Slot-MPC: Goal-Conditioned Model Predictive Control with Object-Centric Representations** — [arxiv_lg](https://arxiv.org/abs/2605.14937v1)
+- **Road Maps as Free Geometric Priors: Weather-Invariant Drone Geo-Localization with GeoFuse** — [arxiv_lg](https://arxiv.org/abs/2605.14925v1)
+- **TILBench: A Systematic Benchmark for Tabular Imbalanced Learning Across Data Regimes** — [arxiv_lg](https://arxiv.org/abs/2605.14915v1)
 - **One Step to the Side: Why Defenses Against Malicious Finetuning Fail Under Adaptive Adversaries** — [arxiv_cr](https://arxiv.org/abs/2605.14605v1)
 - **Angel or Demon: Investigating the Plasticity Interventions' Impact on Backdoor Threats in Deep Reinforcement Learning** — [arxiv_cr](https://arxiv.org/abs/2605.14587v1)
 - **Systematic Discovery of Semantic Attacks in Online Map Construction through Conditional Diffusion** — [arxiv_cr](https://arxiv.org/abs/2605.14396v1)
-- **Warp-as-History: Generalizable Camera-Controlled Video Generation from One Training Video** — [huggingface_papers](https://arxiv.org/abs/2605.15182)
+- **Model Forensics in AI-Native Wireless Networks: Taxonomy, Applications, and Case Study** — [arxiv_cr](https://arxiv.org/abs/2605.14387v1)
+- **Chain-of-Procedure: Hierarchical Visual-Language Reasoning for Procedural QA** — [arxiv_cl](https://arxiv.org/abs/2605.14928v1)
+- **Streaming Speech-to-Text Translation with a SpeechLLM** — [arxiv_cl](https://arxiv.org/abs/2605.14766v1)
+- **Persian MusicGen: A Large-Scale Dataset and Culturally-Aware Generative Model for Persian Music** — [arxiv_cl](https://arxiv.org/abs/2605.14765v1)
+- **Agentifying Patient Dynamics within LLMs through Interacting with Clinical World Model** — [arxiv_cl](https://arxiv.org/abs/2605.14723v1)
+- **Resolving Action Bottleneck: Agentic Reinforcement Learning Informed by Token-Level Energy** — [arxiv_cl](https://arxiv.org/abs/2605.14558v1)
+- **Learning from Failures: Correction-Oriented Policy Optimization with Verifiable Rewards** — [arxiv_cl](https://arxiv.org/abs/2605.14539v1)
+- **Evo-Depth: A Lightweight Depth-Enhanced Vision-Language-Action Model** — [arxiv_cv](https://arxiv.org/abs/2605.14950v1)
+- **ACE-LoRA: Adaptive Orthogonal Decoupling for Continual Image Editing** — [arxiv_cv](https://arxiv.org/abs/2605.14948v1)
+- **Multi-scale Coarse-to-fine Modeling for Test-time Human Motion Control** — [arxiv_cv](https://arxiv.org/abs/2605.14935v1)
+- **SteerSeg: Attention Steering for Reasoning Video Segmentation** — [arxiv_cv](https://arxiv.org/abs/2605.14908v1)
+- **Hierarchical Image Tokenization for Multi-Scale Image Super Resolution** — [arxiv_cv](https://arxiv.org/abs/2605.14891v1)
+- **To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model** — [arxiv_cr](https://arxiv.org/abs/2605.14291v1)
+- **Web Agents Should Adopt the Plan-Then-Execute Paradigm** — [arxiv_cr](https://arxiv.org/abs/2605.14290v1)
 - **Learning to Build the Environment: Self-Evolving Reasoning RL via Verifiable Environment Synthesis** — [huggingface_papers](https://arxiv.org/abs/2605.14392)
-- **Self-Distilled Agentic Reinforcement Learning** — [huggingface_papers](https://arxiv.org/abs/2605.15155)
-- **Quantitative Video World Model Evaluation for Geometric-Consistency** — [huggingface_papers](https://arxiv.org/abs/2605.15185)
-- **ATLAS: Agentic or Latent Visual Reasoning? One Word is Enough for Both** — [huggingface_papers](https://arxiv.org/abs/2605.15198)
-- **RAVEN: Real-time Autoregressive Video Extrapolation with Consistency-model GRPO** — [huggingface_papers](https://arxiv.org/abs/2605.15190)
 - **Topology-Preserving Neural Operator Learning via Hodge Decomposition** — [huggingface_papers](https://arxiv.org/abs/2605.13834)
 - **EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13841)
 - **RealICU: Do LLM Agents Understand Long-Context ICU Data? A Benchmark Beyond Behavior Imitation** — [huggingface_papers](https://arxiv.org/abs/2605.13542)
 - **FrameSkip: Learning from Fewer but More Informative Frames in VLA Training** — [huggingface_papers](https://arxiv.org/abs/2605.13757)
-- **Vividh-ASR: A Complexity-Tiered Benchmark and Optimization Dynamics for Robust Indic Speech Recognition** — [huggingface_papers](https://arxiv.org/abs/2605.13087)
-- **F-GRPO: Factorized Group-Relative Policy Optimization for Unified Candidate Generation and Ranking** — [huggingface_papers](https://arxiv.org/abs/2605.12995)
-- **VGGT-Edit: Feed-forward Native 3D Scene Editing with Residual Field Prediction** — [huggingface_papers](https://arxiv.org/abs/2605.15186)
+- **RefDecoder: Enhancing Visual Generation with Conditional Video Decoding** — [arxiv_lg](https://arxiv.org/abs/2605.15196v1)
+- **Causal Foundation Models with Continuous Treatments** — [arxiv_lg](https://arxiv.org/abs/2605.15133v1)
+- **Natural Synthesis: Outperforming Reactive Synthesis Tools with Large Reasoning Models** — [arxiv_lg](https://arxiv.org/abs/2605.15131v1)
+- **CoCo-InEKF: State Estimation with Learned Contact Covariances in Dynamic, Contact-Rich Scenarios** — [arxiv_lg](https://arxiv.org/abs/2605.15122v1)
+- **From Data to Action: Accelerating Refinery Optimization with AI** — [arxiv_lg](https://arxiv.org/abs/2605.15085v1)
+- **Average Gradient Outer Product in kernel regression provably recovers the central subspace for multi-index models** — [arxiv_lg](https://arxiv.org/abs/2605.15082v1)
+- **Is Grep All You Need? How Agent Harnesses Reshape Agentic Search** — [arxiv_cl](https://arxiv.org/abs/2605.15184v1)
+- **Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution** — [arxiv_cl](https://arxiv.org/abs/2605.15138v1)
+- **MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory** — [arxiv_cl](https://arxiv.org/abs/2605.15128v1)
+- **Proposal and study of statistical features for string similarity computation and classification** — [arxiv_cl](https://arxiv.org/abs/2605.15110v1)
+- **The Scientific Contribution Graph: Automated Literature-based Technological Roadmapping at Scale** — [arxiv_cl](https://arxiv.org/abs/2605.15011v1)
+- **Articraft: An Agentic System for Scalable Articulated 3D Asset Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15187v1)
+- **From Plans to Pixels: Learning to Plan and Orchestrate for Open-Ended Image Editing** — [arxiv_cv](https://arxiv.org/abs/2605.15181v1)
+- **SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer** — [arxiv_cv](https://arxiv.org/abs/2605.15178v1)
+- **Does Synthetic Layered Design Data Benefit Layered Design Decomposition?** — [arxiv_cv](https://arxiv.org/abs/2605.15167v1)
+- **Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15141v1)
+- **DriveCtrl: Conditioned Sim-to-Real Driving Video Generation** — [arxiv_cv](https://arxiv.org/abs/2605.15116v1)
+- **CoralLite: μCT Reconstruction of Coral Colonies from Individual Corallites** — [arxiv_cv](https://arxiv.org/abs/2605.15093v1)
+- **SAGE3D: Soft-guided attention and graph excitation for 3D point cloud corner detection** — [arxiv_cv](https://arxiv.org/abs/2605.15088v1)
+- **Tokenizer Fertility and Zero-Shot Performance of Foundation Models on Ukrainian Legal Text: A Comparative Study** — [arxiv_cl](https://arxiv.org/abs/2605.14890v1)
+- **Holistic Evaluation and Failure Diagnosis of AI Agents** — [arxiv_cl](https://arxiv.org/abs/2605.14865v1)
+- **Conversion of Lexicon-Grammar tables to LMF. Application to French** — [arxiv_cl](https://arxiv.org/abs/2605.14816v1)
 - **Darwin Family: MRI-Trust-Weighted Evolutionary Merging for Training-Free Scaling of Language-Model Reasoning** — [huggingface_papers](https://arxiv.org/abs/2605.14386)
-- **MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory** — [huggingface_papers](https://arxiv.org/abs/2605.15128)
-- **Orchard: An Open-Source Agentic Modeling Framework** — [huggingface_papers](https://arxiv.org/abs/2605.15040)
 - **Nexus : An Agentic Framework for Time Series Forecasting** — [huggingface_papers](https://arxiv.org/abs/2605.14389)
 - **LLM-based Detection of Manipulative Political Narratives** — [huggingface_papers](https://arxiv.org/abs/2605.14354)
 - **Beyond Individual Intelligence: Surveying Collaboration, Failure Attribution, and Self-Evolution in LLM-based Multi-Agent Systems** — [huggingface_papers](https://arxiv.org/abs/2605.14892)
+- **PhyMotion: Structured 3D Motion Reward for Physics-Grounded Human Video Generation** — [huggingface_papers](https://arxiv.org/abs/2605.14269)
+- **Towards Self-Evolving Agentic Literature Retrieval** — [huggingface_papers](https://arxiv.org/abs/2605.14306)
+- **EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13941)
+- **Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling** — [huggingface_papers](https://arxiv.org/abs/2605.13301)
+- **SPIN: Structural LLM Planning via Iterative Navigation for Industrial Tasks** — [huggingface_papers](https://arxiv.org/abs/2605.14051)
+- **BOOKMARKS: Efficient Active Storyline Memory for Role-playing** — [huggingface_papers](https://arxiv.org/abs/2605.14169)
+- **FlowCompile: An Optimizing Compiler for Structured LLM Workflows** — [huggingface_papers](https://arxiv.org/abs/2605.13647)
+- **IndicMedDialog: A Parallel Multi-Turn Medical Dialogue Dataset for Accessible Healthcare in Indic Languages** — [huggingface_papers](https://arxiv.org/abs/2605.13292)
+- **FeatCal: Feature Calibration for Post-Merging Models** — [huggingface_papers](https://arxiv.org/abs/2605.13030)
+- **PersonalAI 2.0: Enhancing knowledge graph traversal/retrieval with planning mechanism for Personalized LLM Agents** — [huggingface_papers](https://arxiv.org/abs/2605.13481)
 - **Elon Musk’s SpaceXAI has been bleeding staff since its merger** — [techcrunch_ai](https://techcrunch.com/2026/05/14/elon-musks-spacexai-has-been-bleeding-staff-since-its-merger/)
 - **Establishing AI and data sovereignty in the age of autonomous systems** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137168/establishing-ai-and-data-sovereignty-in-the-age-of-autonomous-systems/)
 - **Closing time** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/931006/musk-v-altman-closing-arguments-analysis)
@@ -104,8 +174,8 @@ Furthermore, the validity of safety benchmarks remains a critical hypothesis awa
 - **Microsoft starts canceling Claude Code licenses** — [theverge_ai](https://www.theverge.com/tech/930447/microsoft-claude-code-discontinued-notepad)
 - **Use this map to find the data centers in your backyard** — [theverge_ai](https://www.theverge.com/policy/930629/data-center-policy-map-interactive)
 - **Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI** — [theverge_ai](https://www.theverge.com/tech/917225/sam-altman-elon-musk-openai-lawsuit)
-- **Americans do not want AI data centers in their backyards** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/930477/ai-data-centers-gallup-survey-70-percent-opposition)
 - **Data readiness for agentic AI in financial services** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137034/data-readiness-for-agentic-ai-in-financial-services/)
+- **Americans do not want AI data centers in their backyards** — [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/930477/ai-data-centers-gallup-survey-70-percent-opposition)
 - **The Download: deepfake porn’s stolen bodies and AI sharing private numbers** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137257/the-download-deepfake-porn-bodies-ai-exposing-phone-numbers/)
 - **The Tesla Semi could be a big deal for electric trucking** — [mit_tech_review](https://www.technologyreview.com/2026/05/14/1137197/tesla-semi-electric-trucking/)
 - **You can make an app for that** — [theverge_ai](https://www.theverge.com/tech/928905/vibe-code-personal-software-revolution)
@@ -141,6 +211,7 @@ Furthermore, the validity of safety benchmarks remains a critical hypothesis awa
 - **yetone/native-feel-skill** — [github](https://github.com/yetone/native-feel-skill)
 - **nexu-io/html-anything** — [github](https://github.com/nexu-io/html-anything)
 - **zghhui/OmniNFT** — [github](https://github.com/zghhui/OmniNFT)
+- **数亿元融资落地！国内最早布局“人类学习”路线的具身公司，用人类视角重做具身智能** — [qbitai](https://www.qbitai.com/2026/05/417935.html)
 - **人手一个数据库，Kimi背后这套AI基建到底有多能扛？** — [qbitai](https://www.qbitai.com/2026/05/417731.html)
 - **重生之我在AI时代当老板：让一群Agent互相PUA** — [qbitai](https://www.qbitai.com/2026/05/417816.html)
 - **淘天金码奖落幕：20 名超级工程师诞生，推动 AI Native 实践** — [qbitai](https://www.qbitai.com/2026/05/417927.html)
@@ -150,13 +221,27 @@ Furthermore, the validity of safety benchmarks remains a critical hypothesis awa
 - **阿里 AI 应用新进展：悟空开始逐步规模化放量** — [qbitai](https://www.qbitai.com/2026/05/417748.html)
 - **田渊栋AI创业估值315亿，老黄苏妈都投了，姚班施天麟也是合伙人** — [qbitai](https://www.qbitai.com/2026/05/417468.html)
 - **亚历山大王回应一切：LeCun、Manus，“我的父母都是中国人”** — [qbitai](https://www.qbitai.com/2026/05/417488.html)
+- **Static and Dynamic Strategies for Influencing Opinions in Social Networks** — [arxiv_cy](https://arxiv.org/abs/2605.14918v1)
+- **From Sycophantic Consensus to Pluralistic Repair: Why AI Alignment Must Surface Disagreement** — [arxiv_cy](https://arxiv.org/abs/2605.14912v1)
+- **GGBound: A Genome-Grounded Agent for Microbial Life-Boundary Prediction** — [arxiv_cy](https://arxiv.org/abs/2605.14442v1)
+- **Due Process on Hold: A Queueing Framework for Improving Access in SNAP** — [arxiv_cy](https://arxiv.org/abs/2605.15165v1)
+- **Tradeoffs are Domain Dependent: Improving Accuracy and Fairness in Property Tax Assessments** — [arxiv_cy](https://arxiv.org/abs/2605.15020v1)
+- **K-Models: a Flexible and Interpretable Method for Ordinal Clustering with Application to Antigen-Antibody Interaction Profiles** — [arxiv_ml](https://arxiv.org/abs/2605.14828v1)
+- **The Racial Character of Computer Graphics Research** — [arxiv_cy](https://arxiv.org/abs/2605.14835v1)
+- **ViMU: Benchmarking Video Metaphorical Understanding** — [arxiv_cy](https://arxiv.org/abs/2605.14607v1)
+- **Computational Thinking Development in AI Agent Creation_A Mixed-Methods Study** — [arxiv_cy](https://arxiv.org/abs/2605.14330v1)
+- **In-Context Learning for Data-Driven Censored Inventory Control** — [arxiv_ml](https://arxiv.org/abs/2605.14840v1)
+- **Optimal Asymptotic Rates for (Stochastic) Gradient Descent under the Local PL-Condition: A Geometric Approach** — [arxiv_ml](https://arxiv.org/abs/2605.14663v1)
+- **Fast Rates for Inverse Reinforcement Learning** — [arxiv_ml](https://arxiv.org/abs/2605.14599v1)
+- **Scaling Laws from Sequential Feature Recovery: A Solvable Hierarchical Model** — [arxiv_ml](https://arxiv.org/abs/2605.14567v1)
+- **Large Dimensional Kernel Ridge Regression: Extending to Product Kernels** — [arxiv_ml](https://arxiv.org/abs/2605.14524v1)
+- **Nearest-Neighbor Radii under Dependent Sampling** — [arxiv_ml](https://arxiv.org/abs/2605.14343v1)
 - **36氪首发｜航天发动机核心部件厂商获投，国内唯一具备核心部件一站式制造能力的民营企业** — [36kr](https://36kr.com/p/3809936183860740?f=rss)
 - **麦记牛奶谢永亮：2025年是唯一窗口期，糖水赛道胜负已定｜厚雪专访** — [36kr](https://36kr.com/p/3809931035844359?f=rss)
 - **36氪首发 | 前大疆核心成员做消费级CNC，获美团、昆仑资本、奇绩创坛投资近亿元** — [36kr](https://36kr.com/p/3809919654403587?f=rss)
 - **2026年上半年最火赛道：具身智能行业前4月融资超200笔，总规模超550亿元** — [36kr](https://36kr.com/p/3809911566704388?f=rss)
 - **抢跑618，iPhone 17 Pro系列首次官方降价** — [36kr](https://36kr.com/newsflashes/3809908500225540?f=rss)
 - **阿里巴巴等来收获期，外卖大战已无大波澜** — [36kr](https://36kr.com/p/3807527591058948?f=rss)
-- **丰田提交申请，拟在美国得克萨斯州斥资20亿美元建厂** — [36kr](https://36kr.com/newsflashes/3809866940030720?f=rss)
 - **独家对谈｜广告人小马宋的烟火与锋芒：非精英们的精英生存指南** — [36kr](https://36kr.com/p/3807543008698118?f=rss)
 - **8点1氪丨周大福回应金饰又涨价；韩国一季度未成年人股票账户暴涨近十倍；张雪机车820RR暂停生产交付** — [36kr](https://36kr.com/p/3809785128869641?f=rss)
 - **氪星晚报｜千里智驾CEO辟谣离职传闻；三星在计划罢工前夕启动减产** — [36kr](https://36kr.com/p/3809007831375621?f=rss)

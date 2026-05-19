@@ -206,49 +206,49 @@
 ---
 
 
-## 18. EgoInteract: Synthetic Egocentric Videos Generation for Interaction Understanding and Anticipation
+## 18. A Unified Non-Parametric and Interpretable Point Cloud Analysis via t-FCW Graph Representation
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18214v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15475)
 
-- **摘要**: Collecting large-scale egocentric video datasets with dense spatial and temporal annotations is costly, slow, and often constrained by environmental biases, privacy constraints, and limited coverage of interaction patterns. While synthetic data has shown strong potential in several vision domains, its use for egocentric perception remains relatively underexplored, especially for tasks requiring temporally coherent human-object interactions. In this work, we introduce EgoInteract, a controllable simulator for egocentric video generation designed to model fine-grained egocentric interactions and their temporal dynamics. The simulator enables precise control over camera, human body and hand motion, object manipulation, and scene composition across diverse environments. Building on this framework, we generate a synthetic egocentric video dataset with dense spatial and temporal annotations for temporal action segmentation, next-active object detection, interaction anticipation, and hand-object interaction detection. We evaluate models trained with simulated data on multiple real-world egocentric benchmarks spanning diverse environments, object categories, and interaction patterns. Results show consistent improvements over strong baselines across tasks and datasets, demonstrating the effectiveness and transferability of our simulation-based approach.
+- **摘要**: arXiv:2605.15475v1 Announce Type: new  Abstract: We introduce an empowered transposed Fully Connected Weighted (t-FCW) graph representation to embed point clouds into a metric space. While original t-FCW has shown promising results for point cloud classification, the reasons behind its effectiveness and its broader applicability remained unclear. In this work, we analyze the properties that make the empowered and original t-FCW effective and design a network that uses the empowered t-FCW exclusively as feature extractors. From an interpretability perspective, we build memory banks for classification, part segmentation, and semantic segmentation using the empowered t-FCW. Our analysis reveals that the empowered t-FCW inherits robustness from surface descriptors, provides interpretability through dimension-wise relations. These properties enable a highly efficient and interpretable network, which processes the ModelNet40 classification problem in approximately 7 seconds on an NVIDIA RTX A5000 GPU. Importantly, empowered t-FCW can function both as a lightweight standalone baseline and as a complementary plug-in to existing deep models.
 
-- **技术标签**: `benchmark` `bias` `privacy` `rag` `synthetic data`
-
-
----
-
-
-## 19. View-Aware Semantic Alignment for Aerial-Ground Person Re-Identification
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18192v1)
-
-- **摘要**: Aerial-Ground Person Re-Identification (AGPReID) remains highly challenging due to drastic viewpoint variations between drones and fixed cameras. Existing methods typically follow a view-invariant paradigm, aligning shared features across views to achieve robustness. However, view-invariant inherently enforces part-level alignment, which ignores view-specific cues and discriminative identity information. To this end, this work proposes ViSA (View-aware Semantic Alignment), a view-aware framework that achieves cross-view semantic consistency containing an Expert-driven Token Generation Module (ETGM) and a Dual-branch Local Fusion Module (DLFM). Technically, the former constructs a set of view-aware experts to generate adaptive semantic queries that perceive viewpoint-specific patterns, while the latter leverages graph reasoning to extract and align local regions responsive to different experts. Extensive experiments on three AGPReID benchmarks including AG-ReID.v2, CARGO and LAGPeR demonstrate that ViSA consistently achieves superior performance, with a notable 10.06\% mAP improvement on the challenging CARGO cross-view protocol. The code is available at \href{https://github.com/Cat-Zero/ViSA}{https://github.com/Cat-Zero/ViSA}.
-
-- **技术标签**: `alignment` `benchmark` `rag` `reasoning` `robustness`
+- **技术标签**: `interpretability` `robustness`
 
 
 ---
 
 
-## 20. Patch Ensembles for Robust Salmon Re-Identification with Weak Trajectory Labels
+## 19. LDGuid: A Framework for Robust Change Detection via Latent Difference Guidance
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18038v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15582)
 
-- **摘要**: Salmon re-identification in commercial net-pens is challenging due to large populations, which impose strict accuracy requirements and make large-scale labeled data acquisition infeasible. Trajectory IDs can be used as proxy labels, but this introduces trajectory-ID bias. To address these challenges, we propose a patch-based re-identification framework that fuses patch-level predictions into a salmon identity decision. A key component is the prediction of the salmon's lateral line, enabling extraction of texture-anchored patches and patch slices. To enable realistic evaluation, we introduce an experimental setup using multiple cameras placed 6 m apart, allowing the same fish to be recorded in different trajectories. This enables the construction of a cross-camera test set through manual match confirmation. Our ensemble approach outperforms the full-image baseline in same-trajectory validation (0.932 to 0.965 mAP) and cross-camera testing (0.609 to 0.860 mAP). The substantial improvements in the cross-camera setting demonstrate improved generalizability and robustness. Code and data: https://github.com/espenbh/salmon-reid-patch-ensemble.
+- **摘要**: arXiv:2605.15582v1 Announce Type: new  Abstract: Modern deep learning models for change detection (CD) often struggle to explicitly represent task-relevant semantic differences. This paper proposes the Latent Difference Guidance (LDGuid) framework that explicitly learns and injects semantic differences into CD models. LDGuid deploys adversarial autoencoding to implement a difference embedding (DE) module. The DE module is pretrained via the information bottleneck method, restricting it to learn only task-relevant differences between pre- and post-event samples. The learned latent difference is then used as an explicit guidance signal in the CD model. We validate LDGuid by integrating it into U-Net, BIT, and AERNet baselines for CD and evaluating it on LEVIR-CD, WHU-CD, SVCD, and CaBuAr datasets. Experimental results show that LDGuid enhances segmentation performance across all benchmarks, with particularly remarkable gains in challenging settings affected by spectral noise. The results further highlight the ability of LDGuid in incorporating domain knowledge, such as task-specific spectral indices. Our findings suggest that semantic difference learning can drastically enhance the robustness of CD in remote sensing.
 
-- **技术标签**: `bias` `robustness`
+- **技术标签**: `adversarial` `benchmark` `embedding` `robustness`
 
 
 ---
 
 
-## 21. UAVFF3D: A Geometry-Aware Benchmark for Feed-Forward UAV 3D Reconstruction
+## 20. AGC: Adaptive Geodesic Correction for Adversarial Robustness on Vision-Language Models
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.17942v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15584)
 
-- **摘要**: Feed-forward 3D reconstruction has recently demonstrated strong generalization across diverse scenes, yet its performance in UAV imagery remains underexplored due to distinctive acquisition geometries, large viewpoint variations, and ambiguity between horizontal field of view and flight height. We present UAVFF3D, a geometry-aware benchmark for feed-forward UAV 3D reconstruction, comprising over 170K real UAV images and more than 370K high-quality synthetic images. The benchmark also includes a challenging diagnostic test subset designed to analyze model behavior under UAV-specific geometric ambiguities.Building on UAVFF3D, we propose an evaluation protocol that jointly assesses camera-geometry estimation and reconstruction accuracy, addressing limitations of existing evaluations that rely on separate alignments. Experiments on four representative feed-forward reconstruction models show that UAV-domain adaptation substantially improves performance, reducing Ray Error by up to 84.2%, Pose ATE by up to 76.0%, and Chamfer Distance by up to 41.1%. Further analysis reveals that domain adaptation mitigates rotation-estimation degradation in oblique-view scenes and improves robustness under horizontal-field-of-view/height ambiguity. Incorporating camera priors further enhances reconstruction performance under UAV-specific acquisition geometries.
+- **摘要**: arXiv:2605.15584v1 Announce Type: new  Abstract: Vision-language models like CLIP have demonstrated remarkable zero-shot transfer capabilities. However, their susceptibility to imperceptible adversarial perturbations remains a critical security concern. While test-time defenses offer a pragmatic solution for deployed models, existing approaches typically rely on gradient-based optimization during inference, incurring significant computational overhead. In this paper, we revisit the role of data augmentation in CLIP robustness and observe that augmentations are not equally effective: specific augmentations consistently provide robust geometric cues that align with correct class semantics in the hyperspherical feature space. Based on this, we propose Adaptive Geodesic Correction (AGC), a training-free defense mechanism that requires no parameter updates. AGC identifies a reliable augmentation as a geometric anchor and corrects the input feature towards it, utilizing an adaptive step size to balance robustness against clean accuracy preservation. AGC achieves superior performance across eight fine-grained datasets and three CLIP backbones, improving average robust accuracy by 44.4\% over state-of-the-art baseline while delivering a 10$\times$ reduction in inference latency. Our findings reveal a fundamental geometric property of CLIP features, offering a highly efficient and effective paradigm for robust multimodal deployment.
 
-- **技术标签**: `alignment` `benchmark` `robustness`
+- **技术标签**: `adversarial` `multimodal` `rag` `robustness` `vision`
+
+
+---
+
+
+## 21. EntropyScan: Towards Model-level Backdoor Detection in LVLMs via Visual Attention Entropy
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15711)
+
+- **摘要**: arXiv:2605.15711v1 Announce Type: new  Abstract: Large Vision-Language Models (LVLMs) have demonstrated remarkable capabilities across various tasks, yet they remain vulnerable to backdoor attacks. Existing defense methods predominantly focus on sample-level defense, which relies on the knowledge of training data or triggers. However, identifying whether a given model is backdoored remains a critical but unexplored task. To fill this gap, we propose EntropyScan, a lightweight and trigger-agnostic method for model-level backdoor detection in LVLMs. We first observe that backdoor injection disrupts the cross-modal alignment, resulting in pronounced structural anomalies in visual attention allocation on benign samples. Based on this insight, EntropyScan detects the backdoor models by quantifying such attention deviations. Specifically, it extracts visual attention distributions from the initial layers of the Large Language Model (LLM) and applies Tsallis entropy to capture these structural distortions. By employing a reference-anchored Z-score normalization on a small set of benign samples, it effectively identifies the backdoored model. Extensive experiments across two LVLMs architectures and three advanced attack scenarios show that EntropyScan achieves an F1 score of 98.5% in average and an AUC of 96.6%. Our code will be publicly available soon.
+
+- **技术标签**: `alignment` `backdoor` `large language model` `llm` `rag`
 
 
 ---
@@ -698,115 +698,199 @@
 ---
 
 
-## 59. Best Segmentation Buddies for Image-Shape Correspondence
+## 59. ReactiveGWM: Steering NPC in Reactive Game World Models
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18193v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15256)
 
-- **摘要**: Finding correspondences is a fundamental and extensively researched problem in computer vision and graphics. In this work, we examine the underexplored task of estimating segmentation-to-segmentation correspondence between images in the wild and untextured 3D shapes. This task is highly challenging due to substantial differences in appearance, geometry, and viewpoint. Our approach bridges the cross-modality gap by linking pixels in the image segment to vertices in the corresponding semantic part of the 3D shape. To achieve this, we first distill deep visual features from a 2D vision model onto the 3D shape surface, allowing for the computation of feature similarity between image pixels and shape vertices. Then, we identify Best Segmentation Buddies, vertices whose most similar image pixel lies within the image segmentation region, enabling the reliable discovery of vertices in semantically corresponding shape parts. Finally, we leverage distilled 3D features from the 2D image segmentation model to segment the shape directly in 3D, bootstrapping the correspondence process. We demonstrate the generality and robustness of our approach across a wide range of image-shape pairs, showcasing accurate and semantically meaningful correspondences. Our project page is at https://threedle.github.io/bsb/.
+- **摘要**: arXiv:2605.15256v1 Announce Type: new  Abstract: Current game world models simulate environments from a subjective, player-centric perspective. However, by treating the Non-Player Character (NPC) merely as background pixels, these models cannot capture interactions between the player and NPC. In that sense, they act as passive video renderers rather than real simulation engines, lacking the physical understanding needed to model action-induced NPC reactivities. We introduce ReactiveGWM, a reactive game world model that synthesizes dynamic interactions between the player and NPC. Instead of entangling all interaction dynamics, ReactiveGWM explicitly decouples player controls from NPC behaviors. Player actions are injected into the diffusion backbone via a lightweight additive bias, while high-level NPC responses (e.g., Offense, Control, Defense) are grounded through cross-attention modules. Crucially, these modules learn a game-agnostic representation of interactive logic. This enables zero-shot strategy transfer: our learned modules can be plugged directly into off-the-shelf, unannotated world models of different games. This instantly unlocks steerable NPC interactions without any domain-specific retraining. Evaluated on two Street Fighter games, ReactiveGWM maintains fine-grain player controllability while achieving robust, prompt-aligned NPC strategy adherence, paving the way for scalable, strategy-rich interaction with the NPC.
 
-- **技术标签**: `rag` `research` `robustness` `vision`
-
-
----
-
-
-## 60. Semi-LAR: Semi-supervised Contrastive Learning with Linear Attention for Removal of Nighttime Flares
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18156v1)
-
-- **摘要**: Lens flare removal is challenging due to the large spatial extent of flare artifacts and their entanglement with scene structures, while existing methods heavily rely on large-scale paired data. We propose a semi-supervised flare removal framework that enables stable learning from unlabeled images by jointly addressing pseudo-label reliability and representation discrimination. We propose an adaptive pseudo-label repository that progressively refines pseudo supervision through no-reference quality assessment, momentum-based updates, and invalid label filtering, effectively mitigating error accumulation. Moreover, we propose a flare-aware contrastive loss that explicitly treats flare-contaminated inputs as negatives and performs patch-level contrastive learning, encouraging representations that are discriminative against flare patterns while remaining consistent with reliable pseudo targets. Extensive experiments on multiple flare benchmarks demonstrate that the proposed framework is model-agnostic and consistently improves performance and robustness.
-
-- **技术标签**: `benchmark` `rag` `robustness` `vision`
+- **技术标签**: `bias` `diffusion`
 
 
 ---
 
 
-## 61. Rad-VLSM: A Cross-Modal Framework with Semantics-Assisted Prompting for Medical Segmentation and Diagnosis
+## 60. Deep Pre-Alignment for VLMs
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18130v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15300)
 
-- **摘要**: Medical image segmentation is more clinically valuable when it supports diagnosis rather than merely producing lesion masks. However, diagnostically relevant lesion cues are often subtle and localized, while existing models may be distracted by background tissues, acoustic artifacts, and irrelevant visual correlations. To address this problem, we propose Rad-VLSM, a two-stage cross-modal framework for semantics-assisted lesion focusing, robust segmentation, and visually grounded diagnosis. In the first stage, a BLIP-2-based vision-language alignment module identifies lesion-related candidate regions under semantic guidance and converts them into box prompts. In the second stage, these prompts are fed into a SAM-based multitask network, where a multi-candidate region aggregation strategy improves prompt stability and guides lesion segmentation. The predicted masks are then used as spatial priors for diagnosis, and a visual-radiomics fusion head integrates lesion-aware visual features with selected radiomics descriptors. By using semantic information for localization rather than direct prediction, Rad-VLSM reduces text-to-diagnosis dependence and grounds diagnosis in lesion-level evidence. Experiments on a private clinical breast ultrasound dataset and public benchmarks show that Rad-VLSM achieves strong segmentation and diagnostic performance with favorable generalization.
+- **摘要**: arXiv:2605.15300v1 Announce Type: new  Abstract: Most Vision Language Models (VLMs) directly map outputs from ViT encoders to the LLM via a lightweight projector. While effective, recent analysis suggests this architecture suffers from an alignment challenge: visual features remain distant from the text space in the initial layers of the LLM, forcing the model to waste critical depth~\cite{zhang-etal-2024-investigating,artzy-schwartz-2024-attend} on superficial modality alignment rather than deep understanding and complex reasoning. In this work, we propose Deep Pre-Alignment (DPA), a novel architecture that replaces the standard ViT encoder with a small VLM as perceiver, ensuring visual features are deeply aligned with the text space of the target large language model. Comprehensive experiments demonstrate the effectiveness of DPA. On the 4B parameter scale, DPA outperforms baselines by 1.9 points across 8 multimodal benchmarks, with gains widening to 3.0 points at the 32B scale. Moreover, by offloading alignment to the perceiver, DPA achieves a 32.9\% reduction in language capability forgetting over 3 text benchmarks. We further demonstrate that these gains are consistent across different LLM families including Qwen3 and LLaMA 3.2, highlighting the generality of our approach. Beyond performance, DPA also offers a seamless upgrade path for current VLM development, requiring only a modular replacement for the visual encoder with marginal computation overhead.
 
-- **技术标签**: `alignment` `benchmark` `vision`
-
-
----
-
-
-## 62. DanceHMR: Hand-Aware Whole-Body Human Mesh Recovery from Monocular Videos
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18102v1)
-
-- **摘要**: Monocular video human mesh recovery is essential for digital humans, avatar animation, and embodied simulation, where both temporal stability and expressive whole-body motion are required. Existing video HMR methods produce coherent body motion but often overlook detailed hand articulation, while image-based whole-body methods recover SMPL-X meshes independently per frame, often leading to jittery and inaccurate hand motion. We present a temporally coherent whole-body HMR framework for challenging in-the-wild monocular videos. Our model unifies body context and part-specific hand observations through residual body-hand fusion, enabling stable body motion and detailed hand recovery within a single temporal architecture. We further introduce close-up-aware augmentation to improve robustness under upper-body framing. Experiments on whole-body and body-only benchmarks demonstrate improved hand reconstruction and competitive body accuracy. Our method also produces temporally stable and 2D-consistent SMPL-X motion in challenging real-world videos.
-
-- **技术标签**: `benchmark` `robustness`
+- **技术标签**: `alignment` `benchmark` `large language model` `llm` `multimodal`
 
 
 ---
 
 
-## 63. Threats to Arabic Handwriting Recognition: Investigating Black-Box Adversarial Attacks on embedded ConvNet models
+## 61. Discretizing Group-Convolutional Neural Networks for 3D Geometry in Feature Space
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18058v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15368)
 
-- **摘要**: Arabic handwriting recognition (AHR) has made significant progress with deep learning models. AHR research has largely focused on performance, with security receiving little attention. This study provides what appears to be a new line of inquiry by demonstrating the vulnerability of high-performing models to adversarial black-box attacks. The focus on black-box attacks reflects real-world scenarios where the attacker has no prior knowledge of the model architecture. Extensive experiments were conducted on two benchmark AHR datasets containing Arabic handwritten Characters. Results demonstrated the effectiveness of the attacks, with the Pixle attack achieving an attack success rate of 99-100\% on most models. Other, less aggressive attacks achieved success rates of 50-96\% across most experiments. Despite the higher attack success rate, the attacks maintain the structural integrity of the characters, rendering them almost imperceptible to the human eye. The findings indicate the higher vulnerability of the studied models to adversarial manipulation. This underscores the need to strengthen efforts to secure these models and ensure their reliability in AHR real-world applications.
+- **摘要**: arXiv:2605.15368v1 Announce Type: new  Abstract: Group-convolutional neural networks (GCNNs) are among the most important methods for introducing symmetry as an inductive bias in deep learning: In each linear layer, GCNNs sample a transformation group $G$ densely and correlate data and filters in different poses (with suitable anti-aliasing for steerable GCNNs) to maintain equivariance with respect to $G$. Unfortunately, applying filters to many data items resulting from this sampling is expensive (even for translations alone, i.e., in ordinary CNNs), and costs grow exponentially with increasing degrees of freedom (such as translations and rotations in 3D), which often hinders practical applications. In this paper, we propose sampling in feature space, i.e., replacing geometrically dense samples with representative samples selected by feature similarity. This decouples geometric resolution from memory and processing costs during training and inference, providing a novel way to trade off computational effort and accuracy. Our main empirical finding is that a coarse feature-space sampling already preserves classification accuracy remarkably well, which permits precomputation based on geometric similarity, accelerating the training of equivariant 3D classifiers substantially.
 
-- **技术标签**: `adversarial` `benchmark` `research`
-
-
----
-
-
-## 64. SGSoft: Learning Fused Semantic-Geometric Features for 3D Shape Correspondence via Template-Guided Soft Signals
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18039v1)
-
-- **摘要**: Learning dense correspondences across deformable 3D shapes remains a long-standing challenge due to structural variability, non-isometric deformation, and inconsistent topology. Existing methods typically trade off generalization, geometric fidelity, and efficiency. We address this by proposing SGSoft, a unified intrinsic pipeline that (i) constructs a geodesic correspondence field on a canonical template, (ii) learns multimodal dense descriptors guided by pretrained semantic priors with this geodesic correspondence field supervision, (iii) retrieves dense correspondences in a single feed-forward pass via nearest-neighbor search in descriptor space. This formulation enables stable and topology-invariant supervision under large pose variation, structural differences, and remeshing. SGSoft achieves state-of-the-art inter-category generalization while offering the best accuracy-efficiency trade-off among prior methods. It also achieves near real-time inference without pre-alignment, pairwise optimization, or post-refinement. Learned descriptors can be transferred effectively to downstream tasks such as semantic segmentation and deformation transfer, establishing a scalable and deployment-ready paradigm for dense 3D correspondence.
-
-- **技术标签**: `alignment` `efficiency` `multimodal` `vision`
+- **技术标签**: `bias`
 
 
 ---
 
 
-## 65. Generation Navigator: A State-Aware Agentic Framework for Image Generation
+## 62. ChangeFlow -- Latent Rectified Flow for Change Detection in Remote Sensing
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.17969v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15375)
 
-- **摘要**: Despite rapid advances in text-to-image generation, faithfully realizing user intent remains challenging, often requiring manual multi-turn trial and error. To automate this process, existing systems rely on either simple prompt rewriting or closed-loop agents driven by hand-crafted rules, rather than learning to adapt actions to the evolving generation process. In this paper, we reformulate image generation as a state-conditioned action-making problem and propose Generation Navigator, a multi-turn T2I agent that learns to dynamically steer the generation trajectory and output the next action. However, training this agent via reinforcement learning introduces a critical credit assignment challenge: naively rewarding a trajectory based solely on a single state assigns equal credit to all actions in the rollout, ignores the quality dynamics across turns, and fails to distinguish actions that improve the trajectory from those that degrade it or waste turns without progress. We resolve this with PRE-GRPO (Peak-Retention-Efficiency Group Relative Policy Optimization), a trajectory-level reinforcement learning objective that explicitly rewards discovering a high-quality image (Peak), avoiding subsequent quality degradation across turns (Retention), and minimizing unnecessary turns (Efficiency). Experiments show substantial improvements across benchmarks, reaching a WISE score of 0.90 and 79.06% reasoning accuracy on T2I-ReasonBench.
+- **摘要**: arXiv:2605.15375v1 Announce Type: new  Abstract: Remote sensing change detection (RSCD) aims to localise changes between two images of the same geographic region. In practice, change masks often follow region-level annotation conventions rather than purely local appearance differences, making them context-dependent and occasionally ambiguous. Most state-of-the-art methods utilise per-pixel discriminative classification, which produces a single prediction per input and fails to explicitly model the changed region as a coherent whole. A natural alternative is generative formulation, which can model a distribution of plausible masks, enabling sampling to capture ambiguity and encourage global consistency. However, existing generative RSCD approaches typically lag behind strong discriminative baselines due to the high computational cost of pixel-space generation and the complexity of their conditioning mechanisms. To address the limitations of prior discriminative and generative methods, we propose ChangeFlow, a generative framework that reformulates change detection as the synthesis of a change mask in latent space via rectified flow. ChangeFlow is guided by a structured yet lightweight conditioning signal, and its stochastic design naturally supports sampling-based prediction ensembling. Namely, aggregating multiple predicted change masks improves robustness, while sample agreement provides a practical confidence estimation that highlights ambiguous regions. Across four benchmarks, ChangeFlow achieves an average F1 of 80.4\%, improving by 1.3 points on average over the previous best method, while maintaining inference speed comparable to recent strong baselines. Project page: https://blaz-r.github.io/changeflow_cd
 
-- **技术标签**: `agent` `benchmark` `efficiency` `policy` `reasoning`
-
-
----
-
-
-## 66. SkyNative: A Native Multimodal Framework for Remote Sensing Visual Evidence Reasoning
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.17949v1)
-
-- **摘要**: Remote sensing vision-language models commonly rely on pretrained visual encoders to convert images into semantic features before language-model reasoning. While effective for scene-level understanding, this pipeline may prematurely compress local visual evidence, making fine-grained spatial reasoning vulnerable to language priors, especially in ultra-high-resolution remote sensing imagery. We present SkyNative, a native multimodal framework for remote sensing that adopts an encoder-free architecture, removing the pretrained visual backbone to directly represent images as raw patch tokens in the language-model token space. To reconcile low-level visual patches with textual tokens, SkyNative introduces a modality-aware decoupling mechanism that uses modality-specific parameters within a unified autoregressive backbone. We further introduce a visual reliance benchmark that diagnoses whether models ground their answers in image evidence through progressive visual degradation and misleading textual prompts. Across standard remote sensing understanding tasks and large-format spatial reasoning evaluations, SkyNative shows stronger image-grounded perception and improved robustness against prompt-induced language priors. These results suggest that native patch-level multimodal modeling is a promising direction for reliable remote sensing vision-language reasoning.
-
-- **技术标签**: `benchmark` `multimodal` `reasoning` `robustness` `vision`
+- **技术标签**: `benchmark` `generative` `rag` `robustness`
 
 
 ---
 
 
-## 67. An Efficient Streaming Video Understanding Framework with Agentic Control
+## 63. MR2-ByteTrack: CNN and Transformer-based Video Object Detection for AI-augmented Embedded Vision Sensor Nodes
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.17921v1)
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15423)
 
-- **摘要**: Streaming video requires handling dynamic information density under strict latency budgets. Yet, existing methods typically employ static strategies, such as fixed memory compression or reliance on a single model, forcing a trade-off: fast models fail on complex queries, while always-on heavy models violate real-time constraints and overcomplicate simple queries. Rather than fixing these decisions upfront, we propose R3-Streaming (Remember, Respond, Reason), which formulates streaming video understanding as a cascaded control problem: for each query, the system compresses memory, judges response readiness, and routes computation sequentially, so that each downstream decision builds on progressively refined information states. To optimize this pipeline, we introduce an age-aware forgetting policy for memory compression, as aggressively compressing historical frames can yield substantial performance gains. For compute routing, we propose TB-GRPO, a target-balanced reinforcement learning objective that routes hard queries to a stronger model while preventing mode collapse. Extensive evaluations demonstrate that R3-Streaming achieves state-of-the-art results among streaming MLLMs, reaching 57.92 on OVO-Bench and 76.36 on StreamingBench, while reducing visual token usage by 95 to 96 percent.
+- **摘要**: arXiv:2605.15423v1 Announce Type: new  Abstract: Modern smart vision sensors need on-device intelligence to process video streams, as cloud computing is often impractical due to bandwidth, latency, and privacy constraints. However, these sensory systems typically rely on ultra-low-power microcontrollers (MCUs) with limited memory and compute, making conventional video object detection methods, which require feature storage or multi-frame buffering, unfeasible. To address this challenge, we introduce Multi-Resolution Rescored ByteTrack (MR2-ByteTrack), a Video Object Detection (VOD) method tailored for MCU-based embedded vision nodes. MR2-ByteTrack reduces computational cost by alternating between full- and low-resolution inference, while linking detections across frames via ByteTrack and correcting misclassifications through the Rescore algorithm, which applies probability union rules to aggregate detection confidence scores across frames. We apply our approach to both a CNN-based detector and a Transformer-based model, demonstrating its generality across architectures with fundamentally different spatial processing. Experiments on ImageNetVID demonstrate that MR2-ByteTrack maintains accuracy, achieving mAP scores of up to 49.0 for the CNN-based models and 48.7 for the Transformer, while reducing multiply-accumulate operations by as much as 53\% for the CNNs and 32\% for the Transformer. When deployed on GAP9, an ultra-low-power RISC-V multicore MCU, our method yields up to 55\% energy savings compared to processing only full-resolution images, enabling the first real-time Transformer-based VOD on an MCU-class embedded vision node. Code available at https://github.com/Bomps4/Multi_Resolution_Rescored_ByteTrack/tree/IEEE_Access
 
-- **技术标签**: `agent` `llm` `policy`
+- **技术标签**: `privacy` `rag` `transformer` `vision`
 
 
 ---
 
 
-## 68. Attention-Guided Fusion of 1D and 2D CNNs for Robust ECG-Based Biometric Recognition
+## 64. Video Models Can Reason with Verifiable Rewards
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15458)
+
+- **摘要**: arXiv:2605.15458v1 Announce Type: new  Abstract: Video diffusion models have made rapid progress in perceptual realism and temporal coherence, but they remain primarily optimized for plausible generation rather than verifiable reasoning. This limitation is especially pronounced in tasks where generated videos must satisfy explicit spatial, temporal, or logical constraints. Inspired by the role of reinforcement learning with verifiable rewards (RLVR) in reasoning-oriented language models, we introduce VideoRLVR, a practical recipe for optimizing video diffusion models with rule-based feedback. VideoRLVR formulates video reasoning as the generation of verifiable visual trajectories and consists of an SDE-GRPO optimization backbone, dense decomposed rewards, and an Early-Step Focus strategy for efficient training. The Early-Step Focus strategy restricts policy optimization to the early denoising phase, reducing training latency by about 40% while preserving performance. We evaluate VideoRLVR on Maze, FlowFree, and Sokoban, three procedurally generated domains with objective success criteria. Across these tasks, VideoRLVR consistently improves over supervised fine-tuning baselines, with dense decomposed rewards proving especially important in low-success-rate settings. Our RL-optimized model also outperforms the evaluated proprietary and open-source video generation models on these verifiable reasoning benchmarks and out-of-domain benchmarks. These results suggest that verifiable RL can move video models beyond perceptual imitation toward more reliable rule-consistent visual reasoning.
+
+- **技术标签**: `benchmark` `diffusion` `fine-tuning` `policy` `reasoning`
+
+
+---
+
+
+## 65. Entity-Centric World Models: Interaction-Aware Masking for Causal Video Prediction
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15466)
+
+- **摘要**: arXiv:2605.15466v1 Announce Type: new  Abstract: Learning predictive world models from unlabelled video is a foundational challenge in artificial intelligence. While Joint Embedding Predictive Architectures (JEPA) have set new benchmarks in semantic classification, they often remain physics-blind, failing to capture the causal dynamics necessary for downstream reasoning. We hypothesize that this stems from standard patch-based masking strategies, which prioritize visual texture over rare but informative kinematic events. We propose Interaction-Aware JEPA (IA-JEPA), which utilizes a self-supervised motion-centric masking strategy to prioritize physical interactions. By specifically targeting entities engaged in collisions or momentum transfers, we force the architecture to reconstruct latent trajectories rather than static background features. Evaluated on the CLEVRER benchmark, IA-JEPA achieves 14.26% accuracy on causal reasoning tasks, a significant lead over the 3.22% achieved by standard patch-masked baselines. Crucially, we demonstrate that IA-JEPA breaks the "static bias" of standard self-supervision by inducing a higher-entropy, more discriminative latent space (+10% entropy gain) that linearizes physical energy ($R^2=0.43$). We show that this interaction bias generalizes to real-world human actions (Something-Something V2) and zero-shot physical puzzles (PHYRE-Lite). Our results provide a scalable, fully self-supervised path toward building foundational world models that begin to internalize the causal structure of the physical world.
+
+- **技术标签**: `benchmark` `bias` `embedding` `reasoning` `vision`
+
+
+---
+
+
+## 66. EgoExo-WM: Unlocking Exo Video for Ego World Models
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15477)
+
+- **摘要**: arXiv:2605.15477v1 Announce Type: new  Abstract: Egocentric world models present a promising direction for enabling agents to predict and plan, but their performance is constrained by the limited availability of egocentric training data and its inherent partial observability of humans' physical actions. In contrast, exocentric video is abundant and reveals body poses well, but lacks direct alignment with an agent's action space -- and is not egocentric. We propose a method to bridge this gap by extracting structured body pose from exocentric video as a representation of action and transforming the exocentric video to egocentric video, informed by a human kinematics prior. This process unlocks the integration of in-the-wild exocentric data for egocentric world model training. We show that training whole-body action-conditioned egocentric world models with our converted data significantly improves both prediction quality and downstream planning performance, where we infer the sequence of body poses needed to achieve a visual goal state. Our approach paves the way to enlist arbitrary in-the-wild videos for building powerful egocentric world models, furthering applications in robot planning and augmented-reality guidance.
+
+- **技术标签**: `agent` `alignment`
+
+
+---
+
+
+## 67. DiffVAS: Diffusion-Guided Visual Active Search in Partially Observable Environments
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15519)
+
+- **摘要**: arXiv:2605.15519v1 Announce Type: new  Abstract: Visual active search (VAS) has been introduced as a modeling framework that leverages visual cues to direct aerial (e.g., UAV-based) exploration and pinpoint areas of interest within extensive geospatial regions. Potential applications of VAS include detecting hotspots for rare wildlife poaching, aiding search-and-rescue missions, and uncovering illegal trafficking of weapons, among other uses. Previous VAS approaches assume that the entire search space is known upfront, which is often unrealistic due to constraints such as a restricted field of view and high acquisition costs, and they typically learn policies tailored to specific target objects, which limits their ability to search for multiple target categories simultaneously. In this work, we propose DiffVAS, a target-conditioned policy that searches for diverse objects simultaneously according to task requirements in partially observable environments, which advances the deployment of visual active search policies in real-world applications. DiffVAS leverages a diffusion model to reconstruct the entire geospatial area from sequentially observed partial glimpses, which enables a target-conditioned reinforcement learning-based planning module to effectively reason and guide subsequent search steps. Extensive experiments demonstrate that DiffVAS excels in searching diverse objects in partially observable environments, significantly surpassing state-of-the-art methods on several datasets.
+
+- **技术标签**: `diffusion` `policy` `rag`
+
+
+---
+
+
+## 68. Neutral-Reference Prompting for Vision-Language Models
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15615)
+
+- **摘要**: arXiv:2605.15615v1 Announce Type: new  Abstract: Efficient transfer learning of vision-language models (VLMs) commonly suffers from a Base-New Trade-off (BNT): improving performance on unseen (new) classes often degrades accuracy on known (base) classes. Addressing how to boost recognition of unseen classes without sacrificing known-class performance remains a central challenge. Existing work often simplistically attributes the BNT to overfitting on known classes. We observe an interesting phenomenon: VLMs frequently exhibit asymmetric confusion on certain downstream data, i.e., samples of class A are systematically mispredicted as class B, while the reverse confusion (B to A) rarely occurs. For known classes, this kind of bias can be mitigated by tuning using a cross-entropy loss, but for unseen classes, such pretraining-induced bias persists and harms generalization. Motivated by this, we propose NeRP, a plug-and-play prompting correction strategy that improves discrimination on unseen classes without modifying model parameters. NeRP leverages neutral text prompts and reference images to measure class-wise prior preferences along the pre-trained inter-class geometry, and combines them with the sample likelihood to obtain the model's surrogate score. If, for a given sample, the prior strongly favors the current prediction while the observed evidence is clearly insufficient, we perform a local flip between easily confusable class pairs, thereby correcting prior-dominated mispredictions. Extensive experiments across multiple backbones and 15 few-shot and cross-domain benchmarks show that NeRP substantially improves accuracy on unseen classes while preserving known-class prediction performance.
+
+- **技术标签**: `benchmark` `bias` `pretraining` `rag` `vision`
+
+
+---
+
+
+## 69. Latent Video Prediction Learns Better World Models
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15618)
+
+- **摘要**: arXiv:2605.15618v1 Announce Type: new  Abstract: Self-supervised video models are increasingly framed as world models, yet their evaluation remains largely confined to a single top-1 accuracy score on clean benchmarks. This leaves a major gap in comprehending their potential as world models. We present the first systematic study addressing this gap, analyzing four matched-capacity frontier video foundation models, V-JEPA 2.1, V-JEPA 2, VideoPrism, and VideoMAEv2, across five robustness axes relevant to their deployment as video world models: feature discriminability, corruption robustness, fine-grained discrimination, occlusion robustness, and sensitivity to temporal direction. Our evaluations establish that across all five axes, latent-prediction models form a distinct and consistent profile. They degrade more gracefully under pixel corruption, preserve usable class structure rather than mere geometric stability under occlusion, capture fine-grained physical contact cues without reconstructing pixels, and uniquely encode the arrow of time. These advantages can even survive task adaptation: a frozen V-JEPA 2 backbone with a lightweight attentive probe outperforms a fully fine-tuned VideoMAE and a supervised TimeSformer on corruption and occlusion robustness. Our extensive results offer concrete new evidence in favor of latent prediction for robust world modeling.
+
+- **技术标签**: `benchmark` `foundation model` `robustness`
+
+
+---
+
+
+## 70. LRCP: Low-Rank Compressibility Guided Visual Token Pruning for Efficient LVLMs
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15621)
+
+- **摘要**: arXiv:2605.15621v1 Announce Type: new  Abstract: Large vision-language models (LVLMs) achieve strong multimodal understanding, but their inference cost grows rapidly with the number of visual tokens, especially for high-resolution images and long videos. Existing attention-based methods estimate token importance from attention scores, which may introduce positional bias, while representation-based methods reduce visual redundancy based on feature relations or reconstruction errors, overlooking the global structure of the visual token set. In this paper, we revisit visual token compression from the perspective of low-rank compressibility. Across models and datasets, we observe that visual token representations exhibit a pronounced low-rank structure, with a dominant subspace that remains stable even after a large fraction of tokens is randomly removed. Motivated by this finding, we propose LRCP, a training-free compression framework that first estimates the dominant low-rank subspace of visual tokens via PCA, and then scores each token by its projection residual onto this subspace, retaining tokens that are poorly explained by the low-rank background. Extensive experiments show that LRCP achieves superior results, preserving 94.7% of the original image-understanding performance with an 88.9% token reduction and 97.8% of the average video-understanding accuracy with an 87.5% token reduction.
+
+- **技术标签**: `bias` `multimodal` `rag` `vision`
+
+
+---
+
+
+## 71. Learning Disentangled Representations for Generalized Multi-view Clustering
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15640)
+
+- **摘要**: arXiv:2605.15640v1 Announce Type: new  Abstract: Multi-View Clustering (MVC) has gained significant attention for its ability to leverage complementary information across diverse views. However, existing deep MVC methods often struggle with view-distribution entanglement during cross-view fusion, which hampers the quality of the shared latent space and leads to suboptimal Figures. To address this issue, we propose the Generalized Multi-view Auto-Encoder (GMAE), a framework designed to preserve cross-view complementarity through disentangled representation learning. Specifically, GMAE employs dual-path autoencoders to decouple source features into view-specific and view-common embeddings, facilitating the discovery of clearer clustering structures. We further construct cross-view adversarial discriminators to guide view-specific encoders in capturing more discriminative features. By strategically modulating mutual information, GMAE effectively aligns distributions and prevents representation collapse, ensuring the generation of robust, non-trivial embeddings. Comprehensive experiments on 13 benchmark datasets demonstrate that GMAE consistently outperforms state-of-the-art methods in both complete and incomplete MVC tasks. Our code implementation is available at the repository: https://github.com/obananas/GMAE.
+
+- **技术标签**: `adversarial` `benchmark` `embedding` `rag`
+
+
+---
+
+
+## 72. MaTe: Images Are All You Need for Material Transfer via Diffusion Transformer
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15660)
+
+- **摘要**: arXiv:2605.15660v1 Announce Type: new  Abstract: Recent diffusion-based methods for material transfer rely on image fine-tuning or complex architectures with assistive networks, but face challenges including text dependency, extra computational costs, and feature misalignment. To address these limitations, we propose MaTe, a streamlined diffusion framework that eliminates textual guidance and reference networks. MaTe integrates input images at the token level, enabling unified processing via multi-modal attention in a shared latent space. This design removes the need for additional adapters, ControlNet, inversion sampling, or model fine-tuning. Extensive experiments demonstrate that MaTe achieves high-quality material generation under a zero-shot, training-free paradigm. It outperforms state-of-the-art methods in both visual quality and efficiency while preserving precise detail alignment, significantly simplifying inference prerequisites.
+
+- **技术标签**: `alignment` `diffusion` `efficiency` `fine-tuning` `transformer`
+
+
+---
+
+
+## 73. VAGS: Velocity Adaptive Guidance Scale for Image Editing and Generation
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15661)
+
+- **摘要**: arXiv:2605.15661v1 Announce Type: new  Abstract: Classifier-free guidance (CFG) is the primary control over how strongly text semantics move a flow-based sampler, yet standard practice holds its scale fixed across the entire ODE trajectory. This is a fundamental mismatch: early steps are noise-dominated and carry weak semantic signal, while late steps commit image structure and demand stronger directional commitment; more critically, the value of any guidance strength depends on whether the guided velocity is consistent with the model's current dynamics or working against them. We propose \textit{Velocity-Adaptive Guidance Scale} (VAGS), a training-free replacement that multiplies the nominal scale by a bounded factor combining a temporal signal-level term with the cosine similarity between task-relevant velocity fields. For inversion-free editing, VAGS measures the alignment between source- and target-guided velocities, so edit strength at each step reflects local compatibility between preservation and transformation. For generation, VAGS-Gen uses the alignment between unconditional and conditional velocities as the analogous signal. Neither variant requires fine-tuning, auxiliary networks, or extra forward passes, and fixed CFG is recovered as a special case. On PIE-Bench and DIV2K for editing, and COCO17, CUB-200, and Flickr30K for generation, VAGS consistently improves structural fidelity and generation quality over fixed CFG and recent training-free guidance variants. The code is publicly available at https://github.com/Harvard-AI-and-Robotics-Lab/Velocity_Adaptive_Guidance_Scale.
+
+- **技术标签**: `alignment` `fine-tuning` `o1`
+
+
+---
+
+
+## 74. DreamSR: Towards Ultra-High-Resolution Image Super-Resolution via a Receptive-Field Enhanced Diffusion Transformer
+
+- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.15682)
+
+- **摘要**: arXiv:2605.15682v1 Announce Type: new  Abstract: Large-scale pre-trained diffusion models have been extensively adopted for real-world image Super-Resolution because of their powerful generative priors through textual guidance. However, when super-resolving high-resolution images with patch-wise inference strategy, most existing diffusion-based SR methods tend to suffer from over-generation, due to the misalignment between the global prompt from LR image and the incomplete semantic information of local patches during each inference step. On the other hand, most existing methods also failed to generate detailed texture in local patches due to the overemphasis on global generation capabilities in network designs and training strategies. To address this issue, we present DreamSR, a novel SR model that suppresses local over-generation and improves fine-detail synthesis, thereby achieving visually faithful results with ultra-high-quality details. Specifically, we propose a dual-branch MM-ControlNet, where the ControlNet generates local textual feature with patch-level prompts while the pre-trained DiT provides global textual feature with global prompts, thereby mitigating over-generation and ensuring semantic consistency across patches. We also design a comprehensive training strategy with stage-specific data processing pipelines and a Receptive-Field Enhancement strategy, enhancing the model's capability to capture patch information and effectively restore local textures. Extensive experiments demonstrate that DreamSR outperforms state-of-the-art methods, providing high-quality SR results. Code and model are available at https://github.com/jerrydong0219/DreamSR.
+
+- **技术标签**: `alignment` `diffusion` `generative` `transformer`
+
+
+---
+
+
+## 75. Attention-Guided Fusion of 1D and 2D CNNs for Robust ECG-Based Biometric Recognition
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17685v1)
 
@@ -818,7 +902,7 @@
 ---
 
 
-## 69. From Documents to Segments: A Contextual Reformulation for Topic Assignment
+## 76. From Documents to Segments: A Contextual Reformulation for Topic Assignment
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17714v1)
 
@@ -830,7 +914,7 @@
 ---
 
 
-## 70. Do LLM Agents Mirror Socio-Cognitive Effects in Power-Asymmetric Conversations?
+## 77. Do LLM Agents Mirror Socio-Cognitive Effects in Power-Asymmetric Conversations?
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17694v1)
 
@@ -842,7 +926,7 @@
 ---
 
 
-## 71. Stop When Reasoning Converges: Semantic-Preserving Early Exit for Reasoning Models
+## 78. Stop When Reasoning Converges: Semantic-Preserving Early Exit for Reasoning Models
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17672v1)
 
@@ -854,7 +938,7 @@
 ---
 
 
-## 72. Beyond Transcripts: Iterative Peer-Editing with Audio Unlocks High-Quality Human Summaries of Conversational Speech
+## 79. Beyond Transcripts: Iterative Peer-Editing with Audio Unlocks High-Quality Human Summaries of Conversational Speech
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17652v1)
 
@@ -866,7 +950,7 @@
 ---
 
 
-## 73. Causal Intervention-Based Memory Selection for Long-Horizon LLM Agents
+## 80. Causal Intervention-Based Memory Selection for Long-Horizon LLM Agents
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17641v1)
 
@@ -878,7 +962,7 @@
 ---
 
 
-## 74. SafeLens: Deliberate and Efficient Video Guardrails with Fast-and-Slow Screening
+## 81. SafeLens: Deliberate and Efficient Video Guardrails with Fast-and-Slow Screening
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17610v1)
 
@@ -890,7 +974,7 @@
 ---
 
 
-## 75. How Off-Policy Can GRPO Be? Mu-GRPO for Efficient LLM Reinforcement Learning
+## 82. How Off-Policy Can GRPO Be? Mu-GRPO for Efficient LLM Reinforcement Learning
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.17570v1)
 
@@ -902,7 +986,7 @@
 ---
 
 
-## 76. SNLP: Layer-Parallel Inference via Structured Newton Corrections
+## 83. SNLP: Layer-Parallel Inference via Structured Newton Corrections
 
 - **来源**: [huggingface_papers](https://arxiv.org/abs/2605.17842)
 
@@ -914,7 +998,7 @@
 ---
 
 
-## 77. ContraFix: Agentic Vulnerability Repair via Differential Runtime Evidence and Skill Reuse
+## 84. ContraFix: Agentic Vulnerability Repair via Differential Runtime Evidence and Skill Reuse
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17450v1)
 
@@ -926,7 +1010,7 @@
 ---
 
 
-## 78. Rethinking Side-Channel Analysis: Automated Discovery and Analysis of Side-Channel Leakage with LLM-Assisted Agents
+## 85. Rethinking Side-Channel Analysis: Automated Discovery and Analysis of Side-Channel Leakage with LLM-Assisted Agents
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17406v1)
 
@@ -938,7 +1022,7 @@
 ---
 
 
-## 79. LPG: Balancing Efficiency and Policy Reasoning in Latent Policy Guardrails
+## 86. LPG: Balancing Efficiency and Policy Reasoning in Latent Policy Guardrails
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17329v1)
 
@@ -950,7 +1034,7 @@
 ---
 
 
-## 80. When Efficiency Backfires: Cascading LLMs Trigger Cascade Failure under Adversarial Attack
+## 87. When Efficiency Backfires: Cascading LLMs Trigger Cascade Failure under Adversarial Attack
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17288v1)
 
@@ -962,7 +1046,7 @@
 ---
 
 
-## 81. Triple-Hoisted Baby-Step Giant-Step Linear Transformation over CKKS Homomorphic Encryption and Hardware Accelerator
+## 88. Triple-Hoisted Baby-Step Giant-Step Linear Transformation over CKKS Homomorphic Encryption and Hardware Accelerator
 
 - **来源**: [arxiv_cr](https://arxiv.org/abs/2605.17222v1)
 
@@ -974,7 +1058,7 @@
 ---
 
 
-## 82. Forward-Learned Discrete Diffusion: Learning how to noise to denoise faster
+## 89. Forward-Learned Discrete Diffusion: Learning how to noise to denoise faster
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18204v1)
 
@@ -986,7 +1070,7 @@
 ---
 
 
-## 83. Dual-Rate Diffusion: Accelerating diffusion models with an interleaved heavy-light network
+## 90. Dual-Rate Diffusion: Accelerating diffusion models with an interleaved heavy-light network
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18190v1)
 
@@ -998,7 +1082,7 @@
 ---
 
 
-## 84. UTOPYA: A Multimodal Deep Learning Framework for Physics-Informed Anomaly Detection and Time-Series Prediction
+## 91. UTOPYA: A Multimodal Deep Learning Framework for Physics-Informed Anomaly Detection and Time-Series Prediction
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18188v1)
 
@@ -1010,7 +1094,7 @@
 ---
 
 
-## 85. Ringmaster LMO: Asynchronous Linear Minimization Oracle Momentum Method
+## 92. Ringmaster LMO: Asynchronous Linear Minimization Oracle Momentum Method
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18174v1)
 
@@ -1022,7 +1106,7 @@
 ---
 
 
-## 86. Buffer-Parameterized Machine Learning Surrogate Models for Cross-Technology Signal Integrity Analysis and Optimization
+## 93. Buffer-Parameterized Machine Learning Surrogate Models for Cross-Technology Signal Integrity Analysis and Optimization
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18170v1)
 
@@ -1034,7 +1118,7 @@
 ---
 
 
-## 87. Elastic-dLLM: Position Preserving Context Compression and Augmentation of Diffusion LLMs
+## 94. Elastic-dLLM: Position Preserving Context Compression and Augmentation of Diffusion LLMs
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18165v1)
 
@@ -1046,7 +1130,7 @@
 ---
 
 
-## 88. Foundation Models for Credit Risk Prediction: A Game Changer?
+## 95. Foundation Models for Credit Risk Prediction: A Game Changer?
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18147v1)
 
@@ -1058,7 +1142,7 @@
 ---
 
 
-## 89. pyforce-1.0.0: Python Framework for data-driven model Order Reduction of multi-physiCs problEms
+## 96. pyforce-1.0.0: Python Framework for data-driven model Order Reduction of multi-physiCs problEms
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18082v1)
 
@@ -1068,7 +1152,7 @@
 ---
 
 
-## 90. Wasserstein bounds for denoising diffusion probabilistic models via the Föllmer process
+## 97. Wasserstein bounds for denoising diffusion probabilistic models via the Föllmer process
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18069v1)
 
@@ -1080,7 +1164,7 @@
 ---
 
 
-## 91. The MixCount Dataset: Bridging the Data Gap for Open-Vocabulary Object Counting
+## 98. The MixCount Dataset: Bridging the Data Gap for Open-Vocabulary Object Counting
 
 - **来源**: [arxiv_lg](https://arxiv.org/abs/2605.18063v1)
 
@@ -1092,7 +1176,7 @@
 ---
 
 
-## 92. SIREM: Speech-Informed MRI Reconstruction with Learned Sampling
+## 99. SIREM: Speech-Informed MRI Reconstruction with Learned Sampling
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.18221v1)
 
@@ -1104,7 +1188,7 @@
 ---
 
 
-## 93. FOL2NS: Generating Natural Sentences from First-Order Logic
+## 100. FOL2NS: Generating Natural Sentences from First-Order Logic
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.18155v1)
 
@@ -1116,7 +1200,7 @@
 ---
 
 
-## 94. iPOE: Interpretable Prompt Optimization via Explanations
+## 101. iPOE: Interpretable Prompt Optimization via Explanations
 
 - **来源**: [arxiv_cl](https://arxiv.org/abs/2605.18113v1)
 
@@ -1128,89 +1212,19 @@
 ---
 
 
-## 95. Token-Space Mask Prediction for Efficient Vision Transformer Segmentation
+## 102. LiteFrame: Efficient Vision Encoders Unlock Frame Scaling in Video LLMs
 
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18177v1)
+- **来源**: [huggingface_papers](https://arxiv.org/abs/2605.17260)
 
-- **摘要**: Query-based Vision Transformer segmentation models typically reconstruct dense spatial feature maps to predict masks, inheriting design patterns from convolutional architectures. We show that this explicit image-space reconstruction is not required. We introduce TokenMask, a token-space mask head that computes mask logits directly from query-token affinities and performs interpolation in logit space rather than feature space. This reformulation preserves the original linear scoring mechanism while simplifying the computational structure. Across diverse ViT backbones, datasets and segmentation tasks, TokenMask consistently improves efficiency over prior approaches by reducing computational and memory requirements while maintaining competitive accuracy, leading to tangible speedups on NVIDIA Jetson AGX Orin using TensorRT FP16 inference. Overall, TokenMask yields a simpler and more deployment-friendly design for embedded vision systems.
+- **摘要**: The fundamental challenge in scaling Video Large Language Models (Video LLMs) to long-form video lies in managing the explosion of visual-token context length. Existing strategies predominantly focus on "post-hoc" token reduction -- reducing visual tokens after feature extraction to alleviate the LLM's computational overhead. While these methods effectively reduce the number of visual tokens, we observe that the primary latency bottleneck then shifts from the LLM to the expensive per-frame processing of the vision encoder. To address this, we introduce LiteFrame, a strong, yet highly efficient video encoder backbone for Video LLMs. To train LiteFrame, we propose Compressed Token Distillation (CTD), a novel training framework that teaches a compact student vision encoder to directly predict information-dense, spatio-temporally compressed representations produced by a large teacher vision model, effectively bypassing redundant computation. When coupled with further Language Model Adaptation (LMA), this approach results in a new latency-accuracy Pareto frontier -- compared with InternVL3-8B, LiteFrame provides a 35% reduction in end-to-end latency while processing 8times more frames and improves average video understanding accuracy across multiple benchmarks. Our results demonstrate a new potential path to unlocking longer-form video understanding under fixed compute budgets.
 
-- **技术标签**: `efficiency` `transformer` `vision`
-
-
----
-
-
-## 96. Do You Need Text Rectification? Soft Attention Mask Embedding for Rectification-Free Scene Text Spotting
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18173v1)
-
-- **摘要**: End-to-end scene text spotting, which unifies text detection and recognition within a single framework, has witnessed remarkable progress driven by deep learning advances. However, most existing approaches still suffer from incomplete mask proposals caused by multi-scale variation, arbitrary text shapes, and complex background interference, thereby degrading recognition accuracy. In this paper, we propose a novel Soft Attention Mask Embedding module (SAME) that leverages the global receptive field of Transformer encoders to encode high-level features and compute soft attention weights, which are then hierarchically embedded with predicted masks to generate refined text-boundary-aware masks that effectively suppress background noise. Building upon this module, we present SAME-Net, a robust end-to-end text spotting framework that requires neither character-level annotations nor auxiliary text rectification modules. Since the soft attention mechanism is fully differentiable, recognition loss gradients can be back-propagated through the SAME module to the detection branch, enabling joint optimization of detection and recognition objectives. Extensive experiments on challenging benchmarks demonstrate the effectiveness of our approach: SAME-Net achieves 84.02\% end-to-end H-mean on the arbitrarily-shaped Total-Text dataset, surpassing the previous state-of-the-art GLASS by 1.02\% in full-lexicon accuracy without additional training data, and obtains competitive 83.4\% strong-lexicon results on the multi-oriented ICDAR 2015 dataset.
-
-- **技术标签**: `benchmark` `embedding` `rag` `transformer`
+- **技术标签**: `benchmark` `distillation` `large language model` `llm` `rag`
 
 
 ---
 
 
-## 97. Xiaomi EV World Model: A Joint World Model Integrating Reconstruction and Generation for Autonomous Driving
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18137v1)
-
-- **摘要**: This report presents a unified technical system addressing the two core capabilities of world models for autonomous driving: world representation and world generation. For world representation, we propose WorldRec, a feed-forward reconstruction architecture driven by sparse scene queries. WorldRec initializes structured queries in 3D space, leveraging them to aggregate cross-view, cross-temporal features, thereby naturally enforcing spatial consistency across frames and yielding compact yet high-fidelity 3D Gaussian scene representations. For world generation, we propose WorldGen, a two-stage training framework of bidirectional pretraining followed by causal fine-tuning through three progressive stages (Teacher Forcing, ODE distillation, and DMD), enabling high-quality online causal video generation in as few as 4 denoising steps. Building on both modules, we further introduce the JWM, which deeply integrates WorldRec and WorldGen to achieve synergistic gains in generation stability, cross-frame consistency, and visual fidelity, providing a solid foundation for closed-loop simulation, data synthesis, and end-to-end training in autonomous driving.
-
-- **技术标签**: `distillation` `fine-tuning` `pretraining` `rag`
-
-
----
-
-
-## 98. WinTok: A Win-Win Hybrid Tokenizer via Decomposing Visual Understanding and Generation with Transferable Tokens
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18115v1)
-
-- **摘要**: Building a unified visual tokenizer is essential for bridging the gap between visual understanding and generation. Yet existing approaches struggle with the inherent conflict between these tasks, as a single token space is forced to support both high-level semantic abstraction and low-level pixel reconstruction. We propose WinTok, a concise hybrid tokenizer that achieves a win-win performance by explicitly decoupling the two objectives. WinTok supplements pixel tokens with a set of learnable semantic tokens, effectively mitigating cross-task interference without incurring the computational overhead of dual tokenizers. To further enhance understanding capability, we introduce an asymmetric token distillation mechanism: the semantic tokens are guided by pretrained semantic embeddings from any visual foundation model, enabling them to inherit strong discriminative power while maintaining flexibility. Across 10 challenging benchmarks, WinTok delivers consistent improvements in reconstruction, understanding, and generation. Trained on only 50M open-source data, WinTok surpasses the strong baseline UniTok by 11.2% in classification accuracy and achieves a competitive reconstruction rFID of 0.41, despite using substantially less training data. Code is released at https://github.com/markywg/WinTok.
-
-- **技术标签**: `benchmark` `distillation` `embedding` `foundation model`
-
-
----
-
-
-## 99. Embedded ConvNet Ensembles: A Lightweight Approach to Recognize Arabic Handwritten Characters
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18060v1)
-
-- **摘要**: Arabic Handwritten Character Recognition (AHCR) has recently advanced significantly with deep Convolutional Neural Networks (ConvNets). However, many models in the literature are deep and computationally expensive in terms of parameters and FLOPs, limiting their deployment on resource-constrained devices, which are increasingly common. This study addresses this gap by proposing a combination of lightweight embedded ConvNet models and ensemble learning techniques. Extensive experiments were conducted to identify best practices in AHCR, considering training hyperparameters, learning strategies, model choices, and ensemble methods. Results show that embedded models can achieve accuracy comparable to, or even surpassing, heavier architectures. Ensemble learning further enhances performance with only modest computational overhead, particularly under challenging training scenarios. Among the ensembling strategies, soft voting yielded the best overall results.
-
-
----
-
-
-## 100. CATRF: Codec-Adaptive TriPlane Radiance Fields for Volumetric Content Delivery
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18054v1)
-
-- **摘要**: Volumetric media promises next-generation content delivery applications, but its bandwidth demand remains a key bottleneck. Implicit and hybrid volumetric representations reduce model sizes, yet still require careful coding to reach 2D video-like bitrates. We present CATRF, a standard-codec-in-the-loop compression framework for plane-factorized radiance fields. During training, we quantize and pack 2D feature planes into codec-friendly canvases, run a standard codec roundtrip (JPEG/VP9/HEVC/AV1), then unpack and dequantize the decoded features before volume rendering. We use a straight-through estimator (STE) to insert the non-differentiable, standard codec pipeline into the training loop, allowing radiance-field features to adapt directly to the real, client-side codec distortions without introducing any learned codec parameters. On both static and dynamic benchmarks, CATRF consistently achieves a better rate-distortion trade-off over codec-agnostic and learned-codec-in-the-loop baselines, and also outperforms recent compressed 3DGS methods in both compression efficiency and decoding speed. These results highlight a practical path toward low-bitrate, compression-resilient volumetric representations for free-viewpoint video streaming.
-
-- **技术标签**: `benchmark` `efficiency`
-
-
----
-
-
-## 101. Efficient 3D Content Reconstruction and Generation
-
-- **来源**: [arxiv_cv](https://arxiv.org/abs/2605.18052v1)
-
-- **摘要**: Automatic 3D content creation seeks to replace labor-intensive modeling and scanning pipelines with systems that can synthesize or recover 3D assets directly from text or images. Its applications span video games, virtual reality, robotics, and simulation, enabling rapid asset prototyping, diverse interactive world generation, and efficient 3D data collection for training foundation models. Contemporary solutions largely follow two complementary paradigms: (i) text- or image-to-3D generation, which learns priors over 3D geometry and appearance to create novel assets from natural language or a single view image; and (ii) 3D reconstruction, which estimates camera poses and geometry from RGB images. This thesis advances both directions. On the generation side, I introduce Instant3D, which combines multi-view diffusion with feed-forward sparse-view 3D reconstruction to produce high-quality assets in 5-20 seconds. On the reconstruction side, I develop FastMap, a structure-from-motion pipeline that achieves up to 10x speedup over prior state-of-the-art by using first-order optimization with fused GPU kernels extensively, while maintaining comparable pose accuracy and downstream novel view synthesis quality.
-
-- **技术标签**: `diffusion` `foundation model`
-
-
----
-
-
-## 102. Here’s why Elon Musk lost his suit against OpenAI
+## 103. Here’s why Elon Musk lost his suit against OpenAI
 
 - **来源**: [mit_tech_review](https://www.technologyreview.com/2026/05/18/1137488/elon-musk-suit-openai-verdict/)
 
@@ -1222,7 +1236,7 @@
 ---
 
 
-## 103. SandboxAQ brings its drug discovery models to Claude — no PhD in computing required
+## 104. SandboxAQ brings its drug discovery models to Claude — no PhD in computing required
 
 - **来源**: [techcrunch_ai](https://techcrunch.com/2026/05/18/sandboxaq-brings-its-drug-discovery-models-to-claude-no-phd-in-computing-required/)
 
@@ -1234,7 +1248,7 @@
 ---
 
 
-## 104. What to expect from Google this week
+## 105. What to expect from Google this week
 
 - **来源**: [mit_tech_review](https://www.technologyreview.com/2026/05/18/1137439/what-to-expect-from-google-this-week/)
 
@@ -1246,7 +1260,7 @@
 ---
 
 
-## 105. Anthropic has acquired the dev tools startup used by OpenAI, Google, and Cloudflare
+## 106. Anthropic has acquired the dev tools startup used by OpenAI, Google, and Cloudflare
 
 - **来源**: [techcrunch_ai](https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/)
 
@@ -1258,7 +1272,7 @@
 ---
 
 
-## 106. Elon Musk has lost his lawsuit against Sam Altman and OpenAI
+## 107. Elon Musk has lost his lawsuit against Sam Altman and OpenAI
 
 - **来源**: [techcrunch_ai](https://techcrunch.com/2026/05/18/elon-musk-has-lost-his-lawsuit-against-sam-altman-and-openai/)
 
@@ -1270,7 +1284,7 @@
 ---
 
 
-## 107. Musk v. Altman proved that AI is led by the wrong people
+## 108. Musk v. Altman proved that AI is led by the wrong people
 
 - **来源**: [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/932464/musk-v-altman-proved-that-ai-is-led-by-the-wrong-people)
 
@@ -1282,7 +1296,7 @@
 ---
 
 
-## 108. All of the updates from Elon Musk and Sam Altman’s battle over OpenAI
+## 109. All of the updates from Elon Musk and Sam Altman’s battle over OpenAI
 
 - **来源**: [theverge_ai](https://www.theverge.com/tech/917225/sam-altman-elon-musk-openai-lawsuit)
 
@@ -1294,7 +1308,7 @@
 ---
 
 
-## 109. Elon Musk loses his case against Sam Altman
+## 110. Elon Musk loses his case against Sam Altman
 
 - **来源**: [theverge_ai](https://www.theverge.com/ai-artificial-intelligence/932383/jury-verdict-musk-v-altman-openai-trial)
 
@@ -1306,7 +1320,7 @@
 ---
 
 
-## 110. Inside Anduril and Meta’s quest to make smart glasses for warfare
+## 111. Inside Anduril and Meta’s quest to make smart glasses for warfare
 
 - **来源**: [mit_tech_review](https://www.technologyreview.com/2026/05/18/1137412/inside-anduril-and-metas-quest-to-make-smart-glasses-for-warfare/)
 
@@ -1318,7 +1332,7 @@
 ---
 
 
-## 111. Amazon Alexa Plus can now create AI-generated podcasts
+## 112. Amazon Alexa Plus can now create AI-generated podcasts
 
 - **来源**: [theverge_ai](https://www.theverge.com/tech/932375/amazon-alexa-plus-ai-podcasts)
 
@@ -1328,7 +1342,7 @@
 ---
 
 
-## 112. The Download: Musk v. Altman week 3, and Trump’s tech trading
+## 113. The Download: Musk v. Altman week 3, and Trump’s tech trading
 
 - **来源**: [mit_tech_review](https://www.technologyreview.com/2026/05/18/1137407/the-download-musk-altman-trial-trump-tech-trading/)
 
@@ -1338,7 +1352,7 @@
 ---
 
 
-## 113. OpenAI and Dell partner to bring Codex to hybrid and on-premise enterprise environments
+## 114. OpenAI and Dell partner to bring Codex to hybrid and on-premise enterprise environments
 
 - **来源**: [openai](https://openai.com/index/dell-codex-enterprise-partnership)
 
@@ -1350,7 +1364,7 @@
 ---
 
 
-## 114. Amazon’s new Alexa+ powered feature can generate podcast episodes
+## 115. Amazon’s new Alexa+ powered feature can generate podcast episodes
 
 - **来源**: [techcrunch_ai](https://techcrunch.com/2026/05/18/amazons-new-alexa-powered-feature-can-generate-podcast-episodes/)
 
@@ -1362,7 +1376,7 @@
 ---
 
 
-## 115. South Korea’s LetinAR is building optics behind AI glasses
+## 116. South Korea’s LetinAR is building optics behind AI glasses
 
 - **来源**: [techcrunch_ai](https://techcrunch.com/2026/05/18/south-koreas-letinar-is-building-the-optics-behind-ai-glasses/)
 
@@ -1372,7 +1386,7 @@
 ---
 
 
-## 116. The Signals That Matter – MIT Insider’s Panel
+## 117. The Signals That Matter – MIT Insider’s Panel
 
 - **来源**: [mit_tech_review](https://www.technologyreview.com/2026/05/18/1137430/the-signals-that-matter-mit-insiders-panel/)
 
@@ -1382,7 +1396,7 @@
 ---
 
 
-## 117. simonlin1212/TradingAgents-astock
+## 118. simonlin1212/TradingAgents-astock
 
 - **来源**: [github](https://github.com/simonlin1212/TradingAgents-astock)
 
@@ -1394,7 +1408,7 @@
 ---
 
 
-## 118. deepelementlab/jupyter-studio
+## 119. deepelementlab/jupyter-studio
 
 - **来源**: [github](https://github.com/deepelementlab/jupyter-studio)
 
@@ -1406,7 +1420,7 @@
 ---
 
 
-## 119. AbhishekK130804/Claude-Mythos-AI-Anthropic-App
+## 120. AbhishekK130804/Claude-Mythos-AI-Anthropic-App
 
 - **来源**: [github](https://github.com/AbhishekK130804/Claude-Mythos-AI-Anthropic-App)
 
@@ -1418,7 +1432,7 @@
 ---
 
 
-## 120. richard-kim-79/archora-skills
+## 121. richard-kim-79/archora-skills
 
 - **来源**: [github](https://github.com/richard-kim-79/archora-skills)
 
@@ -1430,7 +1444,7 @@
 ---
 
 
-## 121. prof-little-bear/cc-equity-research
+## 122. prof-little-bear/cc-equity-research
 
 - **来源**: [github](https://github.com/prof-little-bear/cc-equity-research)
 
@@ -1442,7 +1456,7 @@
 ---
 
 
-## 122. mdowis/anansi
+## 123. mdowis/anansi
 
 - **来源**: [github](https://github.com/mdowis/anansi)
 
@@ -1454,7 +1468,7 @@
 ---
 
 
-## 123. zimingttkx/QuantumFlow
+## 124. zimingttkx/QuantumFlow
 
 - **来源**: [github](https://github.com/zimingttkx/QuantumFlow)
 
@@ -1466,7 +1480,7 @@
 ---
 
 
-## 124. Siva-Chidambaram12/kalshi-trading-bot
+## 125. Siva-Chidambaram12/kalshi-trading-bot
 
 - **来源**: [github](https://github.com/Siva-Chidambaram12/kalshi-trading-bot)
 
@@ -1478,7 +1492,7 @@
 ---
 
 
-## 125. ahammadmejbah/Awesome-Datasets-Hub
+## 126. ahammadmejbah/Awesome-Datasets-Hub
 
 - **来源**: [github](https://github.com/ahammadmejbah/Awesome-Datasets-Hub)
 
@@ -1490,7 +1504,7 @@
 ---
 
 
-## 126. gonemedia/aipointer
+## 127. gonemedia/aipointer
 
 - **来源**: [github](https://github.com/gonemedia/aipointer)
 
@@ -1502,7 +1516,7 @@
 ---
 
 
-## 127. PlaceNL2026/okx-agent-trade-kit
+## 128. PlaceNL2026/okx-agent-trade-kit
 
 - **来源**: [github](https://github.com/PlaceNL2026/okx-agent-trade-kit)
 
@@ -1514,7 +1528,7 @@
 ---
 
 
-## 128. exploitbench/exploitbench
+## 129. exploitbench/exploitbench
 
 - **来源**: [github](https://github.com/exploitbench/exploitbench)
 
@@ -1526,7 +1540,7 @@
 ---
 
 
-## 129. lynote-ai/humanize-text
+## 130. lynote-ai/humanize-text
 
 - **来源**: [github](https://github.com/lynote-ai/humanize-text)
 
@@ -1538,7 +1552,7 @@
 ---
 
 
-## 130. python-telegramBot/ai-auto-trading
+## 131. python-telegramBot/ai-auto-trading
 
 - **来源**: [github](https://github.com/python-telegramBot/ai-auto-trading)
 
@@ -1550,7 +1564,7 @@
 ---
 
 
-## 131. dex-original/okx-agent-trade-kit
+## 132. dex-original/okx-agent-trade-kit
 
 - **来源**: [github](https://github.com/dex-original/okx-agent-trade-kit)
 
@@ -1562,7 +1576,7 @@
 ---
 
 
-## 132. mikesheehan54/Claude-Code-Design-AI
+## 133. mikesheehan54/Claude-Code-Design-AI
 
 - **来源**: [github](https://github.com/mikesheehan54/Claude-Code-Design-AI)
 
@@ -1574,7 +1588,7 @@
 ---
 
 
-## 133. BasZ4ll/Stable-Diffusion-WebUI
+## 134. BasZ4ll/Stable-Diffusion-WebUI
 
 - **来源**: [github](https://github.com/BasZ4ll/Stable-Diffusion-WebUI)
 
@@ -1586,7 +1600,7 @@
 ---
 
 
-## 134. yetone/native-feel-skill
+## 135. yetone/native-feel-skill
 
 - **来源**: [github](https://github.com/yetone/native-feel-skill)
 
@@ -1598,7 +1612,7 @@
 ---
 
 
-## 135. CHB-learner/PaperPilot
+## 136. CHB-learner/PaperPilot
 
 - **来源**: [github](https://github.com/CHB-learner/PaperPilot)
 
@@ -1610,7 +1624,7 @@
 ---
 
 
-## 136. kgmkm/novel2hermes_jp
+## 137. kgmkm/novel2hermes_jp
 
 - **来源**: [github](https://github.com/kgmkm/novel2hermes_jp)
 
@@ -1622,7 +1636,7 @@
 ---
 
 
-## 137. 重塑主流PC，第三代英特尔酷睿开启全民AI轻薄本时代
+## 138. 重塑主流PC，第三代英特尔酷睿开启全民AI轻薄本时代
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419585.html)
 
@@ -1632,7 +1646,7 @@
 ---
 
 
-## 138. AI水论文封一年，署名连坐！arXiv最严新规来了，陶哲轩附议
+## 139. AI水论文封一年，署名连坐！arXiv最严新规来了，陶哲轩附议
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419528.html)
 
@@ -1642,7 +1656,7 @@
 ---
 
 
-## 139. openJiuwen社区开源新招：重磅发布JiuwenSwarm，拉开群体智能“养蜂”序幕
+## 140. openJiuwen社区开源新招：重磅发布JiuwenSwarm，拉开群体智能“养蜂”序幕
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419515.html)
 
@@ -1652,7 +1666,7 @@
 ---
 
 
-## 140. 华为“养”出半个具身智能创业圈
+## 141. 华为“养”出半个具身智能创业圈
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419414.html)
 
@@ -1662,7 +1676,7 @@
 ---
 
 
-## 141. 上交x创智x瑞金联合发布CX-Mind：胸片诊断进入“可验证推理”时代
+## 142. 上交x创智x瑞金联合发布CX-Mind：胸片诊断进入“可验证推理”时代
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419396.html)
 
@@ -1672,7 +1686,7 @@
 ---
 
 
-## 142. 8B模型做生物实验：实验步骤顺序不乱、剂量无幻觉｜ICLR 2026
+## 143. 8B模型做生物实验：实验步骤顺序不乱、剂量无幻觉｜ICLR 2026
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419386.html)
 
@@ -1684,7 +1698,7 @@
 ---
 
 
-## 143. 信通院&清华提出FedRE：用「纠缠」搞定联邦学习三难困境 | CVPR 26
+## 144. 信通院&清华提出FedRE：用「纠缠」搞定联邦学习三难困境 | CVPR 26
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419373.html)
 
@@ -1694,7 +1708,7 @@
 ---
 
 
-## 144. 黄仁勋北京必吃榜我们都尝了！后海酒吧老板：他答应以后每年来一次
+## 145. 黄仁勋北京必吃榜我们都尝了！后海酒吧老板：他答应以后每年来一次
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419278.html)
 
@@ -1704,7 +1718,7 @@
 ---
 
 
-## 145. LeCun炮轰Hinton：他认可LLM就是想摆烂退休了！
+## 146. LeCun炮轰Hinton：他认可LLM就是想摆烂退休了！
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419272.html)
 
@@ -1716,7 +1730,7 @@
 ---
 
 
-## 146. 30万奖金池，这道汉语方言对话题等你来解丨第十一届信也科技杯全球AI算法大赛
+## 147. 30万奖金池，这道汉语方言对话题等你来解丨第十一届信也科技杯全球AI算法大赛
 
 - **来源**: [qbitai](https://www.qbitai.com/2026/05/419256.html)
 
@@ -1726,7 +1740,7 @@
 ---
 
 
-## 147. Simple Approximation and Derivative Free Inference-Time Scaling for Diffusion Models via Sequential Monte Carlo on Path Measures
+## 148. Simple Approximation and Derivative Free Inference-Time Scaling for Diffusion Models via Sequential Monte Carlo on Path Measures
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17850v1)
 
@@ -1738,7 +1752,7 @@
 ---
 
 
-## 148. Feature Learning in Linear-Width Two-Layer Networks: Two vs. One Step of Gradient Descent
+## 149. Feature Learning in Linear-Width Two-Layer Networks: Two vs. One Step of Gradient Descent
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17767v1)
 
@@ -1750,7 +1764,7 @@
 ---
 
 
-## 149. On efficient robust regression with subquadratic samples
+## 150. On efficient robust regression with subquadratic samples
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.18042v1)
 
@@ -1760,7 +1774,7 @@
 ---
 
 
-## 150. A data-driven Fourier-mixture neural-network method for density estimation
+## 151. A data-driven Fourier-mixture neural-network method for density estimation
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.18019v1)
 
@@ -1772,7 +1786,7 @@
 ---
 
 
-## 151. From Saddle Points Toward Global Minima: A Newton-Type Method on Wasserstein Space
+## 152. From Saddle Points Toward Global Minima: A Newton-Type Method on Wasserstein Space
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17963v1)
 
@@ -1782,7 +1796,7 @@
 ---
 
 
-## 152. Conditional Predictive Inference for General Structured Data with Group Symmetries
+## 153. Conditional Predictive Inference for General Structured Data with Group Symmetries
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17934v1)
 
@@ -1794,7 +1808,7 @@
 ---
 
 
-## 153. A Unified Framework for Data-Free One-Step Sampling via Wasserstein Gradient Flows
+## 154. A Unified Framework for Data-Free One-Step Sampling via Wasserstein Gradient Flows
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17808v1)
 
@@ -1806,23 +1820,13 @@
 ---
 
 
-## 154. Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models
+## 155. Self-Distillation is Optimal Among Spectral Shrinkage Estimators in Spiked Covariance Models
 
 - **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17778v1)
 
 - **摘要**: Self-distillation has emerged as a promising technique for improving model performance in modern machine learning systems. We develop the statistical foundations of self-distillation in spiked covariance models, by introducing and analyzing a broad class of estimators, namely spectral shrinkage estimators. We establish that for spiked covariance matrices with $s$ spikes, $s$-step self-distillation achieves optimal performance among spectral shrinkage estimators, outperforming well-known estimators in statistics and machine learning. Moreover, we show that $s$ steps are necessary for optimality: any $(s-k)$-step distilled estimator is strictly suboptimal for $1 \leq k \leq s$. For the special subclass of isotropic covariances, we show that optimally tuned Ridge regression performs best among spectral shrinkage estimators. We also study a federated approach where multiple data centers share spectral shrinkage estimators and a common server seeks to aggregate them to achieve optimal performance. In this case, we find that the best local rule again takes the form of self-distillation, though it differs from the optimal rule when data are hosted centrally on a single server. Together, our results elucidate why self-distillation improves predictive performance and provide a broader statistical framework connecting it with classical shrinkage-based methods.
 
 - **技术标签**: `distillation`
-
-
----
-
-
-## 155. Comparing Two Categorical Gini Correlations with Applications to Classification Problems
-
-- **来源**: [arxiv_ml](https://arxiv.org/abs/2605.17763v1)
-
-- **摘要**: This article proposes an inferential framework for comparing predictor importance in classification problems with categorical response variables. The approach is based on the categorical Gini correlation (CGC) proposed by Dang et al. (2020), a measure of dependence between numerical predictors and categorical outcomes. Predictor importance is evaluated by testing differences in CGCs across competing predictor groups. The proposed methodology accommodates predictors of arbitrary and unequal dimensions and allows for dependence between predictor groups. Asymptotic normality of the test statistic is established under both the null and alternative hypotheses, and the resulting test is shown to be consistent. In addition to deriving the asymptotic distribution, a nonparametric bootstrap procedure is developed as an alternative approach to inference. Simulation studies, along with applications to breast cancer and human activity recognition datasets, demonstrate the effectiveness of the proposed framework.
 
 
 ---
@@ -1956,7 +1960,7 @@
   <p>公司起步初期，SportVision选择从羽毛球场景切入进行关键产品验证，首款产品“好球哇”是一套羽毛球AI运动相机方案。设备可实时采集球场画面，通过视觉算法自动识别并捕捉用户的运动高光时刻，为普通运动爱好者、专业运动员及赛事场景，提供高光集锦、赛事直播、运动数据分析等一体化服务。</p>
   <p>这套系统落地了全国数十家头部羽毛球馆，并获得林丹、王睁茗、龚睿那等世界冠军在内的多位种子用户支持。在赛事侧，该系统也服务了全运会残特奥会、粤港澳大湾区羽毛球比赛、深圳杯等多场关键赛事。</p>
   <p>但它真正的价值，远非硬件本身，而是持续运行中沉淀的海量运动数据。</p>
-  <p>在拍摄过程中，SportVision自研算法能实时分析并智能预测运动轨迹，根据比赛进程自动调整摄像角度，对复杂的多人运动场景进行针对性学习优化。从世界冠军到刚入门的爱好者，从专业教练的指导语料到普通用户的练习习惯，场馆设备每天运行十几个小时，能收集到各类各样的泛化数据。每一场球、每一次挥拍、每一个得分瞬间，都在被系统记录、拆解、分析。</p>
+  <p>在拍摄过程中，SportVision自研算法能实时分析并智能预测运动轨迹，根据比赛进程自动调整摄像角度，对复杂的多人运动场景进行针对性学习优化。从世界冠军到刚入门的爱好者，从专业教练的指导语料到普通用户的练习习惯，场馆设备每天运行十几个小时，能收集到各类各样的泛化数据。每一场球、每一次挥拍、每一个得分瞬间，都在被系统记��、拆解、分析。</p>
   <p>这是一座难以被发球机或运动相机采集到的数据矿。</p>
   <p>运动学习的基本机制分为三个阶段：认知阶段（通过视觉掌握动作要领）、联想阶段（在反复练习中形成神经通路）、自主阶段（动作固化成为肌肉记忆）。其中联想阶段的及时反馈最为关键：动作做对还是做错需要在几秒内被确认，否则错误动作就会被“练熟”。</p>
   <p>陈楷夫向硬氪指出，“此前，多数运动AI解决方案仍停留在‘事后分析’阶段，用户完成运动后上传视频、系统给出复盘报告。但这种模式错过了最佳纠正窗口。”</p>
@@ -2194,7 +2198,7 @@
   <p><strong>风水双冷复合散热系统</strong>：针对第五代骁龙8至尊领先版的发热特性，红魔在散热上引入了原本常见于服务器端的复合方案。手机将【驭风4.0】贯穿式主动散热风扇<strong>与</strong>脉动水冷引擎<strong>相结合，辅以复合液态金属3.0和4D冰阶VC。风扇与整机均通过了</strong>IPX8级防水认证，在提升主动散热效率的同时，规避了由于进水导致元器件损坏的风险。在散热系统运转时，后盖的蓝色轨道圈内，蓝白相间的液冷介质会随之一起转动。仪式感拉满！</p>
   <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260518/v2_78b07dd63a31408eb175d301d350f91d@517825446_oswg8006886oswg5888oswg4416_img_jpg?x-oss-process=image/quality,q_80/format,jpg/interlace,1" /></p>
   <p class="img-desc">产品图片</p>
-  <p><strong>独立显存与能效调度</strong>：在架构协作上，红魔自研的<strong>红芯R4电竞芯片</strong>与高通联合打造了独立的高速显存。在图形高渲染场景下，此设计可减少高频访问系统内存的次数，从而降低总功耗。结合<strong>CUBE擎天游戏引擎3.0</strong>的AI感知调校，系统能够精细化调配算力，平衡了高帧率表现与续航消耗。</p>
+  <p><strong>独立显存与能效调度</strong>：在架构协作上，红魔自研的<strong>红芯R4电竞芯片</strong>与高通联合打造了独立的高速显存。在图形高渲染场景���，此设计可减少高频访问系统内存的次数，从而降低总功耗。结合<strong>CUBE擎天游戏引擎3.0</strong>的AI感知调校，系统能够精细化调配算力，平衡了高帧率表现与续航消耗。</p>
   <h3><strong>三、 使用体验：悟空屏2.0、Steam直连与续航评估</strong></h3>
   <p>在日常交互和实际游戏运行中，硬件的堆叠最终转化为了多场景的体验。</p>
   <p><strong>悟空屏2.0的视觉完整性</strong>：正面配备的<strong>悟空屏2.0</strong>基于京东方X10全新屏下发光材料，实现了全无挖孔的视觉体验。屏幕黑边控制在<strong>1.25mm</strong>，屏占比达到<strong>95.3%</strong>，支持144Hz刷新率。由于没有刘海或挖孔遮挡，在全局视野和视频播放时拥有更纯粹的画面呈现。同时，屏幕集成了全屏3D超声波指纹解锁，提升了暗光或湿手状态下的解锁盲操率。</p>
@@ -2370,7 +2374,7 @@
   <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260518/v2_cae2267b39614b99bce2d93ed7a61e63@6381723_oswg207150oswg1080oswg2041_img_jpeg?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
   <p><strong>冯雷</strong></p>
   <p><strong>MarsWave CEO</strong></p>
-  <p>冯雷（Orange），MarsWave CEO，MarsWave先后推出了AI播客Listenhub、Agent操作系统ColaOS等热门AI产品。冯雷曾任MiniMax海螺AI产品负责人，在此之前，曾任职于BOSS直��、兰亭集势及三星电子，拥有超过10年产品经验。同时，他也是AI自媒体「AGENT橘/Orange AI」创作者。&nbsp;</p>
+  <p>冯雷（Orange），MarsWave CEO，MarsWave先后推出了AI播客Listenhub、Agent操作系统ColaOS等热门AI产品。冯雷曾任MiniMax海螺AI产品负责人，在此之前，曾任职于BOSS直聘、兰亭集势及三星电子，拥有超过10年产品经验。同时，他也是AI自媒体「AGENT橘/Orange AI」创作者。&nbsp;</p>
   <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260518/v2_19b8e827eb034484a25d394702fabbd8@6381723_oswg223220oswg1080oswg2041_img_jpeg?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
   <p><strong>张昊阳</strong></p>
   <p><strong>EvoMap创始人</strong></p>
@@ -2410,7 +2414,7 @@
   <p><strong>本轮领投方高榕创投项目负责人表示：作为卫星互联网、太空算力、6G等战略产业的核心底层基建，商业航天正迈向从研发验证到规模化商业落地的2.0时代，大运力、可复用火箭成为行业发展刚需。宇石空间是国内最早全面对标SpaceX的商业火箭公司，聚焦四米级直径中大型可复用液体火箭研发，团队始终锚定商业航天赛道的技术制高点。坚定技术终局路线的同时，宇石团队在唐文博士的带领下展现出势如破竹的战斗力，工程化落地进度亮眼。我们期待见证宇石在不远的未来缔造更多行业里程碑。</strong></p>
   <p><strong>本轮领投方昆仑资本表示：中国的商业航天产业已进入到新的发展阶段，市场对“低成本、高频次、可复用、大运力”的火箭提出了明确需求。同时，随着太空算力、太空制造、深空经济等新兴产业的快速崛起，大型可复用运载火箭将成为未来空间基础设施建设的重要能力。宇石空间从创立之初，就明确选择了"液氧甲烷 + 不锈钢箭体 + 筷子夹回收"这一产品定义和技术路线，并在人才吸引、工程配套等维度坚决投入，快速的实现研发里程碑，体现了团队战略取舍上的清醒判断和极强目标感。</strong></p>
   <p><strong>昆仑资本专注硬科技方向的投资，重视企业清晰的技术路线、可验证的工程能力，以及创业团队的使命感、目标感和持续的执行力。此次投资宇石空间，正是基于我们对中国商业航天长期发展前景的看好，以及对唐文博士带领下的团队的认可。昆仑资本愿与宇石空间同行，共同推动中国大型可复用运载火箭从追赶到引领。</strong></p>
-  <p><strong>建发新兴投资团队表示：我们核心看好商业航天 2.0 时代的产业变革机遇与企业长期成长价值。当前行业已迈入规模化、低成本商业化新阶段，四米级直径的大运力可复用火箭成为产业发展刚需，科创板第五套上市标准明确了硬科技航天企业的上市准入规则，宇石空间主打中大型可复用液体火箭路线，完全契合监管标准与行业发展主流方向。团队始终秉持求真务实的做事风格，埋头深耕工程化研制，在同批次商业航天新生代企业中，整体工程化落地进度稳居行业前列，成长确定性极强。建发新兴期待宇石团队在唐文博士的带领下，保持惊人的成长速度和强大的执行力，坚定走终局路线，成为行业内第二家完成4米以上直径首飞的火箭企业。</strong></p>
+  <p><strong>建发新兴投资团队表示：我们核心看好商业航天 2.0 时代的产业变革机遇与企业长期成长价值。当前行业已迈入规模化、低成本商业化新阶段，四米级直径的大运力可复用火箭成为产业发展刚需，科创板第五套上市标准明确了硬科技航天企业的上市准入规则，宇石空间主打中大型可复用液体火箭路线，完全契合监管标准与行业发展主流方向。团队始终秉持求真务实的做事风格，埋头深耕工程化研制，在同批次商业航天新生代企业中，整体工程化落地��度稳居行业前列，成长确定性极强。建发新兴期待宇石团队在唐文博士的带领下，保持惊人的成长速度和强大的执行力，坚定走终局路线，成为行业内第二家完成4米以上直径首飞的火箭企业。</strong></p>
   <p><strong>东证资本表示：东证资本坚定看好商业航空航天赛道，宇石空间直接选择“液氧甲烷+不锈钢”的终局方案，瞄准4米以上级别可复用、大运力的行业痛点，团队配置扎实、包容开放，在动力、回收、工程落地等多方面行业领先。商业航天已经进入了“应用落地”的淘汰赛阶段，宇石空间掌握不锈钢火箭的核心技术、拥有产业资本背书、未来商业模式清晰开放，我们相信在商业航天竞速的下半场，公司能实现从火箭验证到商业化发射的跨越，重塑商业航天的成本和效率标准，成为国内商业航天的头部力量。</strong></p>
   <p><strong>蓝湖资本表示：宇石空间是商业航天 2.0 时代的典型代表，从立项起就直接对标 “不锈钢 + 液氧甲烷 + 可回收” 的行业终局路线，彻底跳过 1.0 时代固体、小型液体火箭的历史包袱，无无效投入的沉没成本。团队无路径依赖，所有资源聚焦中大型可复用火箭研发，高效匹配市场刚需，具备显著后发优势。</strong></p>
   <p><strong>弘晖基金表示：弘晖基金始终以发掘科技恒久价值、布局硬核底层技术为投资底色，此次投资宇石空间，是弘晖在创新科技赛道又一个重要布局，我们将全力支持唐博士及团队加速实现火箭首飞与规模化运营，助力中国商业航天可复用运载技术实现突破。</strong></p>

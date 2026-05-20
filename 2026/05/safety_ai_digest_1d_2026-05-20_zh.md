@@ -1,122 +1,117 @@
 # AI 日报 [AI 安全] - 2026-05-20
 
 
-# AI安全研究每日主题综述：2026年5月20日
+### **2026年5月20日 AI安全专题综述**
 
-## Highlights
+#### **Highlights**
 
-今日（2026年5月20日）的AI安全研究领域呈现出深度与广度并进的态势。学术界在几个关键方向取得了显著突破：**首先，针对检索增强生成系统的安全防御出现新思路**，BiRD机制通过引入双向排名分析，试图从根本上提升RAG系统对抗投毒攻击的鲁棒性。**其次，扩散模型的对齐技术获得改进**，Stitched Value Model提出一种将策略网络与价值网络“缝合”的巧妙方法，旨在提高对齐效率和稳定性。**第三，AI Agent的安全性问题被提升至系统工程的层面进行审视**，多位研究者共同强调，必须将驱动Agent的模型视为不可信组件，通过系统级设计来强制执行安全不变量。与此同时，针对多模态模型（包括音频、视觉和具身智能体）的新型攻击与防御基准测试也在持续构建中，反映出攻击面的快速扩大与防御评估的迫切需求。
+今日的学术进展凸显了AI安全领域从单一模型防护向复杂系统治理的范式转移。首先，在**Agent安全**方向，多项研究共同指出，当前主流的提升模型鲁棒性的方法不足以应对自主智能体引入的系统性风险，必须采用系统安全的思维框架。其次，在**后门攻防**领域，针对快速植入攻击的轻量级检测方法取得突破，同时攻击面也扩展到了统一多模态模型和新型扩散语言模型。最后，在**多模态对齐与防御**方面，研究者开始揭示利用多图像输入、自然语言指令等更隐蔽的攻击路径，并提出了基于结构分析的新防御范式。产业层面，谷歌I/O大会全面展示了其AI代理化布局，引发了关于信任、隐私和安全边界的广泛讨论。
 
 ---
 
-## 一、 对抗攻击与鲁棒性：从内容防御到结构洞察
+#### **一、 Agent安全与治理：从模型漏洞到系统风险**
 
-今日的研究表明，对抗攻击与防御的范式正在从单一内容分析向更深层的结构特征和系统交互演化。
+随着大语言模型演变为具备规划、记忆和工具使用能力的自主Agent，其安全问题已超越传统提示注入的范畴，演变为复杂的系统性风险。**《Agent Security is a Systems Problem》** 一文明确主张，应将驱动Agent的AI模型视为不可信组件，并在系统层面强制实施安全不变量。该文指出，单纯增强模型鲁棒性是不充分的，必须借鉴操作系统、网络安全和形式化方法中的技术来构建防护层。这一立场得到了**《OEP: Poisoning Self-Evolving LLM Agents via Locally Correct but Non-Transferable Experiences》** 的经验支持。该研究发现，通过精心构造的“局部正确但不可迁移”的经验来毒化自进化Agent的记忆，可以诱导其在反思过程中产生有害的泛化行为，而这种攻击绕过了现有安全过滤器。这深刻揭示了Agent自主学习机制中一个先前未受重视的脆弱点。
 
-在检索增强生成安全方面，**《BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation》** 对现有防御方法依赖语义内容分析的局限性提出了批评。作者发现，被投毒的文档与良性文档在排名结构上存在双向可区分的模式。基于此，他们提出了一种双向排名防御机制，其创新之处在于超越了文档本身的内容相关性，转而利用检索上下文中至关重要的排序信息作为防御判据。这一思路可能为设计计算开销更低、对强投毒攻击更鲁棒的RAG安全系统开辟新路径。
+针对动态交互场景，**《Surviving the Unseen: Predictive Defense for Novel Multi-Turn Multimodal Attacks》** 提出了一种预测性防御框架。该框架意识到，攻击者会通过多轮对话、跨模态扰动将恶意意图分散在纵向交互轨迹中，而静态的、仅评估单轮输入的防御机制会失效。同时，**《RoboJailBench: Benchmarking Adversarial Attacks and Defenses in Embodied Robotic Agents》** 发布了首个针对具身机器人的对抗攻防基准，其核心创新在于强调评估安全与遵循良性指令能力之间的权衡，而非仅仅追求攻击成功率，这为衡量真实场景下的安全性能提供了更全面的视角。
 
-针对快速发展的具身智能体领域，**《RoboJailBench: Benchmarking Adversarial Attacks and Defenses in Embodied Robotic Agents》** 指出，当前对具身视觉-语言模型的攻击与防御评估存在数据集临时化、评估指标片面（仅关注攻击成功率）等问题。该工作构建了第一个系统性的基准测试，旨在全面评估在安全命令遵循与恶意指令拒绝之间的权衡。这对于推动安全可信的具身AI发展至关重要，因为机器人系统的安全失误可能带来物理世界的严重后果。
+#### **二、 后门攻击与检测：速度、广度与新范式**
 
-此外，**《Acoustic Interference: A New Paradigm Weaponizing Acoustic Latent Semantic for Universal Jailbreak against Large Audio Language Models》** 揭示了一种新颖的攻击范式。作者发现，大型音频语言模型的安全对齐可以被特定的声学潜在语义单独干扰，而无需注入显式的恶意内容。这挑战了现有将音频仅视为恶意内容载体的攻击假设，表明模型的多模态对齐可能存在深层次的、模态特异性的脆弱点，为安全研究者提出了新的挑战。
+后门攻击与检测的“军备竞赛”仍在加速，并向新的模型架构蔓延。在防御端，应对快速攻击的轻量级检测器成为焦点。**《Lightweight and Fast Backdoor Model Detection》** 提出了DFBScanner，旨在解决后门可在毫秒级植入而现有检测需要分钟或小时级处理的“速度差”问题。无独有偶，**《Fast and Lightweight Backdoor Detection via Head Random Probing》** 提出了HTell，其核心思想是通过探测模型预测头部的统一表征来检测后门，而非逆向工程复杂的触发模式，从而实现了快速、无需干净数据的检测。这些方法在效率和实用性上相比传统方法有显著提升。
 
-## 二、 模型对齐与可解释性：从价值函数到内部机制
+攻击面则在持续扩大。**《Token by Token, Compromised: Backdoor Vulnerabilities in Unified Autoregressive Models》** 首次证明，统一自回归模型因其共享的参数和多模态词表，可能遭受“跨模态后门攻击”，即一个触发器能同时影响文本和图像输出，这为多模态模型的安全部署敲响了警钟。**《Backdooring Masked Diffusion Language Models》** 则将后门研究的触角伸向了新兴的掩码扩散语言模型，提出了SHADOWMASK攻击，证明了这一新范式同样面临严重的训练时安全威胁。在联邦学习场景下，**《Detecting and Mitigating Backdoor Attacks in OTA-FL Systems》** 针对空中联邦学习因信道叠加特性无法区分个体更新的问题，提出了一种两阶段鲁棒聚合方案，以应对非独立同分布数据下恶意更新与良性数据漂移难以区分的挑战。
 
-模型对齐与可解释性研究今日侧重于优化对齐效率和深入理解模型内部决策机制。
+#### **三、 多模态对齐与防御：从单点突破到结构分析**
 
-在生成模型的对齐方面，**《Stitched Value Model for Diffusion Alignment》** 针对扩散模型对齐过程中价值函数估计偏差与计算成本的权衡问题，提出了一种创新的“缝合”技巧。该方法将独立训练的策略网络与价值网络在去噪步骤上进行缝合，以期在推理时获得更准确的价值评估。作者声称，这种方法旨在结合Tweedie估计的高效性与蒙特卡洛估计的准确性，为扩散模型更高效地对齐人类偏好（如美学、保真度）提供了理论上的改进方案。
+针对多模态大模型（MLLM）的越狱攻击正变得更为复杂和隐蔽。**《DMN: A Compositional Framework for Jailbreaking Multimodal LLMs with Multi-Image Inputs》** 揭示了多图像输入这一常被忽视的攻击面，攻击者可以通过将有害请求分布到多张图像中，或利用额外的视觉推理任务来分散模型注意力，从而突破安全对齐。**《DarkLLM: Learning Language-Driven Adversarial Attacks with Large Language Models》** 则另辟蹊径，训练一个LLM将自然语言攻击指令转换为潜空间的对抗向量，使得攻击具备了可扩展性和灵活性，不再局限于单一预设目标。
 
-可解释性研究则更注重实际应用与内部机制分析。**《XAI FL-IDS: A Federated Learning and SHAP-Based Explainable Framework for Distributed Intrusion Detection Systems》** 将可解释AI工具SHAP与联邦学习相结合，用于分布式入侵检测系统。其价值在于解决了传统中心化检测的隐私问题和模型不可解释性双重局限，使得分布式网络中的安全决策能够被理解，从而增强系统可信度。另一项机制可解释性研究**《Where Does Authorship Signal Emerge in Encoder-Based Language Models?》** 发现，作者身份风格特征（如词长、标点密度）在编码器的所有层中都同样可得，性能差异主要源于评分机制（如均值池化 vs. 最后一个token）如何整合信号。这为理解模型内部信息整合与任务特化提供了精细的见解。
+防御方面，研究开始深入到底层几何结构。**《On the Geometric Limits of Transformer Defenses against Obfuscation Attacks》** 指出了一个关键矛盾：高检测性能并不等同于表征鲁棒性。研究发现，经过多算子混淆的对抗提示可以部分“坍缩”到干净提示的嵌入流形上（即“潜在嵌入坍缩”），从而在语义层面欺骗分类器。这提示防御评估应超越分类准确率，关注模型内部表征的稳定性。**《BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation》** 为RAG系统的安全提供了新思路，它不再仅仅分析文档内容的语义相关性，而是通过建模文档在检索排名中的双向行为来识别中毒文档，因为恶意文档在向前后文检索时会表现出异常的排名不一致性。
 
-## 三、 隐私保护与联邦学习：理论保证与实际挑战
+#### **四、 隐私保护与联邦学习：创新架构与可信计算**
 
-隐私保护研究今日的工作凸显了理论隐私保证在实际复杂场景下可能面临的挑战，以及将治理因素融入学习过程的新思路。
+隐私计算技术继续在边缘场景和创新架构中深化。**《XAI FL-IDS》** 将联邦学习与SHAP可解释性结合，用于构建分布式入侵检测系统，旨在同时解决数据隐私和模型决策不透明两大痛点。**《Towards Family-Grouped Hierarchical Federated Learning on Sub-5KB Models》** 针对超低功耗可穿戴设备进行隐私保护的心电监测，提出了一种三层架构的联邦学习方案，展示了在极严格资源约束下实现隐私保护协同训练的可行性。
 
-**《Auditing Privacy in Multi-Tenant RAG under Account Collusion》** 对多租户RAG服务声称的每账户差分隐私保证提出了重要质疑。作者分析指出，当同一租户下的多个账户合谋时，根据DP组合定理，联合隐私泄露会以速率 $\Theta(\sqrt{k} \cdot \varepsilon_{\text{acc}})$ 恶化，这在实际的“同租户”场景下是不可避免的。这项工作进行了一次严格的“隐私审计”，揭示了商业化AI服务中隐私声明可能存在的边界漏洞，对于构建更诚实的隐私保障体系具有警示意义。
+在可信计算与隐私的交叉领域，**《The Privacy Subsidy in Glosten-Milgrom》** 从信息论角度为隐私机制（如对交易方向信号进行二进制翻转）建立了经济学模型，量化了隐私保护对市场价差和福利的影响。**《MultiBallot: Verifiable and privacy-preserving E-Collecting in the Swiss setting》** 则设计了一个针对瑞士电子签名收集的安全协议，在不依赖匿名信道的前提下，实现了参与隐私和可验证性，为电子政务中的隐私保护提供了具体方案。
 
-在联邦学习领域，**《Federated Naive Bayes with Real Mixture of Gaussians and Institutional Governance Regularization for Network Intrusion Detection》** 提出了一个新颖的观点：参与联邦学习的机构应被区别对待。作者将来自ISACA CRISC框架的治理指标（如控制成熟度）作为正则化项引入联邦朴素贝叶斯模型，使得拥有成熟安全控制的机构对全局模型有更大影响。这种“治理正则化”方法尝试在去中心化学习中融入现实世界的组织信任差异，比简单的联邦平均更具现实合理性，尽管其实际效果仍有待验证。
+#### **五、 安全评估基准与可解释性**
 
-## 四、 安全评估基准：覆盖新模态与复杂场景
+全面、可靠的安全评估基准是推动领域进步的基石。除了前文提到的 **《RoboJailBench》** ，**《LLMEval-Logic: A Solver-Verified Chinese Benchmark for Logical Reasoning of LLMs with Adversarial Hardening》** 发布了一个基于真实情境、经过对抗性强化的中文逻辑推理基准，以应对现有基准被前沿模型迅速饱和的问题。**《MixRea》** 基于“非注意盲视”理论，设计了评估LLM在显式任务指令下能否关注到隐含重要上下文线索的基准，揭示了模型与人类注意力模式的差异。
 
-随着多模态生成和复杂交互场景的爆发，构建全面、可靠的评估基准成为紧迫任务。
+可解释性研究在多个层面展开。**《Exploring and Developing a Pre-Model Safeguard with Draft Models》** 提出了一种“预模型防护”策略，即在调用目标大模型前，先用一个轻量的草稿模型对提示进行安全审计，试图在安全误报和计算成本之间找到平衡。**《CLIF: Concept-Level Influence Functions for Transparent Bottleneck Models》** 将影响函数的应用从样本级扩展到概念级，增强了NLP模型在医学诊断等高风险领域的可解释性。**《Mechanisms of Object Localization in Vision-Language Models》** 通过机制可解释性工具，探究了视觉语言模型中对象定位的驱动机制，为理解模型工作原理提供了新见解。
 
-**《MSAVBench: Towards Comprehensive and Reliable Evaluation of Multi-Shot Audio-Video Generation》** 直指当前评估多镜头音视频生成模型时存在的基准范围狭窄、数据多样性不足、评估流程僵化等问题。该基准首次系统覆盖视频、音频、叙事连贯性和时序同步等多个维度，并提出了自适应混合评估框架，旨在为下一代多媒体生成模型的安全性与质量评估提供更全面的标尺。
+#### **六、 产业动态与政策启示**
 
-在生成内容的安全检测方面，**《Artifact-Bench: Evaluating MLLMs on Detecting and Assessing the Artifacts of AI-Generated Videos》** 关注的是多模态大语言模型感知和推理AI生成视频中伪影（如时间不一致、结构扭曲）的能力。该基准对于建立可靠的内容安全审核工具、识别虚假或有害视频内容具有直接应用价值，填补了现有评估中关于“诊断性推理”的空白。
+谷歌在I/O 2026大会上全面展示了其AI代理化战略，发布了Gemini 3.5系列模型、Gemini Spark 24/7代理助手，并将AI深度集成到搜索、购物、邮件等核心产品中。这种激进的产品化路径，在提升用户便利的同时，也必然将数据隐私、Agent行为可控性等安全问题推向更广阔的公众视野。国内方面，DeepSeek就用户反馈的隐私泄露疑虑发布了技术说明，将其归因于特殊字符触发的模型幻觉，而非真正的安全事件，这凸显了用户对模型行为确定性和隐私安全的高度关切。OpenAI宣布加入C2PA内容来源标准并集成Google的SynthID，是行业在AI生成内容溯源和透明度方面的积极进展。Anthropic的Pre-training团队引入了知名研究员Andrej Karpathy，预示着前沿基础模型研发的人才竞争仍在继续。
 
-## 五、 Agent安全与治理：系统视角与预测防御
+#### **Looking Forward**
 
-AI Agent的安全性是今日最受关注的跨领域主题之一，多篇论文从不同角度强化了“Agent安全是一个
+今日的文献揭示了若干关键的未解问题：第一，**系统安全范式的可行性**：将Agent安全视为系统问题后，如何设计具体、可形式化验证的安全架构，以兼容AI模型的快速迭代？第二，**后门检测的根本局限**：轻量级检测器能否应对未来更自适应、更不可见的攻击模式，其安全性保证是否存在理论上限？第三，**多模态对齐的失衡**：在单模态上已捉襟见肘的对齐技术，如何有效扩展到输入输出空间呈指数增长的多模态与具身场景，并平衡安全、有用性和泛化能力？第四，**隐私保护的共谋威胁**：在联邦学习和多方计算中，如何设计机制来应对参与者之间日益复杂的合谋攻击？这些问题的探索，将继续定义下一代AI系统的安全边界。
 
 ---
 
 
 ## 参考来源
 
-- **XAI FL-IDS: A Federated Learning and SHAP-Based Explainable Framework for Distributed Intrusion Detection Systems** — [arxiv_cr](https://arxiv.org/abs/2605.19448v1)
-- **BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation** — [arxiv_cr](https://arxiv.org/abs/2605.20123v1)
+- **XAI FL-IDS: A Federated Learning and SHAP-Based Explainable Framework for Distributed Intrusion Detection Systems** — [arxiv_cr](https://arxiv.org/abs/2605.19448)
+- **Lightweight and Fast Backdoor Model Detection** — [arxiv_cr](https://arxiv.org/abs/2605.18907)
+- **RoboJailBench: Benchmarking Adversarial Attacks and Defenses in Embodied Robotic Agents** — [arxiv_cr](https://arxiv.org/abs/2605.19328)
+- **BiRD: A Bidirectional Ranking Defense Mechanism for Retrieval Augmented Generation** — [arxiv_cr](https://arxiv.org/abs/2605.20123)
+- **Towards Family-Grouped Hierarchical Federated Learning on Sub-5KB Models: A Feasibility Study of Privacy-Preserving ECG Monitoring for Ultra-Resource-Constrained Wearables** — [arxiv_cr](https://arxiv.org/abs/2605.18862)
 - **Smooth Partial Lotteries for Stable Randomized Selection** — [arxiv_lg](https://arxiv.org/abs/2605.20069v1)
-- **RoboJailBench: Benchmarking Adversarial Attacks and Defenses in Embodied Robotic Agents** — [arxiv_cr](https://arxiv.org/abs/2605.19328v1)
-- **Acoustic Interference: A New Paradigm Weaponizing Acoustic Latent Semantic for Universal Jailbreak against Large Audio Language Models** — [arxiv_cr](https://arxiv.org/abs/2605.18168v1)
+- **Decentralized autonomous organization and blockchain-based incentivization framework for community-based facilities management** — [arxiv_cr](https://arxiv.org/abs/2605.18773)
+- **Fast and Lightweight Backdoor Detection via Head Random Probing** — [arxiv_cr](https://arxiv.org/abs/2605.18908)
+- **DMN: A Compositional Framework for Jailbreaking Multimodal LLMs with Multi-Image Inputs** — [arxiv_cr](https://arxiv.org/abs/2605.18915)
+- **OEP: Poisoning Self-Evolving LLM Agents via Locally Correct but Non-Transferable Experiences** — [arxiv_cr](https://arxiv.org/abs/2605.18930)
+- **Surviving the Unseen: Predictive Defense for Novel Multi-Turn Multimodal Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.18988)
+- **Agent Security is a Systems Problem** — [arxiv_cr](https://arxiv.org/abs/2605.18991)
+- **Be Kind, Rewrite: Benign Projections via Rewriting Defend Against LLM Data Poisoning Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.19147)
+- **On the Geometric Limits of Transformer Defenses against Obfuscation Attacks: Latent Embedding Collapse & Performance Robustness Gap** — [arxiv_cr](https://arxiv.org/abs/2605.19159)
+- **Token by Token, Compromised: Backdoor Vulnerabilities in Unified Autoregressive Models** — [arxiv_cr](https://arxiv.org/abs/2605.19227)
+- **Detecting and Mitigating Backdoor Attacks in OTA-FL Systems: A Two-Stage Robust Aggregation Scheme** — [arxiv_cr](https://arxiv.org/abs/2605.19253)
+- **MultiBallot: Verifiable and privacy-preserving E-Collecting in the Swiss setting** — [arxiv_cr](https://arxiv.org/abs/2605.19312)
+- **Exploring and Developing a Pre-Model Safeguard with Draft Models** — [arxiv_cr](https://arxiv.org/abs/2605.19321)
+- **Backdooring Masked Diffusion Language Models** — [arxiv_cr](https://arxiv.org/abs/2605.19262)
+- **The Privacy Subsidy in Glosten-Milgrom: Bid-Ask Spread and Welfare under Flip-Noise Direction Observation** — [arxiv_cr](https://arxiv.org/abs/2605.19742)
 - **MSAVBench: Towards Comprehensive and Reliable Evaluation of Multi-Shot Audio-Video Generation** — [arxiv_cv](https://arxiv.org/abs/2605.20183v1)
-- **Towards Fine-Grained Robustness: Attention-Guided Test-Time Prompt Tuning for Vision-Language Models** — [arxiv_cv](https://arxiv.org/abs/2605.19956v1)
-- **When Critics Disagree: Adaptive Reward Poisoning Attacks in RIS-Aided Wireless Control System** — [arxiv_ai](https://arxiv.org/abs/2605.20037v1)
-- **Detecting Fluent Optimization-Based Adversarial Prompts via Sequential Entropy Changes** — [arxiv_ai](https://arxiv.org/abs/2605.19966v1)
-- **Where Does Authorship Signal Emerge in Encoder-Based Language Models?** — [arxiv_cl](https://arxiv.org/abs/2605.19908v1)
-- **The Privacy Subsidy in Glosten-Milgrom: Bid-Ask Spread and Welfare under Flip-Noise Direction Observation** — [arxiv_cr](https://arxiv.org/abs/2605.19742v1)
-- **Exploring and Developing a Pre-Model Safeguard with Draft Models** — [arxiv_cr](https://arxiv.org/abs/2605.19321v1)
-- **MultiBallot: Verifiable and privacy-preserving E-Collecting in the Swiss setting** — [arxiv_cr](https://arxiv.org/abs/2605.19312v1)
+- **When Critics Disagree: Adaptive Reward Poisoning Attacks in RIS-Aided Wireless Control System** — [arxiv_lg](https://arxiv.org/abs/2605.20037v1)
+- **Detecting Fluent Optimization-Based Adversarial Prompts via Sequential Entropy Changes** — [arxiv_lg](https://arxiv.org/abs/2605.19966v1)
 - **Auditing Privacy in Multi-Tenant RAG under Account Collusion** — [arxiv_lg](https://arxiv.org/abs/2605.19847v1)
+- **Towards Fine-Grained Robustness: Attention-Guided Test-Time Prompt Tuning for Vision-Language Models** — [arxiv_cv](https://arxiv.org/abs/2605.19956v1)
+- **A Framework for Evaluating Zero-Shot Image Generation in Concept-based Explainability** — [arxiv_cv](https://arxiv.org/abs/2605.19855v1)
 - **Stitched Value Model for Diffusion Alignment** — [arxiv_cv](https://arxiv.org/abs/2605.19804v1)
 - **Mechanisms of Object Localization in Vision-Language Models** — [arxiv_cv](https://arxiv.org/abs/2605.19792v1)
-- **A Framework for Evaluating Zero-Shot Image Generation in Concept-based Explainability** — [arxiv_ai](https://arxiv.org/abs/2605.19855v1)
+- **Where Does Authorship Signal Emerge in Encoder-Based Language Models?** — [arxiv_cl](https://arxiv.org/abs/2605.19908v1)
 - **Mega-ASR: Towards In-the-wild^2 Speech Recognition via Scaling up Real-world Acoustic Simulation** — [arxiv_cl](https://arxiv.org/abs/2605.19833v1)
 - **Mathematical Reasoning in Large Language Models: Benchmarks, Architectures, Evaluation, and Open Challenges** — [arxiv_cl](https://arxiv.org/abs/2605.19723v1)
-- **Backdooring Masked Diffusion Language Models** — [arxiv_cr](https://arxiv.org/abs/2605.19262v1)
-- **Detecting and Mitigating Backdoor Attacks in OTA-FL Systems: A Two-Stage Robust Aggregation Scheme** — [arxiv_cr](https://arxiv.org/abs/2605.19253v1)
-- **Token by Token, Compromised: Backdoor Vulnerabilities in Unified Autoregressive Models** — [arxiv_cr](https://arxiv.org/abs/2605.19227v1)
-- **On the Geometric Limits of Transformer Defenses against Obfuscation Attacks: Latent Embedding Collapse & Performance Robustness Gap** — [arxiv_cr](https://arxiv.org/abs/2605.19159v1)
-- **Be Kind, Rewrite: Benign Projections via Rewriting Defend Against LLM Data Poisoning Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.19147v1)
-- **Agent Security is a Systems Problem** — [arxiv_cr](https://arxiv.org/abs/2605.18991v1)
-- **Surviving the Unseen: Predictive Defense for Novel Multi-Turn Multimodal Attacks** — [arxiv_cr](https://arxiv.org/abs/2605.18988v1)
-- **Federated Naive Bayes with Real Mixture of Gaussians and Institutional Governance Regularization for Network Intrusion Detection** — [arxiv_cr](https://arxiv.org/abs/2605.18647v1)
-- **Overeager Coding Agents: Measuring Out-of-Scope Actions on Benign Tasks** — [arxiv_cr](https://arxiv.org/abs/2605.18583v1)
-- **OEP: Poisoning Self-Evolving LLM Agents via Locally Correct but Non-Transferable Experiences** — [arxiv_cr](https://arxiv.org/abs/2605.18930v1)
-- **DARTIC: Decentralized Anonymous Reputation at Scale for Trustworthy Crowdsourcing** — [arxiv_cr](https://arxiv.org/abs/2605.18146v2)
-- **DASM: Domain-Aware Sharpness Minimization for Multi-Domain Voice Stream Steganalysis** — [arxiv_cr](https://arxiv.org/abs/2605.19955v1)
+- **DarkLLM: Learning Language-Driven Adversarial Attacks with Large Language Models** — [arxiv_cr](https://arxiv.org/abs/2605.18868)
+- **Atoms of Thought: Universal EEG Representation Learning with Microstates** — [arxiv_lg](https://arxiv.org/abs/2605.20182v1)
 - **Multi-axis Analysis of Image Manipulation Localization** — [arxiv_lg](https://arxiv.org/abs/2605.20174v1)
 - **SAGE: Scalable Automatic Gating Ensemble for Confident Negative Harvesting in Fraud Detection** — [arxiv_lg](https://arxiv.org/abs/2605.20157v1)
+- **Beyond Prediction Accuracy: Target-Space Recovery Profiles for Evaluating Model-Brain Alignment** — [arxiv_lg](https://arxiv.org/abs/2605.20127v1)
+- **Beyond Isotropy in JEPAs: Hamiltonian Geometry and Symplectic Prediction** — [arxiv_lg](https://arxiv.org/abs/2605.20107v1)
 - **Optimal Representation Size: High-Dimensional Analysis of Pretraining and Linear Probing** — [arxiv_lg](https://arxiv.org/abs/2605.20105v1)
+- **INSHAPE: Instance-Level Shapelets for Interpretable Time-Series Classification** — [arxiv_lg](https://arxiv.org/abs/2605.20088v1)
 - **Towards Distillation Guarantees under Algorithmic Alignment for Combinatorial Optimization** — [arxiv_lg](https://arxiv.org/abs/2605.20074v1)
+- **Training Neural Networks with Optimal Double-Bayesian Learning** — [arxiv_lg](https://arxiv.org/abs/2605.20009v1)
+- **Learning with Foresight: Enhancing Neural Routing Policy via Multi-Node Lookahead Prediction** — [arxiv_lg](https://arxiv.org/abs/2605.19975v1)
 - **Your Neighbors Know: Leveraging Local Neighborhoods for Backdoor Detection in Decentralized Learning** — [arxiv_lg](https://arxiv.org/abs/2605.19969v1)
+- **StruMPL: Multi-task Dense Regression under Disjoint Partial Supervision and MNAR Labels** — [arxiv_lg](https://arxiv.org/abs/2605.19931v1)
 - **PixVerve: Advancing Native UHR Image Generation to 100MP with a Large-Scale High-Quality Dataset** — [arxiv_cv](https://arxiv.org/abs/2605.20147v1)
 - **Spatially Prompted Visual Trajectory Prediction for Egocentric Manipulation** — [arxiv_cv](https://arxiv.org/abs/2605.20085v1)
 - **Cardiac fat segmentation using computed tomography and an image-to-image conditional generative adversarial neural network** — [arxiv_cv](https://arxiv.org/abs/2605.20064v1)
 - **RECIPE: Procedural Planning via Grounding in Instructional Video** — [arxiv_cv](https://arxiv.org/abs/2605.19976v1)
 - **Feed-Forward Gaussian Splatting from Sparse Aerial Views** — [arxiv_cv](https://arxiv.org/abs/2605.19949v1)
-- **Atoms of Thought: Universal EEG Representation Learning with Microstates** — [arxiv_ai](https://arxiv.org/abs/2605.20182v1)
-- **Not Every Rubric Teaches Equally: Policy-Aware Rubric Rewards for RLVR** — [arxiv_ai](https://arxiv.org/abs/2605.20164v1)
-- **Beyond Prediction Accuracy: Target-Space Recovery Profiles for Evaluating Model-Brain Alignment** — [arxiv_ai](https://arxiv.org/abs/2605.20127v1)
-- **Beyond Isotropy in JEPAs: Hamiltonian Geometry and Symplectic Prediction** — [arxiv_ai](https://arxiv.org/abs/2605.20107v1)
-- **INSHAPE: Instance-Level Shapelets for Interpretable Time-Series Classification** — [arxiv_ai](https://arxiv.org/abs/2605.20088v1)
-- **ThoughtTrace: Understanding User Thoughts in Real-World LLM Interactions** — [arxiv_ai](https://arxiv.org/abs/2605.20087v1)
-- **CopT: Contrastive On-Policy Thinking with Continuous Spaces for General and Agentic Reasoning** — [arxiv_ai](https://arxiv.org/abs/2605.20075v1)
-- **Towards LLM-Assisted Architecture Recovery for Real-World ROS~2 Systems: An Agent-Based Multi-Level Approach to Hierarchical Structural Architecture Reconstruction** — [arxiv_ai](https://arxiv.org/abs/2605.20055v1)
-- **AutoResearchClaw: Self-Reinforcing Autonomous Research with Human-AI Collaboration** — [arxiv_ai](https://arxiv.org/abs/2605.20025v1)
-- **Training Neural Networks with Optimal Double-Bayesian Learning** — [arxiv_ai](https://arxiv.org/abs/2605.20009v1)
-- **GeoX: Mastering Geospatial Reasoning Through Self-Play and Verifiable Rewards** — [arxiv_ai](https://arxiv.org/abs/2605.20006v1)
-- **Learning with Foresight: Enhancing Neural Routing Policy via Multi-Node Lookahead Prediction** — [arxiv_ai](https://arxiv.org/abs/2605.19975v1)
-- **Robotics-Inspired Guardrails for Foundation Models in Socially Sensitive Domains** — [arxiv_ai](https://arxiv.org/abs/2605.19940v1)
-- **PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents** — [arxiv_ai](https://arxiv.org/abs/2605.19932v1)
-- **StruMPL: Multi-task Dense Regression under Disjoint Partial Supervision and MNAR Labels** — [arxiv_ai](https://arxiv.org/abs/2605.19931v1)
-- **MixRea: Benchmarking Explicit-Implicit Reasoning in Large Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.20128v1)
-- **Text-to-SPARQL Generation with Reinforcement Learning: A GRPO-based Approach on DBLP** — [arxiv_cl](https://arxiv.org/abs/2605.20066v1)
-- **Rewarding Beliefs, Not Actions: Consistency-Guided Credit Assignment for Long-Horizon Agents** — [arxiv_cl](https://arxiv.org/abs/2605.20061v1)
-- **Set Shaping Theory as a Complementary Payload-Shaping Layer for Steganography** — [arxiv_cr](https://arxiv.org/abs/2605.19885v1)
 - **GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation** — [arxiv_cv](https://arxiv.org/abs/2605.19889v1)
 - **Structural Energy Guidance for View-Consistent Text-to-3D Generation** — [arxiv_cv](https://arxiv.org/abs/2605.19876v1)
+- **Passive Construction Site Safety Monitoring via Persona-Scaffolded Adversarial Chain-of-Thought VLM Verification** — [arxiv_cv](https://arxiv.org/abs/2605.19869v1)
 - **When Preference Labels Fall Short: Aligning Diffusion Models from Real Data** — [arxiv_cv](https://arxiv.org/abs/2605.19839v1)
 - **LaCoVL-FER: Landmark-Guided Contrastive Learning Network with Vision-Language Enhancement for Facial Expression Recognition** — [arxiv_cv](https://arxiv.org/abs/2605.19821v1)
-- **Passive Construction Site Safety Monitoring via Persona-Scaffolded Adversarial Chain-of-Thought VLM Verification** — [arxiv_ai](https://arxiv.org/abs/2605.19869v1)
+- **MixRea: Benchmarking Explicit-Implicit Reasoning in Large Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.20128v1)
+- **ThoughtTrace: Understanding User Thoughts in Real-World LLM Interactions** — [arxiv_cl](https://arxiv.org/abs/2605.20087v1)
+- **CopT: Contrastive On-Policy Thinking with Continuous Spaces for General and Agentic Reasoning** — [arxiv_cl](https://arxiv.org/abs/2605.20075v1)
+- **Text-to-SPARQL Generation with Reinforcement Learning: A GRPO-based Approach on DBLP** — [arxiv_cl](https://arxiv.org/abs/2605.20066v1)
+- **Rewarding Beliefs, Not Actions: Consistency-Guided Credit Assignment for Long-Horizon Agents** — [arxiv_cl](https://arxiv.org/abs/2605.20061v1)
+- **PEEK: Context Map as an Orientation Cache for Long-Context LLM Agents** — [arxiv_cl](https://arxiv.org/abs/2605.19932v1)
 - **Are Tools Always Beneficial? Learning to Invoke Tools Adaptively for Dual-Mode Multimodal LLM Reasoning** — [arxiv_cl](https://arxiv.org/abs/2605.19852v1)
 - **CLIF: Concept-Level Influence Functions for Transparent Bottleneck Models** — [arxiv_cl](https://arxiv.org/abs/2605.19848v1)
 - **FineBench: Benchmarking and Enhancing Vision-Language Models for Fine-grained Human Activity Understanding** — [arxiv_cl](https://arxiv.org/abs/2605.19846v1)
@@ -127,67 +122,42 @@ AI Agent的安全性是今日最受关注的跨领域主题之一，多篇论文
 - **GoLongRL: Capability-Oriented Long Context Reinforcement Learning with Multitask Alignment** — [arxiv_cl](https://arxiv.org/abs/2605.19577v1)
 - **Library Drift: Diagnosing and Fixing a Silent Failure Mode in Self-Evolving LLM Skill Libraries** — [arxiv_cl](https://arxiv.org/abs/2605.19576v1)
 - **m3BERT: A Modern, Multi-lingual, Matryoshka Bidirectional Encoder** — [arxiv_cl](https://arxiv.org/abs/2605.19568v1)
-- **SceneCode: Executable World Programs for Editable Indoor Scenes with Articulated Objects** — [huggingface_papers](https://arxiv.org/abs/2605.19587)
-- **CEPO: RLVR Self-Distillation using Contrastive Evidence Policy Optimization** — [huggingface_papers](https://arxiv.org/abs/2605.19436)
-- **Artifact-Bench: Evaluating MLLMs on Detecting and Assessing the Artifacts of AI-Generated Videos** — [huggingface_papers](https://arxiv.org/abs/2605.18984)
-- **WavFlow: Audio Generation in Waveform Space** — [huggingface_papers](https://arxiv.org/abs/2605.18749)
-- **DexHoldem: Playing Texas Hold'em with Dexterous Embodied System** — [huggingface_papers](https://arxiv.org/abs/2605.18727)
-- **Evaluating Cognitive Age Alignment in Interactive AI Agents** — [huggingface_papers](https://arxiv.org/abs/2605.17894)
-- **SafeDiffusion-R1: Online Reward Steering for Safe Diffusion Post-Training** — [huggingface_papers](https://arxiv.org/abs/2605.18719)
-- **SkillsVote: Lifecycle Governance of Agent Skills from Collection, Recommendation to Evolution** — [huggingface_papers](https://arxiv.org/abs/2605.18401)
-- **StableVLA: Towards Robust Vision-Language-Action Models without Extra Data** — [huggingface_papers](https://arxiv.org/abs/2605.18287)
-- **Actionable World Representation** — [huggingface_papers](https://arxiv.org/abs/2605.18743)
-- **Lance: Unified Multimodal Modeling by Multi-Task Synergy** — [huggingface_papers](https://arxiv.org/abs/2605.18678)
+- **HaorFloodAlert: Deseasonalized ML Ensemble for 72-Hour Flood Prediction in Bangladesh Haor Wetlands** — [arxiv_lg](https://arxiv.org/abs/2605.20167v1)
 - **Interpretable Computer Vision for Defect Detection in X-ray Tomography of Aerospace SiC/SiC Composites** — [arxiv_lg](https://arxiv.org/abs/2605.20159v1)
-- **When Does Model Collapse Occur in Structured Interactive Learning?** — [arxiv_lg](https://arxiv.org/abs/2605.20151v1)
-- **Goal-Oriented Lower-Tail Calibration of Gaussian Processes for Bayesian Optimization** — [arxiv_lg](https://arxiv.org/abs/2605.20145v1)
-- **TrajTok: Adaptive Spatial Tokenization for Trajectory Representation Learning** — [arxiv_lg](https://arxiv.org/abs/2605.20134v1)
-- **FiLark: a streaming-first software framework for end-to-end exploration, annotation, and algorithm integration in distributed acoustic sensing** — [arxiv_lg](https://arxiv.org/abs/2605.20132v1)
-- **Optimizing Computational-Statistical Runtime for Wasserstein Distance Estimation** — [arxiv_lg](https://arxiv.org/abs/2605.20122v1)
-- **Tail Annealing for Heavy-Tailed Flow Matching** — [arxiv_lg](https://arxiv.org/abs/2605.20068v1)
-- **Active Context Selection Improves Simple Regret in Contextual Bandits** — [arxiv_lg](https://arxiv.org/abs/2605.20040v1)
-- **D$^3$-Subsidy: Online and Sequential Driver Subsidy Decision-Making for Large-Scale Ride-Hailing Market** — [arxiv_lg](https://arxiv.org/abs/2605.20036v1)
-- **CAMERA: Adapting to Semantic Camouflage in Unsupervised Text-Attributed Graph Fraud Detection** — [arxiv_lg](https://arxiv.org/abs/2605.20032v1)
-- **Take It or Leave It: Intent-Controlled Partial Optimal Transport** — [arxiv_lg](https://arxiv.org/abs/2605.20030v1)
-- **Training-Free Bayesian Filtering with Generative Emulators** — [arxiv_lg](https://arxiv.org/abs/2605.20028v1)
-- **Fine-Tuning Without Forgetting via Loss-Adaptive Learning Rates** — [arxiv_lg](https://arxiv.org/abs/2605.20005v1)
 - **PiG-Avatar: Hierarchical Neural-Field-Guided Gaussian Avatars** — [arxiv_cv](https://arxiv.org/abs/2605.20185v1)
 - **CaMo: Camera Motion Grounded Evaluation and Training for Vision-Language Models** — [arxiv_cv](https://arxiv.org/abs/2605.20165v1)
+- **TIDE: Efficient and Lossless MoE Diffusion LLM Inference with I/O-aware Expert Offload** — [arxiv_cl](https://arxiv.org/abs/2605.20179v1)
+- **When Does Model Collapse Occur in Structured Interactive Learning?** — [arxiv_lg](https://arxiv.org/abs/2605.20151v1)
+- **Goal-Oriented Lower-Tail Calibration of Gaussian Processes for Bayesian Optimization** — [arxiv_lg](https://arxiv.org/abs/2605.20145v1)
 - **TideGS: Scalable Training of Over One Billion 3D Gaussian Splatting Primitives via Out-of-Core Optimization** — [arxiv_cv](https://arxiv.org/abs/2605.20150v1)
 - **SetCon: Towards Open-Ended Referring Segmentation via Set-Level Concept Prediction** — [arxiv_cv](https://arxiv.org/abs/2605.20110v1)
 - **MetaEarth-MM: Unified Multimodal Remote Sensing Image Generation with Scene-centered Joint Modeling** — [arxiv_cv](https://arxiv.org/abs/2605.20090v1)
-- **X-Ray cardiac angiographic vessel segmentation based on pixel classification using machine learning and region growing** — [arxiv_cv](https://arxiv.org/abs/2605.20073v1)
-- **OP2GS: Object-Aware 3D Gaussian Splatting with Dual-Opacity Primitives** — [arxiv_cv](https://arxiv.org/abs/2605.20044v1)
-- **A Methodology for Selecting and Composing Runtime Architecture Patterns for Production LLM Agents** — [arxiv_ai](https://arxiv.org/abs/2605.20173v1)
-- **TIDE: Efficient and Lossless MoE Diffusion LLM Inference with I/O-aware Expert Offload** — [arxiv_cl](https://arxiv.org/abs/2605.20179v1)
-- **From Seeing to Thinking: Decoupling Perception and Reasoning Improves Post-Training of Vision-Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.20177v1)
-- **ClinSeekAgent: Automating Multimodal Evidence Seeking for Agentic Clinical Reasoning** — [arxiv_cl](https://arxiv.org/abs/2605.20176v1)
-- **KoRe: Compact Knowledge Representations for Large Language Models** — [arxiv_cl](https://arxiv.org/abs/2605.20170v1)
-- **OpenComputer: Verifiable Software Worlds for Computer-Use Agents** — [huggingface_papers](https://arxiv.org/abs/2605.19769)
-- **OSCAR: Offline Spectral Covariance-Aware Rotation for 2-bit KV Cache Quantization** — [huggingface_papers](https://arxiv.org/abs/2605.17757)
-- **SCICONVBENCH: Benchmarking LLMs on Multi-Turn Clarification for Task Formulation in Computational Science** — [huggingface_papers](https://arxiv.org/abs/2605.18630)
-- **Symmetry-Compatible Principle for Optimizer Design: Embeddings, LM Heads, SwiGLU MLPs, and MoE Routers** — [huggingface_papers](https://arxiv.org/abs/2605.18106)
-- **MementoGUI: Learning Agentic Multimodal Memory Control for Long-Horizon GUI Agents** — [huggingface_papers](https://arxiv.org/abs/2605.18652)
-- **Code-as-Room: Generating 3D Rooms from Top-Down View Images via Agentic Code Synthesis** — [huggingface_papers](https://arxiv.org/abs/2605.18451)
-- **Incantation: Natural Language as the Action Interface for Multi-Entity Video World Models** — [huggingface_papers](https://arxiv.org/abs/2605.18601)
-- **AtlasVA: Self-Evolving Visual Skill Memory for Teacher-Free VLM Agents** — [huggingface_papers](https://arxiv.org/abs/2605.17933)
-- **Code as Agent Harness** — [huggingface_papers](https://arxiv.org/abs/2605.18747)
-- **Introducing OpenAI for Singapore** — [openai](https://openai.com/index/introducing-openai-for-singapore)
+- **Demis Hassabis said this might be the ‘foothills of the singularity.’ What?** — [theverge_ai](https://www.theverge.com/tech/934260/google-io-ai-singularity-demis-hassabis)
+- **The future of Google is a search box that does everything** — [theverge_ai](https://www.theverge.com/tech/934217/google-search-box-does-everything-ai-io-2026)
+- **Google’s AI future demands trust — and your personal data** — [theverge_ai](https://www.theverge.com/tech/934172/google-io-gemini-ai-trust-personal-data)
 - **From teen hacker to Iron Dome researcher, this founder raised $28M to fight AI phishing** — [techcrunch_ai](https://techcrunch.com/2026/05/19/from-teen-hacker-to-iron-dome-researcher-this-founder-raised-28m-to-fight-ai-phishing/)
+- **Gemini will use Volvo’s external cameras to interpret parking signs** — [theverge_ai](https://www.theverge.com/transportation/933556/google-io-gemini-volvo-ex60-camera-ai-parking)
+- **The 13 biggest announcements at Google I/O 2026** — [theverge_ai](https://www.theverge.com/tech/933415/google-io-2026-biggest-announcements-ai-gemini)
+- **Google wants to compete with Anthropic’s Mythos** — [theverge_ai](https://www.theverge.com/tech/933921/google-wants-to-compete-with-anthropics-mythos)
 - **Elon Musk said Sam Altman ‘stole’ a non-profit — but the trial showed he had similar aims** — [techcrunch_ai](https://techcrunch.com/2026/05/19/elon-musk-said-sam-altman-stole-a-non-profit-but-the-trial-showed-he-had-similar-aims/)
 - **Google takes a page out of Meta’s book, announces new audio-powered smart glasses at IO 2026** — [techcrunch_ai](https://techcrunch.com/2026/05/19/google-takes-a-page-out-of-metas-book-announces-new-audio-powered-smart-glasses-at-io-2026/)
 - **Google’s Genie world model can now simulate real streets with Street View** — [techcrunch_ai](https://techcrunch.com/2026/05/19/googles-genie-world-model-can-now-simulate-real-streets-with-street-view/)
 - **With Gemini 3.5 Flash, Google bets its next AI wave on agents, not chatbots** — [techcrunch_ai](https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/)
 - **Google Search as you know it is over** — [techcrunch_ai](https://techcrunch.com/2026/05/19/google-search-as-you-know-it-is-over/)
+- **Introducing OpenAI for Singapore** — [openai](https://openai.com/index/introducing-openai-for-singapore)
+- **Roundtables: Inside the Musk v. Altman Trial** — [mit_tech_review](https://www.technologyreview.com/2026/05/19/1137454/roundtables-inside-the-musk-v-altman-trial/)
+- **Google can now vibe-code you an Android app** — [theverge_ai](https://www.theverge.com/tech/932364/google-ai-studio-native-android-apps-vibe-code-google-io-2026)
+- **Would you let robots spend your money? Google is betting on it** — [theverge_ai](https://www.theverge.com/news/932927/google-io-agentic-ai-shopping-universal-cart)
+- **Google Search is getting its biggest changes ever** — [theverge_ai](https://www.theverge.com/tech/932970/google-search-ai-update-io-2026)
+- **Gmail is going to start talking to you** — [theverge_ai](https://www.theverge.com/tech/932973/google-gmail-live-ai-keep-docs-io-2026)
 - **Agentic app coding gets an upgrade with Google’s release of Android CLI** — [techcrunch_ai](https://techcrunch.com/2026/05/19/agentic-app-coding-gets-an-upgrade-with-googles-release-of-android-cli/)
 - **Google’s AI Studio now lets anyone build Android apps in minutes** — [techcrunch_ai](https://techcrunch.com/2026/05/19/googles-ai-studio-now-lets-anyone-build-android-apps-in-minutes/)
 - **Google launches Antigravity 2.0 with an updated desktop app and CLI tool at IO 2026** — [techcrunch_ai](https://techcrunch.com/2026/05/19/google-launches-antigravity-2-0-with-an-updated-desktop-app-and-cli-tool-at-io-2026/)
 - **Google introduces Gemini Spark, a 24/7 agentic assistant with Gmail integration, at IO 2026** — [techcrunch_ai](https://techcrunch.com/2026/05/19/google-introduces-gemini-spark-a-24-7-agentic-assistant-with-gmail-integration/)
 - **Google’s Gemini Omni turns images, audio, and text into video — and that’s just the start** — [techcrunch_ai](https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-text-into-video-and-thats-just-the-start/)
-- **Roundtables: Inside the Musk v. Altman Trial** — [mit_tech_review](https://www.technologyreview.com/2026/05/19/1137454/roundtables-inside-the-musk-v-altman-trial/)
+- **OpenAI co-founder Andrej Karpathy joins Anthropic’s pre-training team** — [techcrunch_ai](https://techcrunch.com/2026/05/19/openai-co-founder-andrej-karpathy-joins-anthropics-pre-training-team/)
 - **I/O 2026** — [google_ai](https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/)
 - **How AI Mode is changing the way people search in the U.S.** — [google_ai](https://blog.google/products-and-platforms/products/search/ai-mode-us-insights/)
-- **OpenAI co-founder Andrej Karpathy joins Anthropic’s pre-training team** — [techcrunch_ai](https://techcrunch.com/2026/05/19/openai-co-founder-andrej-karpathy-joins-anthropics-pre-training-team/)
 - **Understanding the modern cybercrime landscape** — [mit_tech_review](https://www.technologyreview.com/2026/05/19/1136925/understanding-the-modern-cybercrime-landscape/)
 - **The Download: Musk v. Altman, smart glasses for warfare, and Google I/O** — [mit_tech_review](https://www.technologyreview.com/2026/05/19/1137505/the-download-musk-altman-trial-smart-glasses-warfare-google-i-o/)
 - **Colossal Biosciences is growing chickens in a 3D-printed artificial eggshell** — [mit_tech_review](https://www.technologyreview.com/2026/05/19/1137471/colossal-biosciences-is-growing-chickens-in-a-3d-printed-container/)
@@ -207,42 +177,54 @@ AI Agent的安全性是今日最受关注的跨领域主题之一，多篇论文
 - **AbhishekK130804/Claude-Mythos-AI-Anthropic-App** — [github](https://github.com/AbhishekK130804/Claude-Mythos-AI-Anthropic-App)
 - **kevintsai1202/teaching-site-skills** — [github](https://github.com/kevintsai1202/teaching-site-skills)
 - **richard-kim-79/archora-skills** — [github](https://github.com/richard-kim-79/archora-skills)
+- **wanshuiyin/ARIS-in-AI-Offer** — [github](https://github.com/wanshuiyin/ARIS-in-AI-Offer)
 - **mdowis/anansi** — [github](https://github.com/mdowis/anansi)
 - **zimingttkx/QuantumFlow** — [github](https://github.com/zimingttkx/QuantumFlow)
 - **ahammadmejbah/Awesome-Datasets-Hub** — [github](https://github.com/ahammadmejbah/Awesome-Datasets-Hub)
 - **exploitbench/exploitbench** — [github](https://github.com/exploitbench/exploitbench)
 - **Siva-Chidambaram12/kalshi-trading-bot** — [github](https://github.com/Siva-Chidambaram12/kalshi-trading-bot)
-- **lynote-ai/humanize-text** — [github](https://github.com/lynote-ai/humanize-text)
-- **SalhaNabil/CloakBrowser** — [github](https://github.com/SalhaNabil/CloakBrowser)
 - **dex-original/okx-agent-trade-kit** — [github](https://github.com/dex-original/okx-agent-trade-kit)
+- **SalhaNabil/CloakBrowser** — [github](https://github.com/SalhaNabil/CloakBrowser)
 - **BasZ4ll/Stable-Diffusion-WebUI** — [github](https://github.com/BasZ4ll/Stable-Diffusion-WebUI)
 - **yetone/native-feel-skill** — [github](https://github.com/yetone/native-feel-skill)
 - **Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.** — [venturebeat_ai](https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think)
-- **wzzheng/IVGT** — [github](https://github.com/wzzheng/IVGT)
-- **jigripokri/POHA** — [github](https://github.com/jigripokri/POHA)
+- **xuanlinAI/overmind** — [github](https://github.com/xuanlinAI/overmind)
 - **hunhee98/pluck** — [github](https://github.com/hunhee98/pluck)
 - **ForgeAILab/forge** — [github](https://github.com/ForgeAILab/forge)
-- **DaoyuanLi2816/can-i-finetune-this** — [github](https://github.com/DaoyuanLi2816/can-i-finetune-this)
+- **jigripokri/POHA** — [github](https://github.com/jigripokri/POHA)
 - **CHB-learner/PaperPilot** — [github](https://github.com/CHB-learner/PaperPilot)
+- **DaoyuanLi2816/can-i-finetune-this** — [github](https://github.com/DaoyuanLi2816/can-i-finetune-this)
 - **kgmkm/novel2hermes_jp** — [github](https://github.com/kgmkm/novel2hermes_jp)
-- **Bridging the Disciplinary Gap in Explainable AI: From Abstract Desiderata to Concrete Tasks** — [arxiv_cy](https://arxiv.org/abs/2605.20081v1)
+- **Bridging the Disciplinary Gap in Explainable AI: From Abstract Desiderata to Concrete Tasks** — [arxiv_cy](https://arxiv.org/abs/2605.20081)
+- **Addressing the Reality Gap: A Three-Tension Framework for Agentic AI Adoption** — [arxiv_cy](https://arxiv.org/abs/2604.27245)
 - **苏姿丰上海开讲：AI正在重新定义计算的每一层** — [qbitai](https://www.qbitai.com/2026/05/420531.html)
+- **完成“由铁到钢”的生态蜕变 刘军携联想全场景AI终端点亮智能未来** — [qbitai](https://www.qbitai.com/2026/05/420561.html)
 - **抢先李飞飞！世界模型能多人联机玩FPS游戏了** — [qbitai](https://www.qbitai.com/2026/05/420083.html)
 - **国产GPU开始造世界！国内首个全栈具身智能仿真平台来了** — [qbitai](https://www.qbitai.com/2026/05/420084.html)
 - **Cursor新模型，你怎么还在套Kimi？马斯克你怎么还吆喝上了？？** — [qbitai](https://www.qbitai.com/2026/05/419990.html)
-- **L2++「五冠王」文远知行：自动驾驶版的张雪机车，专治各种不服** — [qbitai](https://www.qbitai.com/2026/05/419913.html)
-- **5.20 明天见！拿好这份参会指南｜AIGC2026峰会** — [qbitai](https://www.qbitai.com/2026/05/419901.html)
-- **Qwen最新3.7 Max预览版空降！两代超大杯并行迭代，林俊旸走了但还在加速** — [qbitai](https://www.qbitai.com/2026/05/419822.html)
-- **The Accessibility Capability Boundary: Operational Limits and Expansion Potential of AI-Generated Browser-Native Accessibility Systems** — [arxiv_cy](https://arxiv.org/abs/2605.19638v1)
+- **Going PLACES: Participatory Localized Red Teaming for Text-to-Image Safety in the Global South** — [arxiv_cy](https://arxiv.org/abs/2605.19190)
+- **GRASP: Deterministic argument ranking in interaction graphs** — [arxiv_cy](https://arxiv.org/abs/2605.19141)
+- **Rethinking the A in STEAM: Insights from and for AI Literacy Education** — [arxiv_cy](https://arxiv.org/abs/2405.18179)
+- **Quantifying the Climate Risk of Generative AI: Region-Aware Carbon Accounting with G-TRACE and the AI Sustainability Pyramid** — [arxiv_cy](https://arxiv.org/abs/2511.04776)
+- **Designing escalation criteria for international AI incident response: criteria, triggers, and thresholds** — [arxiv_cy](https://arxiv.org/abs/2604.23183)
+- **CAPC-CG: A Large-Scale, Expert-Directed LLM-Annotated Corpus of Adaptive Policy Communication in China** — [arxiv_cy](https://arxiv.org/abs/2510.08986)
+- **Technologies and Security Challenges in Metaverse** — [arxiv_cy](https://arxiv.org/abs/2510.09621)
+- **Beyond Nutrition Labels: How Analogical Reasoning Shapes Synthetic Media Disclosure Design** — [arxiv_cy](https://arxiv.org/abs/2605.19045)
+- **Stop Drawing Scientific Claims from LLM Social Simulations Without Robustness Audits** — [arxiv_cy](https://arxiv.org/abs/2605.18890)
+- **The Accessibility Capability Boundary: Operational Limits and Expansion Potential of AI-Generated Browser-Native Accessibility Systems** — [arxiv_cy](https://arxiv.org/abs/2605.19638)
+- **ALSO: Adversarial Online Strategy Optimization for Social Agents** — [arxiv_cy](https://arxiv.org/abs/2605.15768)
 - **Smooth Piecewise Cutting for Neural Operator to Handle Discontinuities and Sharp Transitions** — [arxiv_ml](https://arxiv.org/abs/2605.19823v1)
 - **Probabilistic Multivariate Time Series Forecasting with Diffusion Copulas** — [arxiv_ml](https://arxiv.org/abs/2605.19685v1)
 - **Increasing Missingness to Reduce Bias: Richardson-SGD with Missing Data** — [arxiv_ml](https://arxiv.org/abs/2605.19641v1)
 - **Online Market Making and the Value of Observing the Order Book** — [arxiv_ml](https://arxiv.org/abs/2605.19584v1)
-- **HalluWorld: A Controlled Benchmark for Hallucination via Reference World Models** — [arxiv_ml](https://arxiv.org/abs/2605.19341v1)
-- **A Unified Framework for Structure-Aware Clustering and Heterogeneous Causal Graph Learning** — [arxiv_ml](https://arxiv.org/abs/2605.19313v1)
-- **Journeys of Parents with LGBTQ+ Children: How Trauma and Healing Reshape Identity and (Mis)Informating Practices** — [arxiv_cy](https://arxiv.org/abs/2605.20024v1)
+- **Automated Grading of Handwritten Mathematics Using Vision-Capable LLMs** — [arxiv_cy](https://arxiv.org/abs/2605.19043)
+- **Can LLMs Emulate Human Belief Dynamics?** — [arxiv_cy](https://arxiv.org/abs/2605.18781)
+- **A City-Scale Dataset of Traffic Flows, Travel Times, and Urban Context** — [arxiv_cy](https://arxiv.org/abs/2605.18782)
+- **How Far Are We From True Auto-Research?** — [arxiv_cy](https://arxiv.org/abs/2605.19156)
+- **Are Rationales Necessary and Sufficient? Tuning LLMs for Explainable Misinformation Detection** — [arxiv_cy](https://arxiv.org/abs/2605.19285)
+- **Journeys of Parents with LGBTQ+ Children: How Trauma and Healing Reshape Identity and (Mis)Informating Practices** — [arxiv_cy](https://arxiv.org/abs/2605.20024)
+- **Improved visual-information-driven model for crowd simulation and its modular application** — [arxiv_cy](https://arxiv.org/abs/2504.03758)
 - **Semi-Parametric Bayesian Additive Regression Trees for Risk Prediction with High-Dimensional Epigenetic Signatures and Low-Dimensional Covariates** — [arxiv_ml](https://arxiv.org/abs/2605.20143v1)
-- **Are Rationales Necessary and Sufficient? Tuning LLMs for Explainable Misinformation Detection** — [arxiv_cy](https://arxiv.org/abs/2605.19285v1)
 - **FLUXtrapolation: A benchmark on extrapolating ecosystem fluxes** — [arxiv_ml](https://arxiv.org/abs/2605.19812v1)
 - **Latent Laplace Diffusion for Irregular Multivariate Time Series** — [arxiv_ml](https://arxiv.org/abs/2605.19805v1)
 - **Fast Spawn\&Prune (FS\&P): Global convergence of stochastic conic particle gradient descent via birth/death process** — [arxiv_ml](https://arxiv.org/abs/2605.19784v1)
@@ -252,24 +234,23 @@ AI Agent的安全性是今日最受关注的跨领域主题之一，多篇论文
 - **MiMuon: Mixed Muon Optimizer with Improved Generalization for Large Models** — [arxiv_ml](https://arxiv.org/abs/2605.19619v1)
 - **Posterior Contraction of Lévy Adaptive B-spline Regression in Besov Spaces** — [arxiv_ml](https://arxiv.org/abs/2605.19610v1)
 - **Density-Ratio Losses for Post-Hoc Learning to Defer** — [arxiv_ml](https://arxiv.org/abs/2605.19557v1)
-- **Tweedie's Formulae and Diffusion Generative Models Beyond Gaussian** — [arxiv_ml](https://arxiv.org/abs/2605.19391v1)
-- **Factor Augmented High-Dimensional SGD** — [arxiv_ml](https://arxiv.org/abs/2605.19291v1)
-- **EviTrack: Selection over Sampling for Delayed Disambiguation** — [arxiv_ml](https://arxiv.org/abs/2605.19283v1)
 - **8点1氪丨谷歌推出Gemini 3.5系列模型；DeepSeek回应用户“对话泄露”疑虑；全国存款十强城市出炉** — [36kr](https://36kr.com/p/3816885092910212?f=rss)
+- **2026福布斯中国人工智能科技企业TOP 50发布，中关村科金入选** — [36kr](https://36kr.com/newsflashes/3817185914520710?f=rss)
+- **圆周率智能发布 iMLite AI（悟境）端侧实时决策引擎** — [36kr](https://36kr.com/newsflashes/3817118508713092?f=rss)
+- **地瓜机器人与千寻智能达成战略合作** — [36kr](https://36kr.com/newsflashes/3817109218575489?f=rss)
+- **宜春就进一步加强锂资源矿山监督管理征求意见** — [36kr](https://36kr.com/newsflashes/3817121466680200?f=rss)
+- **Seedance 2.1即将推出？接近字节跳动人士：不属实** — [36kr](https://36kr.com/newsflashes/3817085893788546?f=rss)
+- **“贝塔无限”连续完成种子轮、种子+轮数亿元融资** — [36kr](https://36kr.com/newsflashes/3817084193866889?f=rss)
+- **平头哥AI芯片真武M890首次亮相，性能提升至3倍** — [36kr](https://36kr.com/newsflashes/3817080294999168?f=rss)
+- **长鑫科技更新招股书，碧桂园错失300亿** — [36kr](https://36kr.com/p/3817039204139908?f=rss)
 - **理想新L9上市72小时：老车主复购占大头，仍需从“家庭”破圈** — [36kr](https://36kr.com/p/3709756082466949?f=rss)
-- **FSD入华信号增强？特斯拉九城急招智驾测试技师，官方客服：正积极推进审批** — [36kr](https://36kr.com/newsflashes/3816998205801352?f=rss)
-- **段永平1380亿元持仓曝光，一季度新进特斯拉** — [36kr](https://36kr.com/newsflashes/3816970108322689?f=rss)
 - **做出百万台割草机器人后，未岚大陆CEO决定让自己变得“不重要”｜硬氪专访** — [36kr](https://36kr.com/p/3814411349581316?f=rss)
 - **要做数字劳动力生产工厂，「未来式智能」完成Pre-A轮融资** — [36kr](https://36kr.com/p/3816909945029760?f=rss)
 - **早期项目 | Chance AI获美图等数百万美元投资，用户数已达20万** — [36kr](https://36kr.com/p/3816947890471812?f=rss)
-- **美联储保尔森：当前利率水平适当，但考虑加息是合理的** — [36kr](https://36kr.com/newsflashes/3816939489117320?f=rss)
-- **中信证券：FDA监管态度重大转向 全球烟草巨头迎来拐点性机遇** — [36kr](https://36kr.com/newsflashes/3816924346762377?f=rss)
-- **江苏：实施提振消费专项行动，培育壮大智能穿戴设备、首发首店经济、AI流量消费等新增长点** — [36kr](https://36kr.com/newsflashes/3816933425857670?f=rss)
-- **谷歌和三星电子公布智能眼镜设计，计划秋季上市** — [36kr](https://36kr.com/newsflashes/3816914719949952?f=rss)
 - **当“躺平”、Gap被歧视，我们该如何度过奥德赛时期？ | 职场极端气候 ②** — [36kr](https://36kr.com/p/3816045694098952?f=rss)
 - **氪星晚报 ｜SpaceX即将成为马斯克旗下第二家上市公司；京东、洋河集团等在宿迁成立新动能股权投资基金，出资额10亿** — [36kr](https://36kr.com/p/3816109626138119?f=rss)
 - **裸辞九个月，降薪跳槽，一个80后营销人如何“上岸甲方”？｜百万年薪系列013** — [36kr](https://36kr.com/p/3816036564147718?f=rss)
 - **影石：重新定义性价比** — [36kr](https://36kr.com/p/3815841756028425?f=rss)
-- **扩博智能Sparrow刷新两项海上风电纪录** — [36kr](https://36kr.com/newsflashes/3816962733229191?f=rss)
-- **A股三大指数集体低开** — [36kr](https://36kr.com/newsflashes/3816955624047749?f=rss)
-- **新亚电缆：目前公司没有生产光纤类产品** — [36kr](https://36kr.com/newsflashes/3816923946648451?f=rss)
+- **新加坡加码人工智能布局，英伟达将落地本地研发中心** — [36kr](https://36kr.com/newsflashes/3817119265457027?f=rss)
+- **飞猪推出酒店商家智能助理** — [36kr](https://36kr.com/newsflashes/3817110991799169?f=rss)
+- **平头哥真武系列GPU已累计出货超56万片** — [36kr](https://36kr.com/newsflashes/3817111570482304?f=rss)

@@ -1,0 +1,61 @@
+# AI Daily Digest [AI 安全] - 2026-07-20
+
+
+# Daily Thematic Digest: AI Safety & Agent Governance
+**Date:** 2026-07-20
+
+## Highlights
+
+Three critical developments dominate today’s safety landscape, centering on the operational realities of autonomous agents. First, researchers propose a paradigm shift in security evaluation from peak success rates to cost-aware metrics, arguing that budget consumption during tool calls and telemetry queries is a primary vulnerability vector in offensive and defensive security agents. Second, the application of recursive self-improvement (RSI) loops in specialized domains like healthcare introduces complex governance challenges, necessitating human-gated oversight to prevent capability degradation across clinical tasks. Third, formal analysis reveals that behavioral privacy leakage remains a significant threat in multi-round negotiation protocols, where adversaries can infer private constraints from observable concession trajectories even when cryptographic protections are active.
+
+## Agent Security & Governance
+
+The transition from static software to dynamic agentic workflows fundamentally alters the security perimeter, requiring new governance frameworks that account for tool-use vulnerabilities and runtime memory risks. A pivotal study on the shift from human-centric to agentic code review demonstrates that while AI-supported processes improve efficiency, the introduction of AI agent reviewers alongside humans creates novel attack surfaces where prompt injection or logic exploitation could compromise integration pipelines. This concern is compounded by findings in specialized domains such as healthcare, where the **Cura 1T** model utilizes a human-gated recursive self-improvement loop. While this approach aims to enhance clinical reasoning over electronic health records, the authors report that narrow updates for specific tasks can degrade others, highlighting the necessity for rigorous governance mechanisms that monitor cross-task interference during continuous learning cycles.
+
+Governance extends beyond model weights to the infrastructure supporting agent execution. Recent work on **Recursive Harness Self-Improvement** posits that harnesses should be treated as data-generating components rather than mere scaffolds. By optimizing user-constructed harnesses for both immediate performance and the quality of execution traces, organizations can mitigate the risk of poor-quality data poisoning future foundation models. This aligns with broader efforts to evaluate security agents through a cost-success lens, as detailed in **Beyond Success Rate: Cost-Aware Evaluation of Offensive and Defensive Security Agents**. The authors argue that traditional benchmarks measuring peak offensive capability under generous inference budgets are incomplete; in operational security, every reasoning step consumes budget, making cost-efficiency a proxy for resilience against resource exhaustion attacks.
+
+Furthermore, the autonomy granted to agents in negotiation and recommendation contexts introduces subtle privacy and integrity risks. **Behavioral Privacy Leakage in Agentic Negotiation** formalizes an inference attack where adversaries deduce private constraints from negotiation dynamics like timing and convergence patterns. The proposed adaptive stochastic negotiation policy offers a mitigation strategy, yet it underscores a broader trend where cryptographic protection of explicit data fails to secure implicit behavioral signals. Similarly, production-scale recommender systems like **RecGPT-V3** face challenges in stateless behavior modeling, where reprocessing full user history wastes computation and discards prior agent states. This inefficiency not only impacts commercial outcomes but also creates opportunities for state manipulation attacks where historical context is selectively obscured or corrupted. Collectively, these works suggest that agent governance must evolve from static policy enforcement to dynamic monitoring of execution costs, trace quality, and behavioral side-channels.
+
+## Runtime Safety & Tool Reliability
+
+Ensuring runtime safety requires robust defenses against environmental unpredictability and retrieval failures. In the realm of retrieval-augmented generation, **RAGU** addresses the brittleness of existing GraphRAG systems by separating entity extraction from consolidation. By employing two-stage typed extraction and DBSCAN-backed deduplication, the engine reduces noisy entities that could otherwise lead to hallucinated tool calls or incorrect information retrieval. This structural rigor is essential for agents operating in high-stakes environments where tool misuse carries tangible consequences.
+
+Predictive safety mechanisms are gaining traction as a method to prevent costly or dangerous actions before execution. The **DSWorld** framework introduces a Data Science World Model capable of anticipating the effects of operations before real execution occurs. By predicting environment state transitions conditioned on workflow states, agents can simulate outcomes to filter out expensive trial-and-error workflows. This concept of pre-execution validation parallels findings in physical safety, such as the systematic evaluation of plasma diagnostic models in **Benchmarking Sensor Robustness in Plasma Diagnostic Models**. The study reveals that fusion diagnostics frequently fail due to sensor dropouts precisely when disruptions approach. By evaluating models across physically-grounded failure scenarios, researchers demonstrate that robustness benchmarks must account for partial observability and signal loss, a lesson directly transferable to digital agents facing network latency or API failures.
+
+## Alignment, Optimization & Reasoning Integrity
+
+Advancements in reinforcement learning and optimization strategies are reshaping how alignment is achieved in agentic settings. The efficacy of optimizers in sparse-reward environments remains a subject of debate, with **When Does Muon Help Agentic Reinforcement Learning?** showing that applying Muon to hidden weight matrices can significantly raise validation success compared to AdamW in specific RL configurations. However, the effect depends heavily on the advantage estimator and learning rate, suggesting that alignment stability is sensitive to hyperparameter choices in post-training phases.
+
+Reasoning integrity is being addressed through novel reward structures that grade the process rather than just the outcome. **Agon** introduces competitive cross-model RL where competing models act as graders for each other’s reasoning traces. This mechanism rewards models for out-solving rivals that have seen their work, theoretically encouraging deeper reasoning over superficial answer generation. Complementing this, **On-Policy Delta Distillation** proposes a new distillation reward defined as the difference between a teacher model and its base model, providing token-level supervision that alleviates constraints imposed by reward models. Additionally, **Beyond Entropy: Correctness-Aware Advantage Shaping via Contrastive Policy Optimization** argues that entropy cannot distinguish useful uncertainty from detrimental confusion. By using token-level contrastive disagreement for advantage shaping, CPO provides a more reliable correctness signal, potentially reducing the likelihood of agents converging on confident but incorrect solutions.
+
+Unified multimodal reasoning models like **S1-Omni** attempt to consolidate fragmented capabilities into coherent scientific reasoning architectures. While this improves joint modeling of heterogeneous data, it raises questions about interpretability as the decision-making process becomes more opaque. Meanwhile, scaling vision-language-action models with massive trajectory data, as seen in **Xiaomi-Robotics-1**, demonstrates that broad generalization is possible with minimal fine-tuning. However, the reliance on 100k hours of real-world trajectories implies that safety guarantees must be established during the data collection phase, as errors in the trajectory data propagate directly into the policy.
+
+## Looking Forward
+
+Several theoretical questions remain unresolved as the field moves toward more autonomous and capable systems. First, the safety implications of recursive self-improvement loops require further empirical validation; specifically, whether human-gated RSI can effectively prevent capability collapse without introducing excessive latency or bias. Second, the relationship between cost-aware evaluation and actual security robustness needs clarification; does minimizing inference budget inherently reduce the attack surface, or does it simply incentivize more aggressive heuristic shortcuts? Finally, the validity of trace-grading mechanisms like those in **Agon** must be tested against adversarial attempts to game the grader, ensuring that competitive reasoning does not devolve into collusion or adversarial mimicry. As agents become more integrated into critical infrastructure, the distinction between alignment theory and runtime governance will continue to blur, demanding a unified approach to safety that spans from pre-training objectives to post-deployment monitoring.
+
+---
+
+
+## References
+
+- **From Human-Centric to Agentic Code Review: The Impact of Different Generations of Generative AI Technology on Review Quality** — [huggingface_papers](https://arxiv.org/abs/2607.13196)
+- **RAGU: A Multi-Step GraphRAG Engine with a Compact Domain-Adapted LLM** — [huggingface_papers](https://arxiv.org/abs/2607.11683)
+- **RESOURCE2SKILL: Distilling Executable Agent Skills from Human-Created Multimodal Resources** — [huggingface_papers](https://arxiv.org/abs/2606.29538)
+- **Cura 1T: Specialized Model for Agentic Healthcare** — [huggingface_papers](https://arxiv.org/abs/2607.15314)
+- **Beyond Success Rate: Cost-Aware Evaluation of Offensive and Defensive Security Agents** — [huggingface_papers](https://arxiv.org/abs/2607.15263)
+- **DSWorld: A Data Science World Model for Efficient Autonomous Agents** — [huggingface_papers](https://arxiv.org/abs/2607.15901)
+- **When Does Muon Help Agentic Reinforcement Learning?** — [huggingface_papers](https://arxiv.org/abs/2607.16169)
+- **Recursive Harness Self-Improvement** — [huggingface_papers](https://arxiv.org/abs/2607.15524)
+- **Behavioral Privacy Leakage in Agentic Negotiation: Formalizing and Mitigating Inference Attacks via Randomized Policies** — [huggingface_papers](https://arxiv.org/abs/2607.06815)
+- **xHC: Expanded Hyper-Connections** — [huggingface_papers](https://arxiv.org/abs/2607.14530)
+- **RecGPT-V3 Technical Report** — [huggingface_papers](https://arxiv.org/abs/2607.15591)
+- **Agon: Competitive Cross-Model RL with Implicit Rival Grading of Reasoning** — [huggingface_papers](https://arxiv.org/abs/2607.07690)
+- **S1-Omni: A Unified Multimodal Reasoning Model for Scientific Understanding, Prediction, and Generation** — [huggingface_papers](https://arxiv.org/abs/2607.15686)
+- **Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories** — [huggingface_papers](https://arxiv.org/abs/2607.15330)
+- **VideoRAE: Taming Video Foundation Models for Generative Modeling via Representation Autoencoders** — [huggingface_papers](https://arxiv.org/abs/2607.14088)
+- **REBASE: Reference-Background Subspace Elimination for Training-Free In-Context Segmentation** — [huggingface_papers](https://arxiv.org/abs/2607.09082)
+- **On-Policy Delta Distillation** — [huggingface_papers](https://arxiv.org/abs/2607.15161)
+- **Benchmarking Sensor Robustness in Plasma Diagnostic Models: A Systematic Evaluation on TokaMark** — [huggingface_papers](https://arxiv.org/abs/2607.11915)
+- **Audio-Visual Flamingo: Open Audio-Visual Intelligence for Long and Complex Videos** — [huggingface_papers](https://arxiv.org/abs/2607.16107)
+- **Beyond Entropy: Correctness-Aware Advantage Shaping via Contrastive Policy Optimization** — [huggingface_papers](https://arxiv.org/abs/2607.14614)
